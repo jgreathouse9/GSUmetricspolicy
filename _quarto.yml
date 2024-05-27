@@ -1,0 +1,38 @@
+theme: jekyll-theme-cayman
+project:
+  type: book
+
+book:
+  title: "Econometrics for Policy Analysis"
+  author: "Jared Greathouse"
+  date: "4/3/2024"
+  chapters:
+    - index.qmd
+    - module1.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html: default
+  pdf: default
+
+output:
+  pdf_document:
+    latex:
+      auto-install: true  # Enable automatic package installation
+      packages:
+        - amsthm
+        - amsfonts
+        - optidef
+        - amsmath
+        - bm
+        - mathtools
+        - upgreek
+        - nccmath
+        - amssymb
+        - amsthm
+      fontfamily: newcent  # Specify the desired font family
+    engine: pdflatex  # Specify the LaTeX engine
+    options: "--shell-escape"  # Additional options for pdflatex
