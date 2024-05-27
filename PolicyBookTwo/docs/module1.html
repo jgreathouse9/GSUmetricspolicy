@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>module1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="how-data-can-be-used-for-policy-studies" class="level1">
+<h1>How Data Can Be Used For Policy Studies</h1>
+<section id="what-is-this-thing-called-science" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-this-thing-called-science">What is This Thing Called Science?</h2>
+<p>Science at its core is a process we use to understand observable phenonmena. It is based on using logic and observations of the senses to form coherent and simple understandings about the world. Data, or a collection of observations, is fundamental to being able to conduct scientific research. We use data in our daily lives to make conclusions; we don’t call it as such, but we do. Note here that data is not a living, breating concept: it requires interpretation by us. We use principles of science to interpret data and the analyses we conduct upon data. As we learn in middle and high school, science typically begins with asking questions or defining a problem.</p>
+<p>Suppose our current problem involves commute time to school or work, and we don’t wish to walk. In this case, that’s our question: “What’s the ideal way to get to school/work?” We then gather information. Chances are we may use Google Maps or Waze to guide us. In this context, these tools provide us with the information we need, namely, <em>estimates</em> of how long our commute will be. And, assuming we wish to get to our destination as fast as possible, we make <em>inferences</em> or conclusions about the ideal way to take based on the GPS’ options. If GPS says the highway takes 15 minutes but the backstreets which avoid highways take 35 minutes, we will typically elect to use the highway since that takes us to our destination the quickest.</p>
+<p>There’s still two more steps to do, though: test our hypothesis and draw conclusions about the actual observed facts. This means that we must, in real life, leave home and take the way we decide to take. When we get to our destination, we form conclusions about how actually taking the highway went. Of course, we repeat this idea multiple times; eventually, we “typically” take a certain direction to work or school precisely because we have the expectation the highway way will, on average, be preferable to <em>alternative</em> ways. This is a simple example, yet it illustrates the central point: in scientific inquiry, we ask questions, draw on available information, form ideas, take actions based on that information, and draw conclusions or plan accordingly based on testing the validity of that observed information. We don’t call this science in daily life, but that’s exactly what it is. The steps I’ve outlined so far are present in every field from public policy to physics, albeit with a little more sophisitcation.</p>
+</section>
+<section id="data-for-policy-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="data-for-policy-analysis">Data for Policy Analysis</h2>
+<p>As I’ve mentioned above, a collection of observations about a set of phenomena is what we call data. Thus, in public policy analysis, data is central to all that we do. One may ask why using data matters at all; the simple reason is that it allows us to resolve disagreements. While people may conduct different data analyses and obtain different results and even reach different conclusions, the main idea is that we can look into the real world and obtain concepts that map on to metrics that we think are important and test them against our expectations. After all, everyone can have opinions or views on things, but the useful part is <em>testing out</em> our expectations against reality. That way, we can have a better sense of what’s more likely to be true if a certain policy happens/is passed. Indeed, policy analysts are frequently concerned with the impact of some intervention on some outcomes, or sometimes a simple relationship between one variable and another. Recall the plot from the preface</p>
+<div class="cell" data-engine="jupyter" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="module1_files/figure-html/cell-2-output-1.png" width="593" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot shows the cigarette pack sales per 100,000 for California from the years 1970 to 2000 (our dependent variable). The thick black line denotes California, and the thick dashed line shows the year that <a href="https://publishing.cdlib.org/ucpressebooks/view?docId=ft167nb0vq&amp;chunk.id=d0e447&amp;toc.depth=1&amp;toc.id=d0e447&amp;brand=ucpress">Proposition 99</a> (the independent variable/treatment) was passed. Proposition 99 was an anti-tobacco program that California passed in 1988 and enacted in 1989. It raised the price of tobacco by 25 cents per cigarette per pack and enacted a broader state-wide public health campaign which discouraged people from smoking.</p>
+<p>This intervention raises an immediate question for policy analysis: namely, “what was the <em>effect</em> of this intervention on the actual smoking rates we see?” This is a question <a href="https://data.cdc.gov/Policy/The-Tax-Burden-on-Tobacco-1970-2019/7nwe-3aj9/about_data">we may collect data</a> on. After data collection (or even prior, in this case), we can form hypotheses. A hyopothesis is a declarative/interrogative, testable statement about the world. It is like a hypothetical in the sense that we try to imagine the effect of a policy on an outcome so that we can answer questions about it. Here, we can hypothesize that Proposition 99 has a <em>negative</em> impact on tobacco smoking. Negative here is not intended in the normative sense; presumably most people reading this do not smoke (tobacco, anyways). Instead, here “negative” means that the policy might decrease the tobacco sales per capita compared to what they would have been otherwise. To test this, we can use statistical analysis to compare California to other states that didn’t do the policy. We typically wish to produce an estimate of California’s cigarette consumption in the years following 1989, had Proposition 99 never been passed. After we do our analyses, we can discuss what the implications are. In other words, was the policy effective by some appreciable margin? Are there other outcomes concerns to consider?). We can do this for other things too.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="module1_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is a plot of GDP growth rates for the United Kingdom, taken from <a href="https://www.cer.eu/insights/cost-brexit-june-2018">this report</a>. The authors were concerned with the impact of Brexit (Britain leaving the European Union) on the GDP in the U.K. economy. The effects of leaving the E.U. is also an empirical question: we can obtain data, as these authors did, about GDP growth rates across a variety of economies/countries. We can also hypothesize about why Brexit may have affected GDP growth. We can compare the U.K. to other areas which didn’t have similar economic shocks at the time and try to estimate, using statistics and data analysis, how British GDP would have evolved otherwise.</p>
+</section>
+<section id="steps-of-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="steps-of-data-analysis">4 Steps of Data Analysis</h2>
+<p>Broadly speaking, we can think of data analysis being broken into 5 distinct concepts. I summarize them below, but these chapters will comprise the rest of the notes</p>
+<ol type="1">
+<li><p>Identifying Policy Problems</p></li>
+<li><p>Gathering Data</p></li>
+<li><p>Cleansing Data</p></li>
+<li><p>Analyzing Data</p></li>
+<li><p>Presenting Results</p></li>
+</ol>
+<section id="identifying-policy-problems" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-policy-problems">Identifying Policy Problems</h3>
+<p>As we’ve discussed above, the first step in this process is simply asking questions. What kind of questions? Policy questions. Knowing what specific questions to ask though can be tricky. Policy is a giant field. Of the thousands of questions we could ask, how do we know which ones will be the most pressing or timely? In other words, how do we know that this is a problem that policy <em>needs</em> to be enacted for? How can we identify programs whose analysis benefits the citizenry or other interested parties? Put simpler, who cares? Why do we want to do this study or answer this question? Who stands to benefit?</p>
+</section>
+<section id="gathering-data" class="level3">
+<h3 class="anchored" data-anchor-id="gathering-data">Gathering Data</h3>
+<p>Even once we’ve identified the problem, how do we go about gathering real data to answer questions? If we can’t get data that speaks to the issues that we’re concerned about, we can’t obtain answers that are useful.</p>
+</section>
+<section id="cleansing-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleansing-data">Cleansing Data</h3>
+<p>In real life, datasets do not come to us wrapped in a pretty bow ready for use. Cleaning data (or organizing it) can be a very messy affair in the best of times. In order for us to answer our questions, the data we obtain must be organized in a coherent way such that we can answer questions at all. If your data are not sorted correctly by place and time, trust me, the plot you’ll get will not just look terrible, but you can’t glean any trends or patterns from it. This and the next three bullets will comprise most of this class’s material.</p>
+</section>
+<section id="analyzing-data" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-data">Analyzing Data</h3>
+<p>Next, we do analysis. We apply statistical analysis in order to answer the questions we’re asking, using the dataset we’ve now cleaned. Such techniques can range from simply descriptive statistical analysis to complex econometric models.</p>
+</section>
+<section id="presenting-the-results" class="level3">
+<h3 class="anchored" data-anchor-id="presenting-the-results">Presenting the Results</h3>
+<p>Now that we’ve done analysis, we can finally interpret what the findings mean. We attempt to draw conclusions based on our results and come up with avenues for future research or other elements of interest.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
