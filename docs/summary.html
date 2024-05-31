@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econometrics for Policy Analysis - 3&nbsp; Identifying Policy Problems</title>
+<title>Econometrics for Policy Analysis - 3&nbsp; OLS Explained</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,25 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
-}
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
 }
 </style>
 
@@ -80,6 +61,7 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -89,7 +71,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Identifying Policy Problems</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">OLS Explained</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -119,12 +101,12 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./module1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How Data Can Be Used For Policy Studies</span></a>
+  <a href="./module1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Identifying Policy Problems</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -141,15 +123,20 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#justifications-for-policy" id="toc-justifications-for-policy" class="nav-link active" data-scroll-target="#justifications-for-policy"><span class="toc-section-number">3.1</span>  Justifications For Policy</a></li>
-  <li><a href="#externalities" id="toc-externalities" class="nav-link" data-scroll-target="#externalities"><span class="toc-section-number">3.2</span>  Externalities</a></li>
-  <li><a href="#social-good" id="toc-social-good" class="nav-link" data-scroll-target="#social-good"><span class="toc-section-number">3.3</span>  Social Good</a></li>
-  <li><a href="#empirical-examples" id="toc-empirical-examples" class="nav-link" data-scroll-target="#empirical-examples"><span class="toc-section-number">4</span>  Empirical Examples</a>
+  <li><a href="#review-of-lines-and-functions" id="toc-review-of-lines-and-functions" class="nav-link active" data-scroll-target="#review-of-lines-and-functions"><span class="toc-section-number">3.1</span>  Review of Lines and Functions</a></li>
+  <li><a href="#arrividerci-algebra." id="toc-arrividerci-algebra." class="nav-link" data-scroll-target="#arrividerci-algebra."><span class="toc-section-number">3.2</span>  Arrividerci, Algebra.</a></li>
+  <li><a href="#an-extended-example" id="toc-an-extended-example" class="nav-link" data-scroll-target="#an-extended-example"><span class="toc-section-number">3.3</span>  An Extended Example</a>
   <ul class="collapse">
-  <li><a href="#identifying-problems-the-case-of-tobacco" id="toc-identifying-problems-the-case-of-tobacco" class="nav-link" data-scroll-target="#identifying-problems-the-case-of-tobacco"><span class="toc-section-number">4.1</span>  Identifying Problems: The Case of Tobacco</a></li>
-  <li><a href="#the-swedish-carbon-tax" id="toc-the-swedish-carbon-tax" class="nav-link" data-scroll-target="#the-swedish-carbon-tax"><span class="toc-section-number">4.2</span>  The Swedish Carbon Tax</a></li>
+  <li><a href="#step-1-define-the-data" id="toc-step-1-define-the-data" class="nav-link" data-scroll-target="#step-1-define-the-data"><span class="toc-section-number">3.3.1</span>  Step 1: Define the Data</a></li>
+  <li><a href="#step-2-list-our-variables-we-solve-for" id="toc-step-2-list-our-variables-we-solve-for" class="nav-link" data-scroll-target="#step-2-list-our-variables-we-solve-for"><span class="toc-section-number">3.3.2</span>  Step 2: List Our Variables We Solve For</a></li>
+  <li><a href="#step-3-write-out-the-objective-function" id="toc-step-3-write-out-the-objective-function" class="nav-link" data-scroll-target="#step-3-write-out-the-objective-function"><span class="toc-section-number">3.3.3</span>  Step 3: Write Out the Objective Function</a></li>
+  <li><a href="#step-4-simplify-the-objective-function" id="toc-step-4-simplify-the-objective-function" class="nav-link" data-scroll-target="#step-4-simplify-the-objective-function"><span class="toc-section-number">3.3.4</span>  Step 4: Simplify the Objective Function</a></li>
+  <li><a href="#step-5-simplify-the-objective-function-cont." id="toc-step-5-simplify-the-objective-function-cont." class="nav-link" data-scroll-target="#step-5-simplify-the-objective-function-cont."><span class="toc-section-number">3.3.5</span>  Step 5: Simplify the Objective Function, cont.</a></li>
+  <li><a href="#step-6-take-partial-derivatives" id="toc-step-6-take-partial-derivatives" class="nav-link" data-scroll-target="#step-6-take-partial-derivatives"><span class="toc-section-number">3.3.6</span>  Step 6: Take Partial Derivatives</a></li>
+  <li><a href="#step-7-get-the-betas" id="toc-step-7-get-the-betas" class="nav-link" data-scroll-target="#step-7-get-the-betas"><span class="toc-section-number">3.3.7</span>  Step 7: Get the Betas</a></li>
+  <li><a href="#step-8-our-ols-line-of-best-fit" id="toc-step-8-our-ols-line-of-best-fit" class="nav-link" data-scroll-target="#step-8-our-ols-line-of-best-fit"><span class="toc-section-number">3.3.8</span>  Step 8: Our OLS Line of Best Fit</a></li>
   </ul></li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="toc-section-number">5</span>  Conclusions</a></li>
+  <li><a href="#after-running-regressions" id="toc-after-running-regressions" class="nav-link" data-scroll-target="#after-running-regressions"><span class="toc-section-number">3.4</span>  After Running Regressions</a></li>
   </ul>
 </nav>
     </div>
@@ -158,7 +145,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Identifying Policy Problems</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">OLS Explained</span></h1>
 </div>
 
 
@@ -173,23 +160,9 @@ div.csl-indent {
 
 </header>
 
-<section id="justifications-for-policy" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="justifications-for-policy"><span class="header-section-number">3.1</span> Justifications For Policy</h2>
-<p>Before we can do any analysis though, we have to take a step back. We have to ask ourselves how we know a problem exists in the first place. There are two broad justifications that policy is based on: negative externalities and social good, but the main point of both justifucations is “<em>harm</em>”.</p>
-</section>
-<section id="externalities" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="externalities"><span class="header-section-number">3.2</span> Externalities</h2>
-<p>The idea of externalities <a href="https://saylordotorg.github.io/text_introduction-to-economic-analysis/s08-externalities.html">comes from</a> microeconomic theory, which says that efficient markets will affect only those parties who willingly participate in transactions. Particularly in the case of negative extrnalities, or externalities which harm others, we could use public policy to rectify this.</p>
-<p>Consider a very simple example: seatbelts. In physics, any force that is not stopped by an equal, oppostite force will keep going. So, if you’re in a car crash while driving at 60 miles per hour while unbuckled, the car stops. You, however, don’t stop: you keep going, 60 miles per hour through the windshield. No public policy is needed just yet. So far, any cost that comes from a transaction has been borne by you, the driver. By the way, I’m not kidding: one of the arguments against seatbelts <a href="https://www.wpr.org/history/surprisingly-controversial-history-seat-belts#:~:text=Among%20the%20arguments%20put%20forth,researchers%20but%20opposition%20remained%20fierce">was literally</a> that using seatbelts should be a personal decision <em>if</em> it does not put others at risk. Additionally, <a href="https://www.cnn.com/2020/08/05/us/seat-belts-masks-coronavirus-wellness-trnd/index.html">industry</a> also argued against mandatory seatbelt laws on the grounds that it was the government interfering between the transactions of a consumer and the seller.</p>
-<p>However, there are a few issues with the externality argument. Firstly, being unbuckled turns you into a human projectile. You can hit your passengers or even others outside your vehicle if you’re unbuckled. Your market exchange (you buying the car and driving it) is now potentially having second-order effects on others by you not using a seatbelt. So, the government may wish to mandate seatbelts while driving in order to prevent these negative externalities which come in the form of medical bills or death. To address the argument of indsutry above, that seatbelt laws would raise costs of production, this raises an important moral dilemma: does the harm caused to the business of having to install seatbelts matter more than the human harm caused by a society where seatbelts are optional? Also, we are human beings. We have imperfect knowledge. We know for fact that we don’t have all the answers, to paraphrase Socrates. We also don’t know if the actions we do will ultimately hurt someone else. We live in a probabalistic world (which we will return to later). Indeed, we could argue against laws banning DUI in precisely this manner, saying that we don’t know if the intoxicated driver will harm someone until they do. But, as with seatbelts, we never know if there will be another passenger on the road or a child playing in the street. So, we rarely know if we’re <em>actually</em> putting peoples’ lives in danger by driving drunk or unbuckled. We can’t know if an externality will occur until it does, usually. Thus, the next view (social good) adopts a different form of reasoning.</p>
-</section>
-<section id="social-good" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="social-good"><span class="header-section-number">3.3</span> Social Good</h2>
-<p>Moreover, the externality justification isn’t typically the way we think about things from a public policy perspective. Usually, we have social welfare goals in mind. This can come in the form of harm reduction or prevention measures. When we argue for public education, for example, we typically don’t do so because we think that the private schools won’t educate citizens enough (even though they won’t), and that public school will be to decrease inefficient education markets. In fact, we typically don’t think of education (in our formative years anyways) as a market at all. We usually argue for public education because we think that education has <em>inherent</em> benefits, and that being denied a certain level of education necessitates an inherent harm. Imagine for a moment how the literacy rate of the United States would look if school was completely optional. We likely would not complain about GDP loss, we’d likely complain about a society where lots of people can’t read the cereal box or function within society in a decent manner. In other words, society has a vested interest in keeping people safe, educated, and healthy to some degree. So we mandate seatbelt laws, basic schooling, and other laws/regulations in service of these ends. Importantly, “these ends” <em>does not</em> have a right or wrong answer. The goals of policy are ultimately decided by people within the society. However, knowing the goals of a policy and reasons for its existence helps us ask meaningful questions about it. Following the above discussion, a natural research question that follows is “How did seatbelt laws affect the rate of car accident injuries and deaths?”</p>
-</section>
-<section id="empirical-examples" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Empirical Examples</h1>
-<p>We can consider two empirical example from the public policy literature <span class="citation" data-cites="Abadie2010 swedenscm">(<a href="references.html#ref-Abadie2010" role="doc-biblioref">Abadie, Diamond, and Hainmueller 2010</a>; <a href="references.html#ref-swedenscm" role="doc-biblioref">Andersson 2019</a>)</span>.</p>
+<section id="review-of-lines-and-functions" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="review-of-lines-and-functions"><span class="header-section-number">3.1</span> Review of Lines and Functions</h2>
+<p>In middle school, we learn about the basics of functions in that when we plug in a number, we get another number in return. For <span class="math inline">\(2x=y\)</span> for example, if we plug in 2, we get 4. If we plug in 5, we get 10. If you’re at the grocery store and grapes are 1 dollar and 50 cents per pound, we just weigh the grapes and multiply that number by 1.5. This could take the form of <span class="math inline">\((0,0), (1,1.5), (2,3)\)</span>, and so on. These points form a line, the equation for which being <span class="math inline">\(y=mx+b\)</span>. Here, <span class="math inline">\(y\)</span> is our outcome, <span class="math inline">\(m\)</span> is the change in the price of grapes for every new pound of grapes bought, and b is our value we pay if we get no grapes.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -199,10 +172,10 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>These two plots show the travel emissions trends of Sweden and per capita smoking rates of California, respectively. How might we go about identifying if a problem exists, though?</p>
-<section id="identifying-problems-the-case-of-tobacco" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="identifying-problems-the-case-of-tobacco"><span class="header-section-number">4.1</span> Identifying Problems: The Case of Tobacco</h2>
-<p>As we’ve discussed above, harm or necessity is typically a standard we look to in order to determine if policy is needed. As I’ve mentioned, California passed Proposition 99 in 1989 to reduce smoking rates. But, how did we know there was a problem to begin with? To do this, we can grab data on lung cancer morality rates from 1950 until today. Presumably, of course, we view lung cancer as harmful and somehthing we wish to prevent.</p>
+<p>The way we find the <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> for a straight line is the “rise over run” method, in this case</p>
+<p><span class="math display">\[m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{3 - 0}{2 - 0} = \frac{3}{2} = 1.5\]</span></p>
+<p>For this case, the function for the line of price paid for grapes is <span class="math inline">\(y=1.5x\)</span>. Notice here how the line explains how much we pay perfectly (in other words, the line exactly matches the data points). This means our <em>residuals</em>/errors <span class="math inline">\(u_i=y_i-\hat y_i\)</span> are 0, where <span class="math inline">\(y_i\)</span> maps on to the real data and <span class="math inline">\(\hat{y}_i\)</span> is the prediction from the line/function. Here, the letter “<span class="math inline">\(u_i\)</span>” is just a variable for the error at an individual data point. We can also think of it as the distance from the predicted point to the observed point. If the observed values are 10 but we predict 11, then our residual is -1.</p>
+<p>However, this is because we have a case where all the necessary information is known (price and weight). We know the price of grapes or gas or movie tickets, so we typically do not even need algebra here, we intuitively understand that this is how we calculate expenses. That is, we know from the above that we could calculate the amount of money we pay for grapes at 1 pound or a trillion pounds, assuming the price does not change. But…. what if the data we see are not nice and neat in terms of a function, e.g, <span class="math inline">\((20.52,29.32), (25.08,24.26), (19.94,29.42)\)</span>? As we can see here, there is simply no straight line that will fit to all of these points perfectly.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -212,26 +185,140 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>The shaded area represents the period before any state-wide anti-tobacco legislation was passed in the United States. We can see quite clearly the age-standarized lung cancer mortality rates rose in a fairly linear manner in the United States. However, the curve is parabolic; mortality rates were rising every single year until the zenith in 1990. Mortality began to fall when the first large scale anti-tobacco laws were passed. Of course, the <em>degree</em> to which these laws were the cause of this decrease is an empirical question. However, given the clear increase in lung cancer rates and other obvious harms of tobacco smoking, policymakers in California and the voters, in fact, became increasingly hostile to tobacco smoking in public and in other crowded areas where a large number of people could be exposed. So, California passed Proposition 99 in 1988 (as did at least a dozen other states from 1988 to 2000, passing similar laws). Just to tie this all together, this plot reinforces why data is needed for policy analysis. Had I not plotted this trend line, people (from the tobacco industry, for example) could simply say “Well, nobody <em>knows</em> if lung cancer mortality is a problem. How do we know if there’s a problem here? I don’t think one exists.” A simple plot of data over time can convincingly suggest that a harm is likely being casued by tobacco smoking (which peaked in the U.S. around 1965, but of course lung-cancer occurs more down-the-line). This plot makes a powerful case for how we can <em>use</em> data to evaluate if policy problems exist. In other words, data provides intellectual self-defense; if you posit that a problem exists, then this should be demonstrable using datasets that speak to the issue at hand.</p>
+<p>Before, we simply would have to throw our hands up, in a sense, and say that there’s no solution. Normal algebra has failed us in that we cannot find a function which explains the points in this dataset. But, this is what the world is like, right? Take the idea of predicting crime rates in cities. We would presume some <em>function</em> exists that generates the crime rate for that city. Some cities are wealthier or poorer than others or of differing racial compositions, or will differ by factors like age composition or alcohol use. Thus… some cities have high crime rates, others have low crime rates, and it would be very unreasonable to expect to find a singular function that perfectly explains the variation in crime rates across one or more cities. After all, crime rates are a <em>random variable</em> in the sense that the number it takes on is not guaranteed. Sometimes, crime is high, other times its low(er).</p>
+<p>So, what can we do? We can’t find a function for the line that perfectly explains the crime trends, or the data points in the plot above… But, how about we instead seek the best <em>possible</em> line, given our data points? The line which best <em>fits</em> (in that it minimizes the residuals) to the data, in that it does our best to approximate the data? To connect these ideas together, suppose I asked you to find the function for the line that tells me how much we pay for grapes, <em>even when I do not</em> give you the price. I only give you the weight of grapes you buy, and how much you paid.</p>
 </section>
-<section id="the-swedish-carbon-tax" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="the-swedish-carbon-tax"><span class="header-section-number">4.2</span> The Swedish Carbon Tax</h2>
-<p>Follwoing similar arguments above, we can now consdier Sweden. Sweden was one of the first countries in the world to implement a carbon tax <span class="citation" data-cites="swedenscm">(<a href="references.html#ref-swedenscm" role="doc-biblioref">Andersson 2019</a>)</span>. The Social Democrats who were in power at the time implemented one, as an addition to the VAT tax on fuel, in 1990 specifically because of climate change. The left panel shows how transport emissions rose in Sweden consistently in the years before 1990, when the tax was passed. In this case, the economic reasoning is simple: the tax increases the price of fuel for consumers, suggesting that less people, on average, will drive as a result, using other forms of transportation. Again, presuming we wish to do demand-side policy to reduce the emissions emitted by a population, a tax is one way of potentially doing this. Much as with the tobacco example above, the plot provides us intellectual self-defense. We can see, for fact, that the emissions were trending upwards in the years before the policy took place.</p>
+<section id="arrividerci-algebra." class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="arrividerci-algebra."><span class="header-section-number">3.2</span> Arrividerci, Algebra.</h2>
+<p>To do such a task, we’ve now reached a point in the course where simple algebra is no longer our best guide. We now <em>must</em> use calculus, specifically the derivative. The derivative is the slope of a curve/line at a given point. When we set the derivative to 0 and solve for the variable, we reach a maximum or minimum, usually. For a realistic example, say we shoot a basketball off a 2 foot cliff, which produces a trajectory of <span class="math inline">\(h(t)= −5t^2 +20t+2\)</span>, where <span class="math inline">\(h(t)\)</span> is our height over time and the 2 represents the fact that we are standing 2 feet above ground, and the line itself represents our trajectory. We can find the <em>maximum</em> height of the ball by taking the derivative of the original quadratic function and solving it for 0.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="summary_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The power rule for dertivatives is where we subtract the exponent value by 1 and palce the original value to be multiplied by the base number. For example, the derivative of <span class="math inline">\(y=2x^3\)</span> is just <span class="math inline">\(6x^2\)</span>. Here is the derivative for the above function using the power rule:</p>
+<p><span class="math display">\[h(t) = -5t^2 + 20t + 2 = \frac{d}{dt}(-5t^2) + \frac{d}{dt}(20t) + \frac{d}{dt}(2)= -10t + 20\]</span></p>
+<p>When we solve the derivative for 0, <span class="math inline">\(-10(2) + 20=0\)</span>, we get the maximum height of 22 feet after 2 seconds. Derivatives play a key role in minimizing or maximizing functions such as the ones we just did. We will use them to minimize the sum of squared errors, which is the process of <em>linear regression</em> or, <em>ordinary least squares</em> (OLS) estimation, the main analytic method you’ll use for this class.</p>
+<p>To introduce OLS, we can think of the equation of a line (<span class="math inline">\(y=mx+b\)</span>) where <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> are variables. Unlike the above examples where <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> were known variables, now we must solve for them. Unlike univariable calculus however, here we have multiple variables which each affect the function differently. And in this case, it makes perfect sense: if we wish to derive a function for how much we spend at the store, it’s quite possible we may spend money on multiple things.</p>
+<p>Here, <span class="math inline">\(y\)</span> is how much we spend in total. <span class="math inline">\(m\)</span> is how much you spend for each t-shirt, <span class="math inline">\(x\)</span> is the number of t-shirts we get, and <span class="math inline">\(b\)</span> is how much we’ve already spent. With regression, we take the derivative with resepct to each variable, holding the other variable constant (that is, not considering the effect of the other variable). The reason this makes sense is because how much we’ve already spent and how much we spend for one additional unit of things are two different constructs, and they will naturally affect how much we spend in total differently.</p>
+<p>If this seems at all abstract to you, I give a detailed explanation of how it works in practice below. Note that all of the steps below, Stata, R, or Python does (and optimizes!) for you. I only provide this derivation so you have a source to refer to when you wish to know how, exactly, the machine returns the numbers that it returns to you.</p>
+<p>Suppose we wish to attend a nightclub. We pay <em>some</em> cost of money to enter, and then we pay <em>some</em> amount of money per drink. However, unlike the real world where we know the price and entry fee up front and may calculate it, in this case we wish to derive the amount we pay up front, as well as the cost per drink using only reported data.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="summary_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="an-extended-example" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="an-extended-example"><span class="header-section-number">3.3</span> An Extended Example</h2>
+<p>Here, I sort of deviate from most econometrics textbooks and I formally derive the OLS betas.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is where you may start skimming. It is okay to not understand everything here.</p>
+</div>
+</div>
+<section id="step-1-define-the-data" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="step-1-define-the-data"><span class="header-section-number">3.3.1</span> Step 1: Define the Data</h3>
+<p>Say that we have data that looks like <span class="math inline">\((0, 30), (1, 35), (2, 40)\)</span>, where <span class="math inline">\(x\)</span>= number of drinks we buy and <span class="math inline">\(y\)</span>=amount of money we spend that evening. If you want to, calculate the rise-over-run of these data points to derive <span class="math inline">\(m\)</span> and see what the answer might be in the end.</p>
+<p><span class="math display">\[m = \frac{35 - 30}{1 - 0} = \ldots \]</span></p>
+</section>
+<section id="step-2-list-our-variables-we-solve-for" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="step-2-list-our-variables-we-solve-for"><span class="header-section-number">3.3.2</span> Step 2: List Our Variables We Solve For</h3>
+<p>Our model of how much we pay given some entry fees and additional drink costs looks like:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1x\]</span></p>
+<p>Here, <span class="math inline">\(y_i\)</span> is how much we pay, <span class="math inline">\(\beta_0\)</span> is how much we pay to enter, <span class="math inline">\(\beta_1\)</span> is how much we pay for each additional drink, and <span class="math inline">\(x\)</span> is the number of drinks we get. Nothing so far is different about this from anything we’ve discussed above. I’ve simply substituted <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> with the Greek letter “beta”.</p>
+</section>
+<section id="step-3-write-out-the-objective-function" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="step-3-write-out-the-objective-function"><span class="header-section-number">3.3.3</span> Step 3: Write Out the Objective Function</h3>
+<p>OLS minimizes the sum of squared residuals. That is, it seeks the line which best fits the data, given some value of <span class="math inline">\(x\)</span>. We can represent this with something called an objective function. <span class="math display">\[S = \underset{\beta_0,\beta_1}{\text{argmin}} \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1x)^2\]</span> The word “argmin” here means “argument of the minimum”. The symbols underneath it, <span class="math inline">\(\beta_0,\beta_1\)</span>, mean these are the values we seek to estimate which minimize the prediction errors of the line. As above, <span class="math inline">\(y_i\)</span> is our observed data points (how much we pay in total given the <span class="math inline">\(i\)</span>th drink bought) 30, 35, and 40.</p>
+</section>
+<section id="step-4-simplify-the-objective-function" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="step-4-simplify-the-objective-function"><span class="header-section-number">3.3.4</span> Step 4: Simplify the Objective Function</h3>
+<p>First, we can substitute the real values as well as our model for prediction into the objective function. We already know the values x-takes. You either buy no drinks, 1 drink, or 2. So with this information, we can now find the amount of money we pay up front (<span class="math inline">\(\beta_0\)</span>) and how much it costs for each drink (<span class="math inline">\(\beta_1\)</span>) <span class="math display">\[S = (30 - (\beta_0 + \beta_1 \cdot 0))^2 + (35 - (\beta_0 + \beta_1 \cdot 1))^2 + (40 - (\beta_0 + \beta_1 \cdot 2))^2\]</span></p>
+</section>
+<section id="step-5-simplify-the-objective-function-cont." class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="step-5-simplify-the-objective-function-cont."><span class="header-section-number">3.3.5</span> Step 5: Simplify the Objective Function, cont.</h3>
+<p>Here we simplify things. <span class="math display">\[S = (30 - \beta_0)^2 + (35 - \beta_0 - \beta_1)^2 + (40 - \beta_0 - 2\beta_1)^2\]</span></p>
+<p>Note that the <span class="math inline">\(\beta_1 \cdot 0\)</span> term goes away because anything multiplied by 0 is just 0. We also simplify the second term because anything multiplied by 1 is just itself in the case of <span class="math inline">\(\beta_1 \cdot 1\)</span>.</p>
+</section>
+<section id="step-6-take-partial-derivatives" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="step-6-take-partial-derivatives"><span class="header-section-number">3.3.6</span> Step 6: Take Partial Derivatives</h3>
+<p>To find the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that minimize <span class="math inline">\(S\)</span>, we take the partial derivatives of <span class="math inline">\(S\)</span> (for “Spending”) with respect to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Recall that the partial derivative is simply how much the value of the function changes when our other variables that affect our outcome are held constant. In this case, the power rule and chain rule are our friend here. To hear more about combining the power rule and chain rule, <a href="https://www.youtube.com/watch?v=TI-j-fr6c4A">see here</a>.</p>
+<ol type="1">
+<li><strong>Partial derivative with respect to <span class="math inline">\(\beta_0\)</span>:</strong></li>
+</ol>
+<p>First, we do: <span class="math display">\[\frac{\partial S}{\partial \beta_0} = -2(30 - \beta_0) - 2(35 - \beta_0 - \beta_1) - 2(40 - \beta_0 - 2\beta_1).\]</span></p>
+<p>Nothing crazy has happened here. I’ve simply brought the 2 down in front of each set of parentheses and subtracted 1 from the exponent. The <span class="math inline">\(-1\)</span> comes from the chain rule due to the fact that we consider <span class="math inline">\((30 - \beta_0)\)</span> as one function, and <span class="math inline">\((30 - \beta_0)^2\)</span> as another function. The “inner” function <span class="math inline">\((30 - \beta_0)\)</span> has a derivative of <span class="math inline">\(-1\)</span> for <span class="math inline">\(\beta_0\)</span>, since there’s no exponent attached to it and 20 is a constant, so its derivative is 0. Therefore, the derivative of the outer function <span class="math inline">\((30 - \beta_0)^2\)</span> (applying the power rule from above) is <span class="math inline">\(2(30 - \beta_0) \cdot -1\)</span>. Now, we simplify. First, distribute the <span class="math inline">\(-2\)</span> across each term inside the parentheses:</p>
+<p><span class="math display">\[\frac{\partial S}{\partial \beta_0} = -2(30 - \beta_0) - 2(35 - \beta_0 - \beta_1) - 2(40 - \beta_0 - 2\beta_1)\]</span> <span class="math display">\[= -2(30) + 2\beta_0 - 2(35) + 2\beta_0 + 2\beta_1 - 2(40) + 2\beta_0 + 4\beta_1.\]</span></p>
+<p>Then we combine like terms:</p>
+<p><span class="math display">\[= -60 + 2\beta_0 - 70 + 2\beta_0 + 2\beta_1 - 80 + 2\beta_0 + 4\beta_1.\]</span></p>
+<p>Now, we group the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> terms together:</p>
+<p><span class="math display">\[= (-60 - 70 - 80) + (2\beta_0 + 2\beta_0 + 2\beta_0) + (2\beta_1 + 4\beta_1).\]</span> Now, I factor out the 2 <span class="math display">\[= (-60 - 70 - 80) + 2(3\beta_0) + 2(\beta_1 + 2\beta_1).\]</span> So, we get <span class="math display">\[= -210 + 6\beta_0 + 6\beta_1.\]</span></p>
+<p>Now we re-arrange by adding 210 to the RHS <span class="math display">\[6\beta_0 + 6\beta_1 = 210.\]</span></p>
+<p>See how there are two 6s? We may now divide the right and left hand sides by 6 to further simplify <span class="math display">\[\beta_0 + \beta_1 = 35 \]</span></p>
+<p>Okay, first parital calculated.</p>
+<ol start="2" type="1">
+<li><strong>Partial derivative with respect to <span class="math inline">\(\beta_1\)</span>:</strong></li>
+</ol>
+<p>Now we do the same with the next beta. Note that THE FIRST TERM IS NOT DIFFERENTIATED because <span class="math inline">\(\beta_1\)</span> is not present due to it being multiplied by 0 in the very first step, so it goes away here. <span class="math display">\[\frac{\partial S}{\partial \beta_1} = -2(35 - \beta_0 - \beta_1) \cdot 1 - 2(40 - \beta_0 - 2\beta_1) \cdot 2\]</span> <span class="math display">\[\frac{\partial S}{\partial \beta_1} = -2(35 - \beta_0 - \beta_1) - 4(40 - \beta_0 - 2\beta_1)\]</span> <span class="math display">\[\frac{\partial S}{\partial \beta_1} = -70 + 2\beta_0 + 2\beta_1 - 160 + 4\beta_0 + 8\beta_1\]</span> <span class="math display">\[\frac{\partial S}{\partial \beta_1} = -230 + 6\beta_0 + 10\beta_1.\]</span></p>
+<p>As above, we isolate the constant by putting it on the RHS: <span class="math display">\[6\beta_0 + 10\beta_1 = 230.\]</span></p>
+</section>
+<section id="step-7-get-the-betas" class="level3" data-number="3.3.7">
+<h3 data-number="3.3.7" class="anchored" data-anchor-id="step-7-get-the-betas"><span class="header-section-number">3.3.7</span> Step 7: Get the Betas</h3>
+<p>Now we’ve set up our partial derivatives. Now we can algebraically get our betas. In order to find their values, though, we must solve a system of equations. The reason we must solve them as a system of equations is because we need for BOTH values to be the ones which minimize the distance between the predictions and the observed data. Here are the equations we must solve for (note, we have two because we have two variables, the entry fee and the drinks, but this can easily be extended to more variables) <span class="math display">\[\beta_0 + \beta_1 = 35\]</span> <span class="math display">\[6\beta_0 + 10\beta_1 = 230.\]</span></p>
+<p>Here I use a method called substitution to solve the system, but there are many such ways we can solve this.</p>
+<section id="step-7.1-solve-for-beta_0" class="level4" data-number="3.3.7.1">
+<h4 data-number="3.3.7.1" class="anchored" data-anchor-id="step-7.1-solve-for-beta_0"><span class="header-section-number">3.3.7.1</span> Step 7.1: Solve for <span class="math inline">\(\beta_0\)</span>:</h4>
+<p>The first step of substitution is to solve for one of our variables. I chose the first parital since it is the easiest.</p>
+<p><span class="math display">\[\beta_0 = 35 - \beta_1\]</span> This is pretty simple, we just subtract <span class="math inline">\(\beta_1\)</span>. We know that the entry fee is some positive number. We also know that <span class="math inline">\(\beta_1\)</span> on the RHS has to be less than 35, as this would mean that we get in for free, which does not make sense given the problem at hand. We also know, logically, that <span class="math inline">\(\beta_0\)</span> can’t be 35, because then this means that drinks are free, which is also inconsistent with the logic of the problem. The reason I’m making such a fuss about this, is because when the regression gives us a number, the model predictions need to make sense under existing constraints. If the model predicts, for example, negative age or that you have negative cups of coffee per day, this suggests we need a different modeling strategy.</p>
+</section>
+<section id="step-7.2-substitute-beta_0" class="level4" data-number="3.3.7.2">
+<h4 data-number="3.3.7.2" class="anchored" data-anchor-id="step-7.2-substitute-beta_0"><span class="header-section-number">3.3.7.2</span> Step 7.2: Substitute <span class="math inline">\(\beta_0\)</span>:</h4>
+<p>Now, since we know the equation for the constant (the entry fee), we can put this back in the partial derivative for <span class="math inline">\(\beta_1\)</span></p>
+<p><span class="math display">\[6\beta_0 + 10\beta_1 = 230.\]</span></p>
+<p>Once we do this, we can solve for <span class="math inline">\(beta_1\)</span>. Here is the partial for <span class="math inline">\(beta_1\)</span> with this replacement for <span class="math inline">\(beta_0\)</span>. <span class="math display">\[6(35 - \beta_1) + 10\beta_1 = 230.\]</span> To solve, we distribute the 6 <span class="math display">\[210 - 6\beta_1 + 10\beta_1 = 230\]</span> and combine these terms <span class="math inline">\(- 6\beta_1 + 10\beta_1\)</span> together <span class="math display">\[210 + 4\beta_1 = 230.\]</span> Next, we subtract 210 from the RHS <span class="math display">\[4\beta_1 = 20.\]</span> Finally, we divide by 4 <span class="math display">\[\beta_1 = 5.\]</span></p>
+<p>Now, we know our value for <span class="math inline">\(\beta_1\)</span>!!! We know that for each drink we get, we pay 5 more dollars. Since we now know <em>this</em>, we substitute 5 into <span class="math inline">\(\beta_0 + \beta_1 = 35\)</span> where <span class="math inline">\(\beta_1\)</span> is to get <span class="math inline">\(\beta_0\)</span>. We now have one equation to solve</p>
+<p><span class="math display">\[\beta_0 + 5 = 35,\]</span></p>
+<p>where we simply subtract 5 <span class="math display">\[\beta_0 = 30.\]</span></p>
+<p>Now, we know the entry fee is 30 dollars.</p>
 </section>
 </section>
-<section id="conclusions" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Conclusions</h1>
-<p>The central takeaway here is that we can use data to idenitfy policy problems by simply looking at relevant datasets which show point to some metric of harm/inequity. Of course, we can also use statistical tools to evaluate good-ness. If a county passes some policy which sees if some local subsidy decreased people not having enough to eat, if we wish to check if a program meant to reduce recidivism actually did decrease it, we identify the effects of policy using existing datasets which we may collect and apply statistical techniques with.</p>
+<section id="step-8-our-ols-line-of-best-fit" class="level3" data-number="3.3.8">
+<h3 data-number="3.3.8" class="anchored" data-anchor-id="step-8-our-ols-line-of-best-fit"><span class="header-section-number">3.3.8</span> Step 8: Our OLS Line of Best Fit</h3>
+<p>So, our line of best fit is <span class="math inline">\(\hat{y} = 30 + 5x\)</span>. The way we interpret this is is for every additional drink bought, you pay 5 more dollars. In fact, more precisely, <em>compared</em> to those who only wanted to get in the club, you spend 5 more dollars than they do, per each new drink you get. We can now predict how much money we would spend if we bought 5 drinks or 500 drinks.</p>
+<p>At the outset, one may ask why we did this at all. Why bother with the partial derivative approach and the messy system of equations? The reason is because the parital derivative allows for us to (atttempt to) isolate the causal impact of <em>multiple</em> variables. In fact, we did so implicitly right here in this derivation! We considered the impact of BOTH entry fees and the number of drinks we bought too. If we wanted to add in another column, say the cost of an additional cigar or some such thing, all we would do is add another beta, <span class="math inline">\(\beta_2\)</span>, to the original objective function and multiply the corresponding values by whatever the costs were. We would then have three systems of equations to solve for, but the underlying principle of adding in other variables and finding the line that minimizes the distance between the line and points is the same.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="summary_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="after-running-regressions" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="after-running-regressions"><span class="header-section-number">3.4</span> After Running Regressions</h2>
+<p>Next, we discuss…</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Abadie2010" class="csl-entry" role="doc-biblioentry">
-Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. 2010. <span>“Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program.”</span> <em>Journal of the American Statistical Association</em> 105 (490): 493–505. <a href="https://doi.org/10.1198/jasa.2009.ap08746">https://doi.org/10.1198/jasa.2009.ap08746</a>.
-</div>
-<div id="ref-swedenscm" class="csl-entry" role="doc-biblioentry">
-Andersson, Julius J. 2019. <span>“Carbon Taxes and CO2 Emissions: Sweden as a Case Study.”</span> <em>American Economic Journal: Economic Policy</em> 11 (4): 1–30. <a href="https://doi.org/10.1257/pol.20170144">https://doi.org/10.1257/pol.20170144</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -371,7 +458,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./module1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How Data Can Be Used For Policy Studies</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

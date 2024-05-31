@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econometrics for Policy Analysis - 2&nbsp; How Data Can Be Used For Policy Studies</title>
+<title>Econometrics for Policy Analysis - 2&nbsp; Data and Policy Studies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How Data Can Be Used For Policy Studies</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -100,12 +100,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./module1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How Data Can Be Used For Policy Studies</span></a>
+  <a href="./module1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Identifying Policy Problems</span></a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -123,14 +123,20 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#what-is-this-thing-called-science" id="toc-what-is-this-thing-called-science" class="nav-link active" data-scroll-target="#what-is-this-thing-called-science"><span class="toc-section-number">2.1</span>  What is This Thing Called Science?</a></li>
-  <li><a href="#data-for-policy-analysis" id="toc-data-for-policy-analysis" class="nav-link" data-scroll-target="#data-for-policy-analysis"><span class="toc-section-number">2.2</span>  Data for Policy Analysis</a></li>
-  <li><a href="#steps-of-data-analysis" id="toc-steps-of-data-analysis" class="nav-link" data-scroll-target="#steps-of-data-analysis"><span class="toc-section-number">2.3</span>  4 Steps of Data Analysis</a>
+  <li><a href="#steps-of-data-analysis" id="toc-steps-of-data-analysis" class="nav-link" data-scroll-target="#steps-of-data-analysis"><span class="toc-section-number">2.2</span>  4 Steps of Data Analysis</a>
   <ul class="collapse">
-  <li><a href="#identifying-policy-problems" id="toc-identifying-policy-problems" class="nav-link" data-scroll-target="#identifying-policy-problems"><span class="toc-section-number">2.3.1</span>  Identifying Policy Problems</a></li>
-  <li><a href="#gathering-data" id="toc-gathering-data" class="nav-link" data-scroll-target="#gathering-data"><span class="toc-section-number">2.3.2</span>  Gathering Data</a></li>
-  <li><a href="#cleansing-data" id="toc-cleansing-data" class="nav-link" data-scroll-target="#cleansing-data"><span class="toc-section-number">2.3.3</span>  Cleansing Data</a></li>
-  <li><a href="#analyzing-data" id="toc-analyzing-data" class="nav-link" data-scroll-target="#analyzing-data"><span class="toc-section-number">2.3.4</span>  Analyzing Data</a></li>
-  <li><a href="#presenting-the-results" id="toc-presenting-the-results" class="nav-link" data-scroll-target="#presenting-the-results"><span class="toc-section-number">2.3.5</span>  Presenting the Results</a></li>
+  <li><a href="#identifying-policy-problems" id="toc-identifying-policy-problems" class="nav-link" data-scroll-target="#identifying-policy-problems"><span class="toc-section-number">2.2.1</span>  Identifying Policy Problems</a></li>
+  <li><a href="#gathering-data" id="toc-gathering-data" class="nav-link" data-scroll-target="#gathering-data"><span class="toc-section-number">2.2.2</span>  Gathering Data</a></li>
+  <li><a href="#cleansing-data" id="toc-cleansing-data" class="nav-link" data-scroll-target="#cleansing-data"><span class="toc-section-number">2.2.3</span>  Cleansing Data</a></li>
+  <li><a href="#analyzing-data" id="toc-analyzing-data" class="nav-link" data-scroll-target="#analyzing-data"><span class="toc-section-number">2.2.4</span>  Analyzing Data</a></li>
+  <li><a href="#presenting-the-results" id="toc-presenting-the-results" class="nav-link" data-scroll-target="#presenting-the-results"><span class="toc-section-number">2.2.5</span>  Presenting the Results</a></li>
+  </ul></li>
+  <li><a href="#identifying-policy-problems-1" id="toc-identifying-policy-problems-1" class="nav-link" data-scroll-target="#identifying-policy-problems-1"><span class="toc-section-number">2.3</span>  Identifying Policy Problems</a>
+  <ul class="collapse">
+  <li><a href="#justifications-for-policy" id="toc-justifications-for-policy" class="nav-link" data-scroll-target="#justifications-for-policy"><span class="toc-section-number">2.3.1</span>  Justifications For Policy</a></li>
+  <li><a href="#externalities" id="toc-externalities" class="nav-link" data-scroll-target="#externalities"><span class="toc-section-number">2.3.2</span>  Externalities</a></li>
+  <li><a href="#social-good" id="toc-social-good" class="nav-link" data-scroll-target="#social-good"><span class="toc-section-number">2.3.3</span>  Social Good</a></li>
+  <li><a href="#why-is-tobacco-a-problem" id="toc-why-is-tobacco-a-problem" class="nav-link" data-scroll-target="#why-is-tobacco-a-problem"><span class="toc-section-number">2.3.4</span>  Why Is Tobacco a Problem?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -140,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How Data Can Be Used For Policy Studies</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></h1>
 </div>
 
 
@@ -160,21 +166,63 @@ ul.task-list li input[type="checkbox"] {
 <p>Science at its core is a process we use to understand observable phenonmena. It is based on using logic and observations of the senses to form coherent and simple understandings about the world. Data, or a collection of observations, is fundamental to being able to conduct scientific research. We use data in our daily lives to make conclusions; we don’t call it as such, but we do. Note here that data is not a living, breating concept: it requires interpretation by us. We use principles of science to interpret data and the analyses we conduct upon data. As we learn in middle and high school, science typically begins with asking questions or defining a problem.</p>
 <p>Suppose our current problem involves commute time to school or work, and we don’t wish to walk. In this case, that’s our question: “What’s the ideal way to get to school/work?” We then gather information. Chances are we may use Google Maps or Waze to guide us. In this context, these tools provide us with the information we need, namely, <em>estimates</em> of how long our commute will be. And, assuming we wish to get to our destination as fast as possible, we make <em>inferences</em> or conclusions about the ideal way to take based on the GPS’ options. If GPS says the highway takes 15 minutes but the backstreets which avoid highways take 35 minutes, we will typically elect to use the highway since that takes us to our destination the quickest.</p>
 <p>There’s still two more steps to do, though: test our hypothesis and draw conclusions about the actual observed facts. This means that we must, in real life, leave home and take the way we decide to take. When we get to our destination, we form conclusions about how actually taking the highway went. Of course, we repeat this idea multiple times; eventually, we “typically” take a certain direction to work or school precisely because we have the expectation the highway way will, on average, be preferable to <em>alternative</em> ways. This is a simple example, yet it illustrates the central point: in scientific inquiry, we ask questions, draw on available information, form ideas, take actions based on that information, and draw conclusions or plan accordingly based on testing the validity of that observed information. We don’t call this science in daily life, but that’s exactly what it is. The steps I’ve outlined so far are present in every field from public policy to physics, albeit with a little more sophisitcation.</p>
-</section>
-<section id="data-for-policy-analysis" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="data-for-policy-analysis"><span class="header-section-number">2.2</span> Data for Policy Analysis</h2>
-<p>As I’ve mentioned above, a collection of observations about a set of phenomena is what we call data. Thus, in public policy analysis, data is central to all that we do. One may ask why using data matters at all; the simple reason is that it allows us to resolve disagreements. While people may conduct different data analyses and obtain different results and even reach different conclusions, the main idea is that we can look into the real world and obtain concepts that map on to metrics that we think are important and test them against our expectations. After all, everyone can have opinions or views on things, but the useful part is <em>testing out</em> our expectations against reality. That way, we can have a better sense of what’s more likely to be true if a certain policy happens/is passed. Indeed, policy analysts are frequently concerned with the impact of some intervention on some outcomes, or sometimes a simple relationship between one variable and another. Recall the plot from the preface</p>
+<p>As I’ve mentioned above, a collection of observations about a set of phenomena is what we call data. Thus, in public policy analysis, data is central to all that we do. One may ask why using data matters at all; the simple reason is that it allows us to resolve disagreements. While people may conduct different data analyses and obtain different results and even reach different conclusions, the main idea is that we can look into the real world and obtain concepts that map on to metrics that we think are important and test them against our expectations. After all, everyone can have opinions or views on things, but the useful part is <em>testing out</em> our expectations against reality. That way, we can have a better sense of what’s more likely to be true if a certain policy happens/is passed.</p>
+<p>Traditionally, data analysis in the policy space has three goals in mind. The first is descriptive analysis of a phenomenon or topic. In this setting, we simply use raw or lightly transformed data to visualize understanding or relationships between variables (braodly, this is called analysis of variance). For example, we may ask (the classic political science question of) why some countries are wealthy or more developed and others poor/underdeveloped. We could classify <em>units of analysis</em> (schools, cities, states, or any other entity) by some criteria (Global South, Southern United States, New England, Metro Atlanta) and compare different metrics of income between them. We may take the average income of each unit and make graphics which show disparities between them. At a deeper level, we may wish to explain the factors which lead to these disparities. So say for cities, we may wish to understand how urbanicity, distance to the capital of the state, age composition, racial composition, and political status of the mayor explains variation in income levels for that city or a set of cities. These sorts of studies can help us point out disparities (for example, maybe cities of the United States that are mostly black or Native American in racial composition have 10,000 less dollars compared to mostly white areas) or identify broader trends. A second goal of policy analysis is prediction. A common problem in macroeconomics is the forecasting of GDP trends. Of course, the only way we may do this is by collecting data on GDP or some other measure we can observe across time and applying statistical techniques to try and predict how GDP/unemployment trends would look under a certain set of assumptions.</p>
+<p>A third need for data in policy analysis is for the purposes of estimating the impact of some policy or intervention on some outcomes. Recall the example from the syllabus of Proposition 99, where California wished to reduce tobacco smoking. This intervention raises an immediate question for policy analysis: namely, “what was the <em>effect</em> of this intervention on the actual smoking rates we see?” This is a question <a href="https://data.cdc.gov/Policy/The-Tax-Burden-on-Tobacco-1970-2019/7nwe-3aj9/about_data">we may collect tobacco sales data</a> on, for at least California. After data collection (or even prior, in this case), we can form hypotheses. A hyopothesis is a declarative/interrogative, testable statement about the world. It is like a hypothetical in the sense that we try to imagine the effect of a policy on an outcome so that we can answer questions about it. Here, we can hypothesize that Proposition 99 has a <em>negative</em> impact on tobacco smoking. Negative here is not intended in the normative sense; presumably most people reading this do not smoke (tobacco, anyways) or think that smoking is wonrg or immoral. Instead, here “negative” means that the policy might decrease the tobacco sales per capita compared to what they would have been otherwise. To test this, we can use statistical analysis to compare California to other states that didn’t do the policy.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="module1_files/figure-html/cell-2-output-1.png" width="593" height="449" class="figure-img"></p>
+<p><img src="module1_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The plot shows the cigarette pack sales per 100,000 for California from the years 1970 to 2000 (our dependent variable). The thick black line denotes California, and the thick dashed line shows the year that <a href="https://publishing.cdlib.org/ucpressebooks/view?docId=ft167nb0vq&amp;chunk.id=d0e447&amp;toc.depth=1&amp;toc.id=d0e447&amp;brand=ucpress">Proposition 99</a> (the independent variable/treatment) was passed. Proposition 99 was an anti-tobacco program that California passed in 1988 and enacted in 1989. It raised the price of tobacco by 25 cents per cigarette per pack and enacted a broader state-wide public health campaign which discouraged people from smoking.</p>
-<p>This intervention raises an immediate question for policy analysis: namely, “what was the <em>effect</em> of this intervention on the actual smoking rates we see?” This is a question <a href="https://data.cdc.gov/Policy/The-Tax-Burden-on-Tobacco-1970-2019/7nwe-3aj9/about_data">we may collect data</a> on. After data collection (or even prior, in this case), we can form hypotheses. A hyopothesis is a declarative/interrogative, testable statement about the world. It is like a hypothetical in the sense that we try to imagine the effect of a policy on an outcome so that we can answer questions about it. Here, we can hypothesize that Proposition 99 has a <em>negative</em> impact on tobacco smoking. Negative here is not intended in the normative sense; presumably most people reading this do not smoke (tobacco, anyways). Instead, here “negative” means that the policy might decrease the tobacco sales per capita compared to what they would have been otherwise. To test this, we can use statistical analysis to compare California to other states that didn’t do the policy. We typically wish to produce an estimate of California’s cigarette consumption in the years following 1989, had Proposition 99 never been passed. After we do our analyses, we can discuss what the implications are. In other words, was the policy effective by some appreciable margin? Are there other outcomes concerns to consider?). We can do this for other things too.</p>
+<p>The plot shows the cigarette pack sales per 100,000 for California from the years 1970 to 2000 (our dependent variable). The thick black line denotes the observed values for California, and the vertical black reference line shows the year that <a href="https://publishing.cdlib.org/ucpressebooks/view?docId=ft167nb0vq&amp;chunk.id=d0e447&amp;toc.depth=1&amp;toc.id=d0e447&amp;brand=ucpress">Proposition 99</a> (the independent variable/treatment) was passed. As I mentioned above, we typically wish to produce an estimate of California’s cigarette consumption in the years following 1989, had Proposition 99 never been passed. This line is denoted by the red dashed line. After we do our analyses/estimations, we can discuss what the implications are. In other words, was the policy effective by some appreciable margin? Are there other outcomes concerns to consider?</p>
+</section>
+<section id="steps-of-data-analysis" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="steps-of-data-analysis"><span class="header-section-number">2.2</span> 4 Steps of Data Analysis</h2>
+<p>Broadly speaking, we can think of data analysis being broken into 5 distinct concepts. I summarize them below.</p>
+<section id="identifying-policy-problems" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="identifying-policy-problems"><span class="header-section-number">2.2.1</span> Identifying Policy Problems</h3>
+<p>As we’ve discussed above, the first step in this process is simply asking questions. What kind of questions? Policy questions. Knowing what specific questions to ask though can be tricky. Policy is a giant field. Of the thousands of questions we could ask, how do we know which ones will be the most pressing or timely? In other words, how do we know that this is a problem that policy <em>needs</em> to be enacted for? How can we identify programs whose analysis benefits the citizenry or other interested parties? Put simpler, who cares? Why do we want to do this study or answer this question? Who stands to benefit?</p>
+</section>
+<section id="gathering-data" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="gathering-data"><span class="header-section-number">2.2.2</span> Gathering Data</h3>
+<p>Even once we’ve identified the problem, how do we go about gathering real data to answer questions? If we can’t get data that speaks to the issues that we’re concerned about, we can’t obtain answers that are useful.</p>
+</section>
+<section id="cleansing-data" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="cleansing-data"><span class="header-section-number">2.2.3</span> Cleansing Data</h3>
+<p>In real life, datasets do not come to us wrapped in a pretty bow ready for use. Cleaning data (or organizing it) can be a very messy affair in the best of times. In order for us to answer our questions, the data we obtain must be organized in a coherent way such that we can answer questions at all. If you wish to plot the trend lines of maternal mortality in Romania compaed to 15 other nations and your data are not sorted by nation and time, <strong>trust me</strong>, the plot you’ll get will not just look terrible, but you can’t glean any trends or patterns from it. What’s worse, you may not even know improper sorting is the casue of the problem until you bother to look at your dataset again. So, it is best to have good habits developed early.</p>
+</section>
+<section id="analyzing-data" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="analyzing-data"><span class="header-section-number">2.2.4</span> Analyzing Data</h3>
+<p>For analysis, we apply statistical analysis in order to answer the questions we’re asking, using the dataset we’ve now cleaned. Such techniques can range from simply descriptive statistical analysis to complex regression models. From such models, we sometimes wish to make inferences to a bigger population, but sometimes more specific statistics (e.g., the average treatment effect on the treated units) are of interest.</p>
+</section>
+<section id="presenting-the-results" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="presenting-the-results"><span class="header-section-number">2.2.5</span> Presenting the Results</h3>
+<p>Now that we’ve done analysis, we can finally interpret what the findings mean. We attempt to draw conclusions based on our results and come up with avenues for future research or other relevant aspects of interest. In this section, we typically try and say why our findings are relevant.</p>
+</section>
+</section>
+<section id="identifying-policy-problems-1" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="identifying-policy-problems-1"><span class="header-section-number">2.3</span> Identifying Policy Problems</h2>
+<section id="justifications-for-policy" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="justifications-for-policy"><span class="header-section-number">2.3.1</span> Justifications For Policy</h3>
+<p>Before we can do any analysis though, we have to take a step back. We have to ask ourselves how we know a problem exists in the first place. There are two broad justifications that policy is based on: negative externalities and social good, but the main point of both justifucations is “<em>harm</em>”.</p>
+</section>
+<section id="externalities" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="externalities"><span class="header-section-number">2.3.2</span> Externalities</h3>
+<p>The idea of externalities <a href="https://saylordotorg.github.io/text_introduction-to-economic-analysis/s08-externalities.html">comes from</a> microeconomic theory, which says that efficient markets will affect only those parties who willingly participate in transactions. Particularly in the case of negative extrnalities, or externalities which harm others, we could use public policy to rectify this.</p>
+<p>Consider a very simple example: seatbelts. In physics, any force that is not stopped by an equal, oppostite force will keep going. So, if you’re in a car crash while driving at 60 miles per hour while unbuckled, the car stops. You, however, don’t stop: you keep going, 60 miles per hour through the windshield. No public policy is needed just yet. So far, any cost that comes from a transaction has been borne by you, the driver. By the way, I’m not kidding: one of the arguments against seatbelts <a href="https://www.wpr.org/history/surprisingly-controversial-history-seat-belts#:~:text=Among%20the%20arguments%20put%20forth,researchers%20but%20opposition%20remained%20fierce">was literally</a> that using seatbelts should be a personal decision <em>if</em> it does not put others at risk. Additionally, <a href="https://www.cnn.com/2020/08/05/us/seat-belts-masks-coronavirus-wellness-trnd/index.html">industry</a> also argued against mandatory seatbelt laws on the grounds that it was the government interfering between the transactions of a consumer and the seller.</p>
+<p>However, there are a few issues with the externality argument. Firstly, being unbuckled turns you into a human projectile. You can hit your passengers or even others outside your vehicle if you’re unbuckled. Your market exchange (you buying the car and driving it) is now potentially having second-order effects on others by you not using a seatbelt. So, the government may wish to mandate seatbelts while driving in order to prevent these negative externalities which come in the form of medical bills or death. To address the argument of indsutry above, that seatbelt laws would raise costs of production, this raises an important moral dilemma: does the harm caused to the business of having to install seatbelts matter more than the human harm caused by a society where seatbelts are optional? Also, we are human beings. We have imperfect knowledge. We know for fact that we don’t have all the answers, to paraphrase Socrates. We also don’t know if the actions we do will ultimately hurt someone else. We live in a probabalistic world (which we will return to later). Indeed, we could argue against laws banning DUI in precisely this manner, saying that we don’t know if the intoxicated driver will harm someone until they do. But, as with seatbelts, we never know if there will be another passenger on the road or a child playing in the street. So, we rarely know if we’re <em>actually</em> putting peoples’ lives in danger by driving drunk or unbuckled. We can’t know if an externality will occur until it does, usually. Thus, the next view (social good) adopts a different form of reasoning.</p>
+</section>
+<section id="social-good" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="social-good"><span class="header-section-number">2.3.3</span> Social Good</h3>
+<p>Moreover, the externality justification isn’t typically the way we think about things from a public policy perspective. Usually, we have social welfare goals in mind. This can come in the form of harm reduction or prevention measures. When we argue for public education, for example, we typically don’t do so because we think that the private schools won’t educate citizens enough (even though they won’t), and that public school will be to decrease inefficient education markets. In fact, we typically don’t think of education (in our formative years anyways) as a market at all. We usually argue for public education because we think that education has <em>inherent</em> benefits, and that being denied a certain level of education necessitates an inherent harm. Imagine for a moment how the literacy rate of the United States would look if school was completely optional. We likely would not complain about GDP loss, we’d likely complain about a society where lots of people can’t read the cereal box or function within society in a decent manner. In other words, society has a vested interest in keeping people safe, educated, and healthy to some degree. So we mandate seatbelt laws, basic schooling, and other laws/regulations in service of these ends. Importantly, “these ends” <em>does not</em> have a right or wrong answer. The goals of policy are ultimately decided by people within the society. However, knowing the goals of a policy and reasons for its existence helps us ask meaningful questions about it. Following the above discussion, a natural research question that follows is “How did seatbelt laws affect the rate of car accident injuries and deaths?”</p>
+</section>
+<section id="why-is-tobacco-a-problem" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="why-is-tobacco-a-problem"><span class="header-section-number">2.3.4</span> Why Is Tobacco a Problem?</h3>
+<p>As we’ve discussed above, harm or necessity is typically a standard we look to in order to determine if policy is needed. As I’ve mentioned, California passed Proposition 99 in 1989 to reduce smoking rates. But, how did we know there was a problem to begin with? To do this, we can grab data on lung cancer morality rates from 1950 until today. Presumably, of course, we view lung cancer as harmful and somehthing we wish to prevent.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -184,37 +232,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>This is a plot of GDP growth rates for the United Kingdom, taken from <a href="https://www.cer.eu/insights/cost-brexit-june-2018">this report</a>. The authors were concerned with the impact of Brexit (Britain leaving the European Union) on the GDP in the U.K. economy. The effects of leaving the E.U. is also an empirical question: we can obtain data, as these authors did, about GDP growth rates across a variety of economies/countries. We can also hypothesize about why Brexit may have affected GDP growth. We can compare the U.K. to other areas which didn’t have similar economic shocks at the time and try to estimate, using statistics and data analysis, how British GDP would have evolved otherwise.</p>
-</section>
-<section id="steps-of-data-analysis" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="steps-of-data-analysis"><span class="header-section-number">2.3</span> 4 Steps of Data Analysis</h2>
-<p>Broadly speaking, we can think of data analysis being broken into 5 distinct concepts. I summarize them below, but these chapters will comprise the rest of the notes</p>
-<ol type="1">
-<li><p>Identifying Policy Problems</p></li>
-<li><p>Gathering Data</p></li>
-<li><p>Cleansing Data</p></li>
-<li><p>Analyzing Data</p></li>
-<li><p>Presenting Results</p></li>
-</ol>
-<section id="identifying-policy-problems" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="identifying-policy-problems"><span class="header-section-number">2.3.1</span> Identifying Policy Problems</h3>
-<p>As we’ve discussed above, the first step in this process is simply asking questions. What kind of questions? Policy questions. Knowing what specific questions to ask though can be tricky. Policy is a giant field. Of the thousands of questions we could ask, how do we know which ones will be the most pressing or timely? In other words, how do we know that this is a problem that policy <em>needs</em> to be enacted for? How can we identify programs whose analysis benefits the citizenry or other interested parties? Put simpler, who cares? Why do we want to do this study or answer this question? Who stands to benefit?</p>
-</section>
-<section id="gathering-data" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="gathering-data"><span class="header-section-number">2.3.2</span> Gathering Data</h3>
-<p>Even once we’ve identified the problem, how do we go about gathering real data to answer questions? If we can’t get data that speaks to the issues that we’re concerned about, we can’t obtain answers that are useful.</p>
-</section>
-<section id="cleansing-data" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="cleansing-data"><span class="header-section-number">2.3.3</span> Cleansing Data</h3>
-<p>In real life, datasets do not come to us wrapped in a pretty bow ready for use. Cleaning data (or organizing it) can be a very messy affair in the best of times. In order for us to answer our questions, the data we obtain must be organized in a coherent way such that we can answer questions at all. If you wish to plot the trend lines of maternal mortality in Romania compaed to 15 other nations and your data are not sorted by nation and time, <strong>trust me</strong>, the plot you’ll get will not just look terrible, but you can’t glean any trends or patterns from it. What’s worse, you may not even know improper sorting is the casue of the problem until you bother to look at your dataset again. So, it is best to have good habits developed early.</p>
-</section>
-<section id="analyzing-data" class="level3" data-number="2.3.4">
-<h3 data-number="2.3.4" class="anchored" data-anchor-id="analyzing-data"><span class="header-section-number">2.3.4</span> Analyzing Data</h3>
-<p>For analysis, we apply statistical analysis in order to answer the questions we’re asking, using the dataset we’ve now cleaned. Such techniques can range from simply descriptive statistical analysis to complex regression models. From such models, we sometimes wish to make inferences to a bigger population, but sometimes more specific statistics (e.g., the average treatment effect on the treated units) are of interest.</p>
-</section>
-<section id="presenting-the-results" class="level3" data-number="2.3.5">
-<h3 data-number="2.3.5" class="anchored" data-anchor-id="presenting-the-results"><span class="header-section-number">2.3.5</span> Presenting the Results</h3>
-<p>Now that we’ve done analysis, we can finally interpret what the findings mean. We attempt to draw conclusions based on our results and come up with avenues for future research or other relevant aspects of interest. In this section, we typically try and say why our findings are relevant.</p>
+<p>The shaded area represents the period before any state-wide anti-tobacco legislation was passed in the United States. We can see quite clearly the age-standarized lung cancer mortality rates rose in a fairly linear manner in the United States. However, the curve is parabolic; mortality rates were rising every single year until the zenith in 1990. Mortality began to fall when the first large scale anti-tobacco laws were passed. Of course, the <em>degree</em> to which these laws were the cause of this decrease is an empirical question (especially since lung cancer develops over time, the decrease after 1990 suggests other thing may have also contributed to the decline in behaviors that led to the decreease in mortality). However, given the clear increase in lung cancer rates and other obvious harms of tobacco smoking in the preceding decades, policymakers in California and the voters, in fact, became increasingly hostile to tobacco smoking in public and in other crowded areas. So, California passed legislation in 1988 (as did at least a dozen other states from 1988 to 2000) to decrease smoking rates.</p>
+<p>Had I not plotted this trend line, people (from the tobacco industry in 1970, for example) could simply say “Well, nobody <em>knows</em> if lung cancer mortality is a problem. How do we know if there’s a problem here? I don’t think one exists.” This plot makes a powerful case that lung cancer is indeed a problem which must be addressed due to the persistent rise in mortality. Data in other words provides intellectual self-defense; if you posit that a problem exists, then this should be demonstrable using datasets that speak to the issue at hand. As a consequence of this, if a problem does exist (be it tobacco smoking or <a href="https://mixtape.scunning.com/10-synthetic_control#prison-construction-and-black-male-incarceration">the impact of</a> racial incarceration/arrest disparities), we can then look for policies that attempt to mitigate or solve the problem. That way, we can go about doing analysis to see which policies are the most effective.</p>
 
 
 </section>
@@ -362,7 +381,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./summary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Identifying Policy Problems</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">OLS Explained</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
