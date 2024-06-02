@@ -131,10 +131,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#define-our-econometric-model" id="toc-define-our-econometric-model" class="nav-link" data-scroll-target="#define-our-econometric-model"><span class="toc-section-number">3.3.2</span>  Define Our Econometric Model</a></li>
   <li><a href="#write-out-the-objective-function" id="toc-write-out-the-objective-function" class="nav-link" data-scroll-target="#write-out-the-objective-function"><span class="toc-section-number">3.3.3</span>  Write Out the Objective Function</a></li>
   <li><a href="#simplify-the-objective-function" id="toc-simplify-the-objective-function" class="nav-link" data-scroll-target="#simplify-the-objective-function"><span class="toc-section-number">3.3.4</span>  Simplify the Objective Function</a></li>
-  <li><a href="#simplify-the-objective-function-cont." id="toc-simplify-the-objective-function-cont." class="nav-link" data-scroll-target="#simplify-the-objective-function-cont."><span class="toc-section-number">3.3.5</span>  Simplify the Objective Function, cont.</a></li>
-  <li><a href="#take-partial-derivatives" id="toc-take-partial-derivatives" class="nav-link" data-scroll-target="#take-partial-derivatives"><span class="toc-section-number">3.3.6</span>  Take Partial Derivatives</a></li>
-  <li><a href="#get-the-betas" id="toc-get-the-betas" class="nav-link" data-scroll-target="#get-the-betas"><span class="toc-section-number">3.3.7</span>  Get the Betas</a></li>
-  <li><a href="#our-ols-line-of-best-fit" id="toc-our-ols-line-of-best-fit" class="nav-link" data-scroll-target="#our-ols-line-of-best-fit"><span class="toc-section-number">3.3.8</span>  Our OLS Line of Best Fit</a></li>
+  <li><a href="#take-partial-derivatives" id="toc-take-partial-derivatives" class="nav-link" data-scroll-target="#take-partial-derivatives"><span class="toc-section-number">3.3.5</span>  Take Partial Derivatives</a></li>
+  <li><a href="#get-the-betas" id="toc-get-the-betas" class="nav-link" data-scroll-target="#get-the-betas"><span class="toc-section-number">3.3.6</span>  Get the Betas</a></li>
+  <li><a href="#our-ols-line-of-best-fit" id="toc-our-ols-line-of-best-fit" class="nav-link" data-scroll-target="#our-ols-line-of-best-fit"><span class="toc-section-number">3.3.7</span>  Our OLS Line of Best Fit</a></li>
   </ul></li>
   <li><a href="#after-running-regressions" id="toc-after-running-regressions" class="nav-link" data-scroll-target="#after-running-regressions"><span class="toc-section-number">3.4</span>  After Running Regressions</a></li>
   </ul>
@@ -190,7 +189,9 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="arrividerci-algebra." class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="arrividerci-algebra."><span class="header-section-number">3.2</span> Arrividerci, Algebra.</h2>
-<p>To do this, we’ve now reached a point in the course where simple algebra is no longer our best guide. We now <em>must</em> use calculus, specifically the baiscs of derivatives, to find the optimal solution. The derivative is the slope of a curve/line at a given point. One interesting property about derivatives is that when we set the derivative to 0 and solve for the variable, we reach a maximum or minimum, usually. Say we shoot a basketball off a 2 foot cliff, which produces a trajectory function of <span class="math inline">\(h(t)= −5t^2 +20t+2\)</span>, where <span class="math inline">\(h(t)\)</span> is our height over time and the 2 represents the fact that we are standing 2 feet above ground, and the line itself represents the ball’s trajectory. We can find the <em>maximum</em> height of the ball by taking the derivative of the original quadratic function and solving it for 0.</p>
+<p>To do this, we’ve now reached a point in the course where simple algebra is no longer our best guide. We now <em>must</em> use calculus, specifically the baiscs of derivatives, to find the optimal solution. The derivative is the slope of a curve/line at a given point. One interesting property about derivatives is that when we set the derivative to 0 and solve for the variable, we reach a maximum or minimum, usually. Optimization problems, in general, take the form of <span class="math display">\[
+\min_{\theta \in \Theta } f(\theta) \,\, \mathrm{ s.t. }  g(\theta) = 0, h(\theta) \leq 0,
+\]</span> where there’s some function <span class="math inline">\(f(\theta)\)</span> (called the <em>objective function</em>) is minimized (or sometimes maximized) over a set of <span class="math inline">\(g(\theta)\)</span> equality constraints and <span class="math inline">\(h(\theta)\)</span> inequality constraints. For example, say we shoot a basketball off a 2 foot cliff, which produces a trajectory function of <span class="math inline">\(h(t)= −5t^2 +20t+2\)</span>, where <span class="math inline">\(h(t)\)</span> is our height over time and the 2 represents the fact that we are standing 2 feet above ground, and the line itself represents the ball’s trajectory. We can find the <em>maximum</em> height of the ball by taking the derivative of the original quadratic function and solving it for 0.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -243,8 +244,8 @@ Note
 </section>
 <section id="write-out-the-objective-function" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="write-out-the-objective-function"><span class="header-section-number">3.3.3</span> Write Out the Objective Function</h3>
-<p>We can represent this problem with something called an <em>objective function</em> <span class="math display">\[S = {\text{argmin}} \sum_{i=1}^{n} \underbrace{(y_i - \hat{y})^2}_{\text{objective function}}.\]</span></p>
-<p>The objective function is the calculus term for some function (in this case “S” for “spending”) we employ for an optimization problem. The residuals are simply <span class="math inline">\(y_i - \hat{y}\)</span>, or the difference between the observed values and our model’s prediction. From the above, our models predictions are simply the two variables we’ve discussed, <span class="math inline">\(\hat{y} \coloneqq \beta_0 + \beta_1x\)</span>. We call this variable y-hat. In fact, our objective function may be rewritten by decomposing <span class="math inline">\(\hat{y}\)</span> as the model’s coefficients <span class="math display">\[S = \underset{\beta_0,\beta_1}{\text{argmin}} \sum_{i=1}^{n} (y_i - (\overbrace{\beta_0 + \beta_1x}^{\text{Predictions}}))^2.\]</span></p>
+<p>We can represent the objective function to solve OLS as <span class="math display">\[S = {\text{argmin}} \sum_{i=1}^{n} \underbrace{(y_i - \hat{y})^2}_{\text{objective function}}.\]</span></p>
+<p>I call the objective function “S” for “spending”. The residuals are simply <span class="math inline">\(y_i - \hat{y}\)</span>, or the difference between the observed values and our model’s prediction. From the above, our models predictions are simply the two variables we’ve discussed, <span class="math inline">\(\hat{y} =\beta_0 + \beta_1x\)</span>. We call this variable y-hat. In fact, our objective function may be rewritten by decomposing <span class="math inline">\(\hat{y}\)</span> as the model’s coefficients <span class="math display">\[S = \underset{\beta_0,\beta_1}{\text{argmin}} \sum_{i=1}^{n} (y_i - (\overbrace{\beta_0 + \beta_1x}^{\text{Predictions}}))^2.\]</span></p>
 <p>The word “<em>argmin</em>” here means “argument of the minimum”. The symbols underneath it, <span class="math inline">\(\beta_0,\beta_1\)</span>, are the coefficients we solve for. We call the solutions <span class="math inline">\(\beta_0,\beta_1\)</span> <em>optimal</em> if they return the lowest possible values the function can produce. What values are these? The sum of the residuals squared. The sigma symbol <span class="math inline">\(\sum_{i=1}^{n}\)</span> means we are adding up the <span class="math inline">\(i\)</span>th squared residual to the <span class="math inline">\(n\)</span>th data point/number of observations (in this case 3), meaning that the line will be as close as it can be to the observed data at every single data point.</p>
 <p>One may ask <em>why</em> we are squaring the summed residuals. First of all, using the sum of absolute errors (that is, without squaring them) is a non-differentiable function. We would need to use numerical methods to compute its solution. Using the squared residuals means that we are dealing a quadratic function (making the solution analytically easier to compute). Also, suppose one observation has a residual of 40 and another observation has one of -40. The residuals would cancel out to 0. The squaring also has the property of penalizing worse predictions. After all, all errors should not be created equally. If the observed value is 20 but we predict 25, the error is -5. Its squared residual is 25. But if the observed value is 40, and we predict 80, the “absolute” error is -40 and the squared error of is 1600. If we did not square them, we would be treating an error of 5 as the same as an error of 40, and this does not make sense (and does not allow for desirable theoretical propoerties of OLS).</p>
 </section>
@@ -252,13 +253,8 @@ Note
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="simplify-the-objective-function"><span class="header-section-number">3.3.4</span> Simplify the Objective Function</h3>
 <p>First, we can substitute the real values as well as our model for prediction into the objective function. We already know the values x-takes. You either buy no drinks, 1 drink, or 2. So with this information, we can now find the amount of money we pay up front (<span class="math inline">\(\beta_0\)</span>) and how much it costs for each drink (<span class="math inline">\(\beta_1\)</span>) <span class="math display">\[S = \underbrace{(30 - (\beta_0 + \beta_1 \cdot 0))^2}_{\text{Term 1}} + \underbrace{(35 - (\beta_0 + \beta_1 \cdot 1))^2}_{\text{Term 2}} + \underbrace{(40 - (\beta_0 + \beta_1 \cdot 2))^2}_{\text{Term 3}}\]</span></p>
 </section>
-<section id="simplify-the-objective-function-cont." class="level3" data-number="3.3.5">
-<h3 data-number="3.3.5" class="anchored" data-anchor-id="simplify-the-objective-function-cont."><span class="header-section-number">3.3.5</span> Simplify the Objective Function, cont.</h3>
-<p>Here we simplify things. <span class="math display">\[S = (30 - \beta_0)^2 + (35 - \beta_0 - \beta_1)^2 + (40 - \beta_0 - 2\beta_1)^2\]</span></p>
-<p>Note that the <span class="math inline">\(\beta_1 \cdot 0\)</span> term goes away because anything multiplied by 0 is just 0. We also simplify the second term because anything multiplied by 1 is just itself in the case of <span class="math inline">\(\beta_1 \cdot 1\)</span>.</p>
-</section>
-<section id="take-partial-derivatives" class="level3" data-number="3.3.6">
-<h3 data-number="3.3.6" class="anchored" data-anchor-id="take-partial-derivatives"><span class="header-section-number">3.3.6</span> Take Partial Derivatives</h3>
+<section id="take-partial-derivatives" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="take-partial-derivatives"><span class="header-section-number">3.3.5</span> Take Partial Derivatives</h3>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -269,103 +265,122 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you do not wish to follow this section, then at least skip to <a href="#get-the-betas">this section</a> following the partial derivatives.</p>
+<p>If you do not wish to follow this section, then at least skip to <a href="#get-the-betas">this section</a> following my calculation of the partial derivatives.</p>
 </div>
 </div>
-<p>To find the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, we take the partial derivatives of <span class="math inline">\(S\)</span> with respect to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Recall that the partial derivative is simply how much the value of the function changes when our other variables that affect our outcome are held constant.</p>
-<p>In this case, the power rule and chain rules for differentiation are our friends here. To hear more about combining the power rule and chain rule, <a href="https://www.youtube.com/watch?v=TI-j-fr6c4A">see here</a>.</p>
+<p>To find the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, we take the partial derivatives of <span class="math inline">\(S\)</span> with respect to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Here is a short sketch of how we do this: For simplicity, I break this into two sections, one section per coefficient. In this case, the chain rule and power rules for differentiation are our friends here. To hear more about combining the power rule and chain rule, <a href="https://www.youtube.com/watch?v=TI-j-fr6c4A">see here</a>. I define inner and outer functions, beginning with the power rule for the outer function, and then taking the derivative for the inner function. The partial derivative w.r.t each coefficient is simply the sum of these chain rules. First, we differentiate w.r.t. the constant (entry fees), then we do the same for the drinks coefficient.</p>
 <ol type="1">
 <li><strong>Partial derivative with respect to <span class="math inline">\(\beta_0\)</span>:</strong></li>
 </ol>
-<p>First, we do: <span class="math display">\[\frac{\partial S}{\partial \beta_0} = -2(30 - \beta_0) - 2(35 - \beta_0 - \beta_1) - 2(40 - \beta_0 - 2\beta_1).\]</span></p>
-<p>Nothing crazy has happened here. I’ve simply brought the 2 down in front of each set of parentheses and subtracted 1 from the exponent. The <span class="math inline">\(-1\)</span> however comes from the chain rule due to the fact that we consider <span class="math inline">\((30 - \beta_0)\)</span> as one function, and <span class="math inline">\((30 - \beta_0)^2\)</span> as another function. The “inner” function <span class="math inline">\((30 - \beta_0)\)</span> has a derivative of <span class="math inline">\(-1\)</span> for <span class="math inline">\(\beta_0\)</span>, since there’s no exponent attached to it and 20 is a constant, so its derivative is 0. Therefore, the derivative of the outer function <span class="math inline">\((30 - \beta_0)^2\)</span> (applying the power rule from above) is <span class="math inline">\(2(30 - \beta_0) \cdot -1\)</span>. Now, we simplify. First, distribute the <span class="math inline">\(-2\)</span> across each term inside the parentheses:</p>
-<p><span class="math display">\[\frac{\partial S}{\partial \beta_0} = -2(30 - \beta_0) - 2(35 - \beta_0 - \beta_1) - 2(40 - \beta_0 - 2\beta_1)\]</span> <span class="math display">\[= -2(30) + 2\beta_0 - 2(35) + 2\beta_0 + 2\beta_1 - 2(40) + 2\beta_0 + 4\beta_1.\]</span></p>
-<p>Then we combine like terms:</p>
-<p><span class="math display">\[= -60 + 2\beta_0 - 70 + 2\beta_0 + 2\beta_1 - 80 + 2\beta_0 + 4\beta_1.\]</span></p>
-<p>Now, we group the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> terms together:</p>
-<p><span class="math display">\[= (-60 - 70 - 80) + (2\beta_0 + 2\beta_0 + 2\beta_0) + (2\beta_1 + 4\beta_1).\]</span> Now, I factor out the 2 <span class="math display">\[= (-60 - 70 - 80) + 2(3\beta_0) + 2(\beta_1 + 2\beta_1).\]</span> So, we get <span class="math display">\[= -210 + 6\beta_0 + 6\beta_1.\]</span></p>
-<p>Now we re-arrange by adding 210 to the RHS <span class="math display">\[6\beta_0 + 6\beta_1 = 210.\]</span></p>
-<p>See how there are two 6s? We may now divide the right and left hand sides by 6 to further simplify <span class="math display">\[\boxed{\beta_0 + \beta_1 = 35} \]</span></p>
-<p>Okay, first parital calculated.</p>
+<p>First, we denote our inner functions. <span class="math display">\[
+\begin{aligned}
+f_1 &amp;= 30 - (\beta_0 + \beta_1 \cdot 0) \\
+f_2 &amp;= 35 - (\beta_0 + \beta_1 \cdot 1) \\
+f_3 &amp;= 40 - (\beta_0 + \beta_1 \cdot 2)
+\end{aligned}
+\]</span></p>
+<p>Here are our outer functions: <span class="math display">\[
+S = f_1^2 + f_2^2 + f_3^2
+\]</span></p>
+<p>We must sum these derivatives together using the chain rule</p>
+<p><span class="math display">\[
+\frac{\partial S}{\partial \beta_0} = \frac{\partial S}{\partial f_1} \cdot \frac{\partial f_1}{\partial \beta_0} + \frac{\partial S}{\partial f_2} \cdot \frac{\partial f_2}{\partial \beta_0} + \frac{\partial S}{\partial f_3} \cdot \frac{\partial f_3}{\partial \beta_0.}
+\]</span> First, the power rule for the outer functions <span class="math display">\[
+\begin{aligned}
+\frac{\partial S}{\partial f_1} &amp;= 2f_1 \\
+\frac{\partial S}{\partial f_2} &amp;= 2f_2 \\
+\frac{\partial S}{\partial f_3} &amp;= 2f_3.
+\end{aligned}
+\]</span> All we’ve done here is used the power rule, taking the twos from the exponent and putting them on the outside of each term’s outer function. Next, we take the derivatives of each term’s inner function w.r.t. <span class="math inline">\(\beta_0\)</span>: <span class="math display">\[
+\begin{aligned}
+\frac{\partial f_1}{\partial \beta_0} &amp;= -1 \\
+\frac{\partial f_2}{\partial \beta_0} &amp;= -1 \\
+\frac{\partial f_3}{\partial \beta_0} &amp;= -1
+\end{aligned}
+\]</span> Since <span class="math inline">\(-\beta_0\)</span> is negative, each inner function’s derivative for <span class="math inline">\(\beta_0\)</span> is just -1. Now, we substitute these inner derivatives back into the <span class="math inline">\(f_i\)</span> functions: <span class="math display">\[
+\begin{aligned}
+&amp;\frac{\partial S}{\partial \beta_0} = 2f_1 \cdot (-1) + 2f_2 \cdot (-1) + 2f_3 \cdot (-1) \\
+&amp;= -2f_1 - 2f_2 - 2f_3 \\
+&amp;= -2(30 - (\beta_0 + \beta_1 \cdot 0)) - 2(35 - (\beta_0 + \beta_1 \cdot 1)) - 2(40 - (\beta_0 + \beta_1 \cdot 2))
+\end{aligned}
+\]</span></p>
+<p>Now, to simplify this expression, let’s first expand each term by distributing the 2:</p>
+<p><span class="math display">\[
+= -60 + 2\beta_0 - 70 + 2\beta_0 + 2\beta_1 - 80 + 2\beta_0 + 4\beta_1.
+\]</span></p>
+<p>Next I rearrange, adding parentheses for readability:</p>
+<p><span class="math display">\[
+= (-60 - 70 - 80) + (2\beta_0 + 2\beta_0 + 2\beta_0) + (2\beta_1 + 4\beta_1).
+\]</span> Finally, when we combine like terms, we end with <span class="math display">\[
+= \boxed{-210 + 6\beta_0 + 6\beta_1}.
+\]</span></p>
 <ol start="2" type="1">
 <li><strong>Partial derivative with respect to <span class="math inline">\(\beta_1\)</span>:</strong></li>
 </ol>
-<p><span class="math display">\[S = \underbrace{(30 - (\beta_0 + \beta_1 \cdot 0))^2}_{\text{Term 1}} + \underbrace{(35 - (\beta_0 + \beta_1 \cdot 1))^2}_{\text{Term 2}} + \underbrace{(40 - (\beta_0 + \beta_1 \cdot 2))^2}_{\text{Term 3}}\]</span></p>
-<p>Rewrite this as:</p>
-<p><span class="math display">\[
-S = (30 - \beta_0)^2 + (35 - (\beta_0 + \beta_1))^2 + (40 - (\beta_0 + 2\beta_1))^2
+<p>We again rewrite these same as above, with these being our inner functions <span class="math display">\[
+\begin{aligned}
+f_1 &amp;= 30 - (\beta_0 + \beta_1 \cdot 0) \\
+f_2 &amp;= 35 - (\beta_0 + \beta_1 \cdot 1) \\
+f_3 &amp;= 40 - (\beta_0 + \beta_1 \cdot 2).
+\end{aligned}
 \]</span></p>
-<p>We differentiate each term with respect to <span class="math inline">\(\beta_1\)</span>:</p>
-<ol type="1">
-<li>The first term</li>
-</ol>
+<p>Then our outer functions:</p>
 <p><span class="math display">\[
-\frac{\partial}{\partial \beta_1} (30 - \beta_0)^2 = 0
-\]</span> does not involve <span class="math inline">\(\beta_1\)</span> because it is multiplied by 0. We therefore move on to the second term.</p>
-<ol start="2" type="1">
-<li>For the second term, we rewrite by distributing the negative 1:</li>
-</ol>
-<p><span class="math display">\[
-\frac{\partial}{\partial \beta_1} (35 - (\beta_0 + \beta_1))^2 = \frac{\partial}{\partial \beta_1} (35 - \beta_0 - \beta_1)^2.
+S = f_1^2 + f_2^2 + f_3^2.
 \]</span></p>
-<p>Then, using the chain rule:</p>
-<p><span class="math display">\[
-= 2 (35 - \beta_0 - \beta_1) \cdot (-1)
+<p>Just as before, we sum each derivative in order to get the partial derivative <span class="math display">\[
+\frac{\partial S}{\partial \beta_1} = \frac{\partial S}{\partial f_1} \cdot \frac{\partial f_1}{\partial \beta_1} + \frac{\partial S}{\partial f_2} \cdot \frac{\partial f_2}{\partial \beta_1} + \frac{\partial S}{\partial f_3} \cdot \frac{\partial f_3}{\partial \beta_1}.
 \]</span></p>
+<p>I apply the power rule to the the outer functions:</p>
 <p><span class="math display">\[
-= -2 (35 - \beta_0 - \beta_1)
+\begin{aligned}
+\frac{\partial S}{\partial f_1} &amp;= 2f_1 \\
+\frac{\partial S}{\partial f_2} &amp;= 2f_2 \\
+\frac{\partial S}{\partial f_3} &amp;= 2f_3.
+\end{aligned}
 \]</span></p>
-<ol start="3" type="1">
-<li>The third term:</li>
-</ol>
+<p>Next, we’ll compute <span class="math inline">\(\frac{\partial f_i}{\partial \beta_1}\)</span> for <span class="math inline">\(i = 1, 2, 3\)</span> for the inner functions:</p>
 <p><span class="math display">\[
-\frac{\partial}{\partial \beta_1} (40 - (\beta_0 + 2\beta_1))^2 = \frac{\partial}{\partial \beta_1} (40 - \beta_0 - 2\beta_1)^2
-\]</span></p>
-<p>Using the chain rule:</p>
+\begin{aligned}
+\frac{\partial f_1}{\partial \beta_1} &amp;= 0 \\
+\frac{\partial f_2}{\partial \beta_1} &amp;= -1 \\
+\frac{\partial f_3}{\partial \beta_1} &amp;= -2
+\end{aligned}
+\]</span> Note how <span class="math inline">\(\beta_1\)</span> isn’t in term 1 since it is multiplied by 0, so its derivative must be 0 as it it’s not there. This means the first outer function goes away because <span class="math inline">\(f_1 \times 0=0\)</span>. So, I omit this from my derivation. Next, we’ll substitute these remaining two derivatives back into the expression for the outer function:</p>
 <p><span class="math display">\[
-= 2 (40 - \beta_0 - 2\beta_1) \cdot (-2)
-\]</span></p>
+\begin{aligned}
+&amp;\frac{\partial S}{\partial \beta_1} = 2f_2 \cdot (-1) + 2f_3 \cdot (-2) \\
+&amp;= -2f_2 - 4f_3 \\
+&amp;= 2(35 - (\beta_0 + \beta_1 \cdot 1)) - 4(40 - (\beta_0 + \beta_1 \cdot 2)).
+\end{aligned}
+\]</span> Now, we combine like terms: <span class="math display">\[
+\frac{\partial S}{\partial \beta_1} = -2(35 - \beta_0 - \beta_1) - 4(40 - \beta_0 - 2\beta_1).
+\]</span> To simplify this expression, first we’ll expand each term by distributing the -2 and -4. Here is term 1:</p>
 <p><span class="math display">\[
-= -4 (40 - \beta_0 - 2\beta_1)
-\]</span></p>
-<p>Now, sum the partial derivatives of the individual terms to get the partial derivative of <span class="math inline">\(S\)</span> with respect to <span class="math inline">\(\beta_1\)</span></p>
+-2(35 - \beta_0 - \beta_1) = -70 + 2\beta_0 + 2\beta_1.
+\]</span> Now we expand term 2: <span class="math display">\[
+-4(40 - \beta_0 - 2\beta_1) = -160 + 4\beta_0 + 8\beta_1.
+\]</span> Now, combine like terms: <span class="math display">\[
+= (-70 + 2\beta_0 + 2\beta_1) + (-160 + 4\beta_0 + 8\beta_1).
+\]</span> Move the constants outside of the parentheses and adding parentheses for readability:</p>
 <p><span class="math display">\[
-\frac{\partial S}{\partial \beta_1} = 0 + (-2 (35 - \beta_0 - \beta_1)) + (-4 (40 - \beta_0 - 2\beta_1))
+= (-70 - 160) + (2\beta_0 + 4\beta_0) + (2\beta_1 + 8\beta_1).
 \]</span></p>
-<p>Simplify this expression:</p>
-<p><span class="math display">\[
-\frac{\partial S}{\partial \beta_1} = -2 (35 - \beta_0 - \beta_1) - 4 (40 - \beta_0 - 2\beta_1)
+<p>After adding the constants and combining like terms once more, <span class="math inline">\(\frac{\partial S}{\partial \beta_1} = -230 + 6\beta_0 + 10\beta_1\)</span> <span class="math display">\[
+\boxed{-230 + 6\beta_0 + 10\beta_1}.
 \]</span></p>
-<p>Expand and combine like terms:</p>
-<p><span class="math display">\[
-\frac{\partial S}{\partial \beta_1} = -2(35 - \beta_0 - \beta_1) - 4(40 - \beta_0 - 2\beta_1)
-\]</span></p>
-<p><span class="math display">\[
-= -2 \cdot 35 + 2 \beta_0 + 2 \beta_1 - 4 \cdot 40 + 4 \beta_0 + 8 \beta_1
-\]</span></p>
-<p><span class="math display">\[
-= -70 + 2 \beta_0 + 2 \beta_1 - 160 + 4 \beta_0 + 8 \beta_1
-\]</span></p>
-<p><span class="math display">\[
-= -230 + 6 \beta_0 + 10 \beta_1
-\]</span></p>
-<p>Just to set it up for the next section, we can again place the constant on the RHS after rearranging</p>
-<p><span class="math display">\[
-\boxed{6 \beta_0 + 10 \beta_1 = 230}
-\]</span></p>
-<p>Okay, second partial calculated.</p>
 </section>
-<section id="get-the-betas" class="level3" data-number="3.3.7">
-<h3 data-number="3.3.7" class="anchored" data-anchor-id="get-the-betas"><span class="header-section-number">3.3.7</span> Get the Betas</h3>
+<section id="get-the-betas" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="get-the-betas"><span class="header-section-number">3.3.6</span> Get the Betas</h3>
 <p>Now we’ve set up our partial derivatives, so we can now return to algebra to get our betas. In order to find their values, though, we must solve a system of equations. The reason we must solve them as a system of equations is because we need for BOTH values to be the ones which minimize the distance between the predictions and the observed data. Here are the equations we must solve for (note, we have two because we have two variables, the entry fee and the drinks, but this can easily be extended to more variables) <span class="math display">\[\beta_0 + \beta_1 = 35\]</span> <span class="math display">\[6\beta_0 + 10\beta_1 = 230.\]</span></p>
 <p>Here I use a method called substitution to solve the system, but there are many such ways we can solve this.</p>
-<section id="solve-for-beta_0" class="level4" data-number="3.3.7.1">
-<h4 data-number="3.3.7.1" class="anchored" data-anchor-id="solve-for-beta_0"><span class="header-section-number">3.3.7.1</span> Solve for <span class="math inline">\(\beta_0\)</span>:</h4>
+<section id="solve-for-beta_0" class="level4" data-number="3.3.6.1">
+<h4 data-number="3.3.6.1" class="anchored" data-anchor-id="solve-for-beta_0"><span class="header-section-number">3.3.6.1</span> Solve for <span class="math inline">\(\beta_0\)</span>:</h4>
 <p>The first step of substitution is to solve for one of our variables. I chose the first parital since it is the easiest.</p>
 <p><span class="math display">\[\beta_0 = 35 - \beta_1\]</span> This is pretty simple, we just subtract <span class="math inline">\(\beta_1\)</span>. We know that the entry fee is some positive number. We also know that <span class="math inline">\(\beta_1\)</span> on the RHS has to be less than 35, as this would mean that we get in for free, which does not make sense given the problem at hand. We also know, logically, that <span class="math inline">\(\beta_0\)</span> can’t be 35, because then this means that drinks are free, which is also inconsistent with the logic of the problem. The reason I’m making such a fuss about this, is because when the regression gives us a number, the model predictions need to either make sense under existing constraints, or be interpreted sensibly. If the model predicts, for example, negative age or that you have negative cups of coffee per day, this suggests we need a different modeling strategy. It also means we must be sensible in interpreting our regression models– if negative values do not make sense for a x-values for a certain variable, we should not include negative values in our interpretation of our results.</p>
 </section>
-<section id="substitute-beta_0" class="level4" data-number="3.3.7.2">
-<h4 data-number="3.3.7.2" class="anchored" data-anchor-id="substitute-beta_0"><span class="header-section-number">3.3.7.2</span> Substitute <span class="math inline">\(\beta_0\)</span>:</h4>
+<section id="substitute-beta_0" class="level4" data-number="3.3.6.2">
+<h4 data-number="3.3.6.2" class="anchored" data-anchor-id="substitute-beta_0"><span class="header-section-number">3.3.6.2</span> Substitute <span class="math inline">\(\beta_0\)</span>:</h4>
 <p>Now, since we know the equation for the constant (the entry fee), we can put this back in the partial derivative equation for <span class="math inline">\(\beta_1\)</span></p>
 <p><span class="math display">\[6\beta_0 + 10\beta_1 = 230.\]</span></p>
 <p>Once we do this, we can solve for <span class="math inline">\(\beta_1\)</span>. Here is the partial for <span class="math inline">\(\beta_1\)</span> with this replacement for <span class="math inline">\(\beta_0\)</span> <span class="math display">\[6(35 - \beta_1) + 10\beta_1 = 230.\]</span> Distribute the 6 <span class="math display">\[210 - 6\beta_1 + 10\beta_1 = 230\]</span> and combine these terms <span class="math inline">\(- 6\beta_1 + 10\beta_1\)</span> together <span class="math display">\[210 + 4\beta_1 = 230.\]</span> Next, we subtract 210 <span class="math display">\[4\beta_1 = 20.\]</span> Finally, we divide by 4 <span class="math display">\[\boxed{\beta_1 = 5}.\]</span></p>
@@ -375,8 +390,8 @@ S = (30 - \beta_0)^2 + (35 - (\beta_0 + \beta_1))^2 + (40 - (\beta_0 + 2\beta_1)
 <p>Now, we know the entry fee is 30 dollars.</p>
 </section>
 </section>
-<section id="our-ols-line-of-best-fit" class="level3" data-number="3.3.8">
-<h3 data-number="3.3.8" class="anchored" data-anchor-id="our-ols-line-of-best-fit"><span class="header-section-number">3.3.8</span> Our OLS Line of Best Fit</h3>
+<section id="our-ols-line-of-best-fit" class="level3" data-number="3.3.7">
+<h3 data-number="3.3.7" class="anchored" data-anchor-id="our-ols-line-of-best-fit"><span class="header-section-number">3.3.7</span> Our OLS Line of Best Fit</h3>
 <p>So, our line of best fit is <span class="math inline">\(\hat{y} = 30 + 5x\)</span>. The way we interpret this is is for every additional drink bought, you pay 5 more dollars. In fact, more precisely, <em>compared</em> to those who only wanted to get in the club, you spend 5 more dollars than they do, per each new drink you get. We can now predict how much money we would spend if we bought 5 drinks or 500 drinks.</p>
 <p>At the outset, one may ask why we did this at all. Why bother with the partial derivative approach and the messy system of equations? The reason is because the parital derivative allows for us to (atttempt to) isolate the causal impact of <em>multiple</em> variables. In fact, we did so implicitly right here in this derivation! We considered the impact of BOTH entry fees and the number of drinks we bought too. If we wanted to add in another variable, say the cost of an additional cigar, all we would do is add another beta, <span class="math inline">\(\beta_2\)</span>, to the original objective function and multiply the corresponding values by whatever the costs for that were. We would then have three systems of equations to solve for. However, the underlying principle is the same. Here is our completed regression line.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="5">
