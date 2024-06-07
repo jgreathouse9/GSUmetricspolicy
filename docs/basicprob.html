@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ols.html" rel="next">
+<link href="./asymptotic.html" rel="next">
 <link href="./module1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -119,7 +119,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
       </ul>
@@ -134,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
+  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
   </div>
 </li>
       </ul>
@@ -237,8 +242,7 @@ s^2 = \frac{1}{5-1} \left[ (30 - 50)^2 + (50 - 50)^2 + (50 - 50)^2 + (50 - 50)^2
 </section>
 <section id="uncertainty-around-the-mean" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="uncertainty-around-the-mean"><span class="header-section-number">3.3</span> Uncertainty Around the Mean</h2>
-<p>Typically, we wish to see how uncertain our estimates are. The way we do this is by calculating the margin of error for the mean. We take such uncertainty into account by computing the standard error of the mean, <span class="math inline">\(\text{SEM} = \frac{s}{\sqrt{N}}\)</span>. Here, lowercase sigma, <span class="math inline">\(\sigma\)</span>, is the sample standard deviation and <span class="math inline">\(N\)</span> is our sample size. The sample standard deviation is how far our entire dataset is from the mean.</p>
-<p>In the case of Group A from above, our sample size is 10000. We have 10000 incomes to pick from. The expectation/average of these in Group A, as we’ve said, is 50. The standard variance of this group is 2. The way we calculate <span class="math inline">\(\sigma\)</span> is by taking the square root of the variance, or <span class="math inline">\(\sqrt{2}=1.142\)</span>.</p>
+<p>Typically, we wish to see how uncertain our estimates are. The way we do this is by calculating the margin of error for the mean. We take such uncertainty into account by computing the standard error of the mean, <span class="math inline">\(\text{SEM} = \frac{\sigma}{\sqrt{N}}\)</span>. Here, lowercase sigma, <span class="math inline">\(\sigma\)</span>, is the sample standard deviation and <span class="math inline">\(N\)</span> is our sample size. The sample standard deviation is how far our entire dataset is from the mean. it is the square root of the variance. In the case of Group A from above, our sample size is 10000. We have 10000 incomes to pick from. The expectation/average of these in Group A, as we’ve said, is 50. The standard deviation of this group is 2.</p>
 <p>Before we can discuss the margin of error, though, we must say some words about probability distributions. The distributions of both income groups are what we’d call <em>normally</em> distributed in the sense that most of the values we see are within 1 standard deviation of the mean. In fact, we can show that 68% of our observations lie within one standard deviation of the mean. What this means here, is that if the mean if 50, 68% of our respondents incomes are between 48.6 and 51.4. Let’s visualize this for group A.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="2">
 <div class="cell-output cell-output-display">
@@ -405,8 +409,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ols.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">OLS Explained</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./asymptotic.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
