@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econometrics for Policy Analysis - 3&nbsp; Probability Theory</title>
+<title>Econometrics for Policy Analysis - 3&nbsp; Basic Probability Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,6 +61,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -70,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Theory</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -113,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./basicprob.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Theory</span></a>
+  <a href="./basicprob.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -143,14 +144,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link active" data-scroll-target="#descriptive-statistics"><span class="toc-section-number">3.1</span>  Descriptive Statistics</a>
+  <ul class="collapse">
+  <li><a href="#means-arithmetic-and-median" id="toc-means-arithmetic-and-median" class="nav-link" data-scroll-target="#means-arithmetic-and-median"><span class="toc-section-number">3.1.1</span>  Means: Arithmetic and Median</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="toc-section-number">3.1.2</span>  Variance</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications"><span class="toc-section-number">3.2</span>  Applications</a></li>
+  <li><a href="#uncertainty-around-the-mean" id="toc-uncertainty-around-the-mean" class="nav-link" data-scroll-target="#uncertainty-around-the-mean"><span class="toc-section-number">3.3</span>  Uncertainty Around the Mean</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">4</span>  Summary</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability Theory</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></h1>
 </div>
 
 
@@ -165,9 +179,90 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>We begin with basic probability…</p>
+<p>Human beings are awestruck at uncertainty in everyday life. In the elder days, the Greeks consulted Oracles at Delphi, the Vikings Seers, the samurai onmyōji, and, more recently, horoscopes/birth charts to make sense of happenings. Of these, however, only one has taken the throne of mathematical statistics: probability. Probability is a formalized system which allows us, under differing philosophies (Frequentism and Bayesianism), to rigorously make sense of events that occur.</p>
+<p>More concretely, probability is a measure of the likelihood that an event will occur. It ranges from 0 to 1, where 0 indicates impossibility and 1 indicates certainty. Generally, there are two kinds of probabilities econometricians and policy analysts are concerned with: discrete random variables and continuous random variables. Why <em>random</em>? Well, because the event <em>may occur or not</em>. If a coin had only heads, only tails, or a die only had the number 1 on it, there’s no uncertainty anymore and probability wouldn’t be needed. But in real life, outcomes are essentially never guranteed. <em>Discrete</em> random variables have finite values they can take on. (heads or tails for the coin). By extension, a continuous random variable can take on infinitely many values. Suppose we have data on the width of a coke can or the amount of time in minutes spent studying. These are uncountable in the sense that they can have so many different values that they can’t be easily counted.</p>
+<p>To fix ideas, let’s begin with the idea of a sample space, which we denote by the uppercase Greek letter “Omega”, <span class="math inline">\(\Omega\)</span>. This represents the set of all possible outcomes for some <em>instance</em> or experiment. For example, suppose we have a die of 3 sides numbered 1, 2, and 3, which we cast to see what number faces up. In our case, <span class="math inline">\(\Omega=\{1,2,3\}\)</span>. Any collection of these outcomes we call events. How then do we assign probability to this event? Say we ask for the probability of getting an odd number for a singular die cast, or <span class="math inline">\(A=\{1,3\}\)</span>. What are the odd numbers in <span class="math inline">\(1,2,3\)</span>? 1 and 3. Since there are two of these, over three possible outcomes, the probability is just two-thirds. Formally, the way we’d write this is <span class="math display">\[
+\mathbb{E}\left[\mathbf{1}\left\{ A\right\} \right]=1\times P(A)+0\times P(A^{\prime})=\left(2\right)\frac{1}{3}+0=\frac{2}{3}
+\]</span> Here, <span class="math inline">\(A\)</span> is our event of interest (getting a 1 or 3), and <span class="math inline">\(A^{\prime}\)</span> (<em>not A</em>) is the probability of A not occuring.</p>
+<section id="descriptive-statistics" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">3.1</span> Descriptive Statistics</h2>
+<p>Probability is rarely used in a vacuum, though. We typically, in the policy sciences, wish to take a given outcome from a set of outcomes and draw conclusions from it. To do this, we use descriptive statistics (also called <em>moments</em>).</p>
+<section id="means-arithmetic-and-median" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="means-arithmetic-and-median"><span class="header-section-number">3.1.1</span> Means: Arithmetic and Median</h3>
+<p>The first moment is called the <strong>average/mean</strong>. The formula for the mean, also called the <em>expected value</em> (denoted by <span class="math inline">\(\mathbb E\)</span>) is <span class="math display">\[
+\mathbb{E}[X]=\frac{1}{N}\sum_{i=1}^{N}x_i
+\]</span> In our formula for the average is <span class="math inline">\(\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i\)</span>, where <span class="math inline">\(\bar{x}\)</span> is the mean, <span class="math inline">\(N\)</span> is the number of values, and <span class="math inline">\(x_i\)</span> represents the <span class="math inline">\(i\text{-th}\)</span> value in the sequence. The uppercase Greek letter “sigma” means summation, or <span class="math inline">\(\sum_{i=1}^{N} x_i\)</span>. It adds the values from <span class="math inline">\(i = 1\)</span> to <span class="math inline">\(N.\)</span> For a discrete random variable, the expected value is</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \sum_{i=1}^{N} x_i \cdot P(x_i).
+\]</span> So for our die, the expected value is <span class="math display">\[
+\mathbb{E}[X] = 1 \cdot \frac{1}{3} + 2 \cdot \frac{1}{3} + 3 \cdot \frac{1}{3} = \frac{1 + 2 + 3}{3} = 2
+\]</span> We can take averages with things aside from die too. Suppose we have a room of 10 men and 40 women, where women take the value of 1 and men the value of 0. The average number of women in the room is <span class="math inline">\(\frac{40}{50}\)</span>. This means the expected value of women in the room is .8. In other words, if we randomly selected a person from the room 10 times, we’d expect about 8 of them to be women.</p>
+<p>The median, or the middle number. It is a type of average. Suppose we have a dataset of years of education <span class="math inline">\(A=\{5,6,7,9,18\}\)</span>. The middle number here is 7 (since two numbers lie to the let and right of 7). But let’s consider the issue deeper: suppose we were to use the average years of education at the average. For us, we have <span class="math display">\[
+\frac{1}{5} \times \sum_{i=1}^{5} 5 + 6 + 7 + 9 + 18 =\frac{45}{5}=9
+\]</span> The mean and median produce differing values. If we were to use the mean, we’d conclude the average person in this sample is in high school. When in fact, as a raw number, most of our respondents are in middle school with one elementary schooler. Thus, we can see that the average is influenced by outliers (in this case, somebody in graduate school).</p>
+</section>
+<section id="variance" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">3.1.2</span> Variance</h3>
+<p>The <strong>variance</strong> is the second moment. For a random variable <span class="math inline">\(X\)</span>, the varaince is denoted <span class="math inline">\(\text{Var}(X)\)</span>, measures the spread of its values around the mean. For a discrete random variable, it is calculated as: <span class="math inline">\(\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]\)</span> For our die, the variance is:</p>
+<p><span class="math display">\[
+\text{Var}(X) = \frac{1}{3}[(1-2)^2 + (2-2)^2 + (3-2)^2] = \frac{1}{3}[1 + 0 + 1] = \frac{2}{3}.
+\]</span></p>
+<p>Note that so far, we’ve assumed that we have the population (or, every observation we are interested in). In practice, we typically have only a <em>sample</em>, or a smaller subset of the population. We will return to this later, but somtimes this affects the way we calculate statistics. For example, while the formula for the mean stays the same, the <em>sample</em> variance’s formula becomes</p>
+<p><span class="math display">\[
+s^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2.
+\]</span></p>
+</section>
+</section>
+<section id="applications" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="applications"><span class="header-section-number">3.2</span> Applications</h2>
+<p>We can use these two moments to answer questions about a group of individuals/units (say, people, cities, etc). For example, say we have the incomes (in 1000s) for 5 people in one year across two groups. For Group A, we have <span class="math inline">\(A=\{50, 50, 50, 50, 50\}\)</span>, and for Group B we have <span class="math inline">\(B=\{30, 50, 50, 50, 70\}\)</span>. The mean and variance for Group A are just 50 and 0 respectively. 50 is the only number we have, so its average is just that, and since it’s the only number we have, it cannot deviate at all from this mean. For Group B, our mean is <span class="math display">\[
+\mathbb{E}[X] = \frac{1}{N}\sum_{i=1}^{N} x_i = \frac{1}{5}(30 + 50 + 50 + 50 + 70) = \frac{1}{5} \times 250 = 50
+\]</span> and the variance is <span class="math display">\[
+s^2 = \frac{1}{5-1} \left[ (30 - 50)^2 + (50 - 50)^2 + (50 - 50)^2 + (50 - 50)^2 + (70 - 50)^2 \right]
+\]</span> which gives us <span class="math display">\[
+= \frac{1}{4} \left[ 400 + 0 + 0 + 0 + 400 \right]
+\]</span> and finally <span class="math display">\[
+= \frac{800}{4} = 200.
+\]</span> So, what do we have here? On average, these groups are the same… but their variance is different. What practically might this mean, why is this useful? Because it allows us to make better inferences on things such as income distribution. To see why, consider the following plot of 10000 hypothetical incomes across two groups of people.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="basicprob_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, the difference is more apparent. If we only consider the average income of people in both groups, we’d walk away saying that the income distributions are the exact same. But this is wrong, Group A is much tighter distribution of income than Group B because its variance/spread is smaller.</p>
+</section>
+<section id="uncertainty-around-the-mean" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="uncertainty-around-the-mean"><span class="header-section-number">3.3</span> Uncertainty Around the Mean</h2>
+<p>Typically, we wish to see how uncertain our estimates are. The way we do this is by calculating the margin of error for the mean. We take such uncertainty into account by computing the standard error of the mean, <span class="math inline">\(\text{SEM} = \frac{s}{\sqrt{N}}\)</span>. Here, lowercase sigma, <span class="math inline">\(\sigma\)</span>, is the sample standard deviation and <span class="math inline">\(N\)</span> is our sample size. The sample standard deviation is how far our entire dataset is from the mean.</p>
+<p>In the case of Group A from above, our sample size is 10000. We have 10000 incomes to pick from. The expectation/average of these in Group A, as we’ve said, is 50. The standard variance of this group is 2. The way we calculate <span class="math inline">\(\sigma\)</span> is by taking the square root of the variance, or <span class="math inline">\(\sqrt{2}=1.142\)</span>.</p>
+<p>Before we can discuss the margin of error, though, we must say some words about probability distributions. The distributions of both income groups are what we’d call <em>normally</em> distributed in the sense that most of the values we see are within 1 standard deviation of the mean. In fact, we can show that 68% of our observations lie within one standard deviation of the mean. What this means here, is that if the mean if 50, 68% of our respondents incomes are between 48.6 and 51.4. Let’s visualize this for group A.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="basicprob_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Typically though, scientists are interested in our uncertainty within two standard deviations of the mean, where 95% of our data lie. To do this, we need the number for the normal distribution that reflects how many standard deivations we are interested in. In practice, the number we use is 1.96. That is, we are using all values from our sample that are within 1.96 standard deviations from our observed mean. Putting this all together, our margin of error for the average income for Group A is <span class="math display">\[
+0.0277= 1.96 \times \frac{1.4142135623730951}{\sqrt{10000}}.
+\]</span> Now, in order to characterize the range that the mean falls within, we simply do <span class="math display">\[
+\text{CI} = \mu \pm \text{Margin of Error}=50 \pm 0.0277=(49.986,50.014).
+\]</span></p>
+<p>What we’re looking at here, is our 95% Confidence Interval. Why 95%? Because that is the range we are intersted within, the area under the normal curve where 95% of our data lie. We interpret this as “Our sample mean is 50 thousand dollars. We are 95% confident that given the data, the real mean lies between 49.986 and 50.014 thousand dollars.” Since I simulated this dataset, we know for fact that the true mean does lie within here! But in real life, the confidence intervals will usually never be this tight.</p>
+</section>
+<section id="summary" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Summary</h1>
+<p>Probability is the stepping stone into using statistical methods. It is the foundation of decisionmaking in business, economics, and policy analysis. This course lays the groundwork for undergraduates to think and reason about public policy using statistics nad probability. For many, the concepts covered here will be new material– indeed, the term “statistics” or “data analysis” can be intimidating to people at first glance.</p>
+<p>So, I believe the best way to introduce these topics is to keep a balanced perspective between mathematics and application. However, this course only scratches the very surface; the world of quantitative methods in policy analysis is a big one. For those of you interested in graduate school or who wish to use statistics for your future job, your mastery of this essential material will not be in vain.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
