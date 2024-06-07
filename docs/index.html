@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jared Greathouse">
+
+<title>Econometrics for Policy Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./module1.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Econometrics for Policy Analysis</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Econometrics for Policy Analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Syllabus: PMAP 4041, Fall 2024</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Mathematics and Econometric Theory</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicprob.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Applied Research Methods</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#syllabus-pmap-4041-fall-2024" id="toc-syllabus-pmap-4041-fall-2024" class="nav-link active" data-scroll-target="#syllabus-pmap-4041-fall-2024"><span class="toc-section-number">1</span>  Syllabus: PMAP 4041, Fall 2024</a>
+  <ul class="collapse">
+  <li><a href="#course-philosophy-and-structure" id="toc-course-philosophy-and-structure" class="nav-link" data-scroll-target="#course-philosophy-and-structure"><span class="toc-section-number">1.1</span>  Course Philosophy and Structure</a></li>
+  <li><a href="#additional-details" id="toc-additional-details" class="nav-link" data-scroll-target="#additional-details"><span class="toc-section-number">1.2</span>  Additional Details</a></li>
+  <li><a href="#helpful-notes-from-me" id="toc-helpful-notes-from-me" class="nav-link" data-scroll-target="#helpful-notes-from-me"><span class="toc-section-number">1.3</span>  Helpful Notes from Me</a></li>
+  <li><a href="#class-schedule" id="toc-class-schedule" class="nav-link" data-scroll-target="#class-schedule"><span class="toc-section-number">1.4</span>  Class Schedule</a>
+  <ul class="collapse">
+  <li><a href="#week-1" id="toc-week-1" class="nav-link" data-scroll-target="#week-1"><span class="toc-section-number">1.4.1</span>  Week 1</a></li>
+  <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2"><span class="toc-section-number">1.4.2</span>  Week 2</a></li>
+  <li><a href="#week-3" id="toc-week-3" class="nav-link" data-scroll-target="#week-3"><span class="toc-section-number">1.4.3</span>  Week 3</a></li>
+  <li><a href="#week-4" id="toc-week-4" class="nav-link" data-scroll-target="#week-4"><span class="toc-section-number">1.4.4</span>  Week 4</a></li>
+  <li><a href="#week-5" id="toc-week-5" class="nav-link" data-scroll-target="#week-5"><span class="toc-section-number">1.4.5</span>  Week 5</a></li>
+  <li><a href="#week-6" id="toc-week-6" class="nav-link" data-scroll-target="#week-6"><span class="toc-section-number">1.4.6</span>  Week 6</a></li>
+  <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7"><span class="toc-section-number">1.4.7</span>  Week 7</a></li>
+  <li><a href="#week-8" id="toc-week-8" class="nav-link" data-scroll-target="#week-8"><span class="toc-section-number">1.4.8</span>  Week 8</a></li>
+  <li><a href="#week-9" id="toc-week-9" class="nav-link" data-scroll-target="#week-9"><span class="toc-section-number">1.4.9</span>  Week 9</a></li>
+  <li><a href="#week-10" id="toc-week-10" class="nav-link" data-scroll-target="#week-10"><span class="toc-section-number">1.4.10</span>  Week 10</a></li>
+  <li><a href="#week-11" id="toc-week-11" class="nav-link" data-scroll-target="#week-11"><span class="toc-section-number">1.4.11</span>  Week 11</a></li>
+  <li><a href="#week-12" id="toc-week-12" class="nav-link" data-scroll-target="#week-12"><span class="toc-section-number">1.4.12</span>  Week 12</a></li>
+  <li><a href="#week-13" id="toc-week-13" class="nav-link" data-scroll-target="#week-13"><span class="toc-section-number">1.4.13</span>  Week 13</a></li>
+  <li><a href="#week-14" id="toc-week-14" class="nav-link" data-scroll-target="#week-14"><span class="toc-section-number">1.4.14</span>  Week 14</a></li>
+  <li><a href="#week-15" id="toc-week-15" class="nav-link" data-scroll-target="#week-15"><span class="toc-section-number">1.4.15</span>  Week 15</a></li>
+  <li><a href="#week-16" id="toc-week-16" class="nav-link" data-scroll-target="#week-16"><span class="toc-section-number">1.4.16</span>  Week 16</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Econometrics for Policy Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jared Greathouse </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="syllabus-pmap-4041-fall-2024" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Syllabus: PMAP 4041, Fall 2024</h1>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is an ongoing project. <em>None</em> of the material is in its final form yet. Comments and suggestions are welcome. <a href="https://jgreathouse9.github.io/">Jared Greathouse</a>. Office Hours: By Request.</p>
+</div>
+</div>
+<p>Every day, governments pass laws/public policy to affect some outcome of interest. Policy usually touches thousands if not <em>millions</em> of people. From traffic-circles to pop/sugar sweetened beverge taxes, vaccine mandates and universal pre-k programs, cannabis legalization to minimum wages, public policy impacts us all from birth to death.</p>
+<p>Policy is never self justifying. It demands evaluation. If California bans tobacco smoking in public, or if New York City implements gun control, presumably we would agree these <em>likely</em> impact outcomes like tobacco use or homicide rates, ideally decreasing both of them.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If California’s <a href="https://ballotpedia.org/California_Proposition_99,_Tobacco_Tax_Increase_Initiative_(1988)">anti-tobacco policy</a> didn’t affect smoking rates at all (or worse, if more people began to smoke) or if gun control has 0 impact on homicide rates (or increased them, paradoxically), then surely these could not be justified in the very first place. Before we continue, understand fundamentally these outcomes being affected <em>are</em> the point. The only reason that we, as a society, do policy is precisely <strong>because</strong> we think policy affects (or should affect) people somehow. If political science studies “who gets what where”, one summation of policy studies might be “what works?” But what policies should we care about? How can we know if they work? This is the starting point for empirical policy analysis. This class discusses the theory and process for how statistical analysis of data may be used to answer policy questions.</p>
+<section id="course-philosophy-and-structure" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="course-philosophy-and-structure"><span class="header-section-number">1.1</span> Course Philosophy and Structure</h2>
+<p>I believe the best way to demonstrate knowledge of policy analysis is through <em>writing</em>. As such, there will be no quizzes or in-class exams. Why? It is unrealistic. In real life, rarely do we have an hour and 30 minutes or a ten minute quiz window on the internet to write a full summation of our ideas or think through a question. Typically, we have much more time and resources to help us. In fact, proper use of resources <em>is what makes a good analyst</em>: good analysts don’t need to remember everything, but they do need to be good at <em>finding answers</em> and using them sensibly. In this spirit, you have one assignment. Specifically, you’ll write a paper where you derive a research question you find interesting and <em>apply</em> the statistical concepts we cover to answer questions about a real, existing policy. Here is the breakdown of your course grade. The class is broken up into two sections: in the first section, we go over basic probability, correlation, and regression. The remainder of the class covers research for policy analysis.</p>
+<ul>
+<li>35% of your grade comes from the first draft of the paper, 15% question and 20% draft.</li>
+<li>60% for the final paper and presentation (respectively, 30 percent each), and</li>
+<li>5% for attendence.</li>
+</ul>
+<p>You will discuss the justification for the policy (including <em>why</em> we should care about understanding its effects). You’ll gather real data on the policy of interest (including information on the primary variables of interest, relevant predictors/covariates), and outcomes you’ll focus on. Finally, after you’ve defined the research question as well as collected and cleaned your dataset, you’ll use the statistical tools we cover (probability theory, descriptive statistics, and regression) to discuss the effects of the policy or intervention. The paper you produce must ask a causal question where there is at least one intervention of interest.</p>
+<p>In many senses, public policy is a catch all term covering various disciplines. Public health scholars may care about how banning of abortion in Texas affected fertility rates, or how COVID-19 vaccine/mask mandates affected the COVID-19 case rate per capita compared to other jurisdictions that did not enact these policies. Criminologists may care about how the building of Cop City affected how many people are shot by police, or how a state legalizing cannabis affects crime rates or the consumption of alcohol. Policy historians may care about how Pinochet’s 1973 economic policies affected the GDP of Chile or about how Britain’s National Health Service of 1948 affected infant mortality. Economists may ask how Hurricane Katrina affected the economy of New Orleans. Environmental scholars may care about how <a href="https://www.npr.org/2024/05/23/nx-s1-4977598/norfolk-southern-multi-million-dollar-settlement-ohio-train-derailment">a train derailment</a> affected housing prices. These of course are just some fields; increasingly, advanced empirical methods are used in the business sector and government. Given the array of areas and topics that policy touches, I don’t care about what policy or research question you choose to study. To quote Noam Chomsky (who was quoting another MIT professor), the important part isn’t what we cover in class; it is about what we discover. The only two stipulations I have is that your rersearch question/outcomes must be 1) quantifiable with <strong>accessible</strong> data that you can use and also must 2) be interesting to you.</p>
+</section>
+<section id="additional-details" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="additional-details"><span class="header-section-number">1.2</span> Additional Details</h2>
+<ol type="1">
+<li><p>If I feel the concept is important, it’ll be in the lecture notes or we will discuss it. I will also assign external readings to be done before class.</p></li>
+<li><p>There is no required textbook (aside from this one!) for this course. Various free textbooks exist such as <a href="https://www.econometrics-with-r.org/">Introductory Econometrics with R</a>, <a href="https://saylordotorg.github.io/text_introductory-statistics/">Introductory Statistics</a>, <a href="https://openintro-ims.netlify.app/">Intro to Modern Statistics</a>, <a href="https://users.aalto.fi/~ave/ROS.pdf">Regression and Other Stories</a>, <a href="https://kaplandm.github.io/Kaplan_Intro_Econometrics_text.pdf">Intro to Econometrics</a>, <a href="https://asccc-oeri.org/wp-content/uploads/2020/06/IntroPS_Methods_PDF.pdf">Intro to Political Science Research Methods</a>, and <a href="https://rafalab.dfci.harvard.edu/dsbook-part-2/">many</a> <a href="https://bookdown.org/lgpcappiello/introstats/">others</a>. The Policy Department at Georgia State also recommends <a href="https://bookdown.org/ejvanholm/Textbook/">Introduction to Research Methods</a> or <a href="https://courses.lumenlearning.com/suny-hccc-research-methods/">Research Methods for the Social Sciences</a>. The corresponding lecture will focus on the content that each respective chapter covers. Note that these books cover different aspects of the course in different levels of depth (Gelman’s book <em>Regression and Other Stories</em> is obviously mainly about regression, one of the last math topics we cover, whereas the others are more rudimentary).</p></li>
+<li><p>The same is true for software– I don’t care which of these you use, but the only ones I know well are Stata, Python, and (to a lesser degree) R. For Stata users, <a href="https://www.statalist.org/forums/">Statalist</a> is a great resource for Stata. R also is backed by a vast statistician community. I will sometimes include code blocks for Stata and Python in the text.</p></li>
+</ol>
+</section>
+<section id="helpful-notes-from-me" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="helpful-notes-from-me"><span class="header-section-number">1.3</span> Helpful Notes from Me</h2>
+<ol type="1">
+<li><p>Sun Tzu <a href="https://suntzusaid.com/book/1">said</a> every battle is won before it is fought. To reverse the perspective, as Ben Franklin said, if you fail to prepare, prepare to fail. The fact that the paper is the only assignment you have, in effect, means that I expect quality questions, idea, and analyses written in a professional manner. I do not expect perfection, or material at a level beyond the main content, but preparation is your best friend in this course.</p></li>
+<li><p>As corollary to the preceding points, please <em>do</em> contact me if you have questions. Policy data analysis is what I do in my research every day. I love what I do, and I love discussing this topic with others. If you have any questions about the ideas we cover in class or have any difficulties, you may always meet with me or contact me otherwise. Thinking of your research question early, asking me for feedback, and so on helps more the earlier you talk to me.</p></li>
+<li><p>Do not simply communicate with me. In addition, feel free to communicate with your classmates. This is something I only really learned the value of as a PHD student, so I figured I would advise the same to you. As an extension of this, I will <u>consider</u> allowing for collaboration on the final paper in groups of two, <em>with my permission</em>. For such papers to be considered, I must hear the research question well in advance, as well as the exact ideas on the data, analysis, and relevance of the question overall.</p></li>
+<li><p>As you’ll see by skimming the sections of EPA, I frequently use graphics that I construct from real datasets which I link to. On my GitHub page, you’ll find these datsets, and more, <a href="https://github.com/jgreathouse9/GSUmetricspolicy/tree/main/data">linked</a> to their descriptions. In lieu of finding your own dataset, you may use any of these for your class paper, should you wish.</p></li>
+</ol>
+</section>
+<section id="class-schedule" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="class-schedule"><span class="header-section-number">1.4</span> Class Schedule</h2>
+<p>Below is the schedule. All readings for Econometrics for Policy Analysis (EPA) should be done before class. The other book chapters (unless I write otherwise) are optional.</p>
+<section id="week-1" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="week-1"><span class="header-section-number">1.4.1</span> Week 1</h3>
+<ul>
+<li>08-26-2024 (Monday)</li>
+</ul>
+<p>Introductions and EPA, C2</p>
+<ul>
+<li>08-28-2024 (Wednesday)</li>
+</ul>
+<p>Required: EPA C3.</p>
+<p>Optional: <a href="https://saylordotorg.github.io/text_introductory-statistics/s06-descriptive-statistics.html">IS C2</a>, <a href="https://saylordotorg.github.io/text_introductory-statistics/s07-basic-concepts-of-probability.html">IS C3</a> (skim), <a href="https://rafalab.dfci.harvard.edu/dsbook-part-2/summaries/intro-summaries.html">IDS C2</a>, <a href="https://rafalab.dfci.harvard.edu/dsbook-part-2/prob/intro-to-prob.html">IDS C3</a>, especially “Discrete Probability” and “Random Variables”.</p>
+<p>A refresher on averages. Also covers t-tests, standard errors.</p>
+</section>
+<section id="week-2" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="week-2"><span class="header-section-number">1.4.2</span> Week 2</h3>
+<ul>
+<li>09-02-2024 (Monday)</li>
+</ul>
+<p>University holiday. No clase.</p>
+<ul>
+<li>09-04-2024 (Wednesday)</li>
+</ul>
+<p>Construction of Confidence Intervals.</p>
+</section>
+<section id="week-3" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="week-3"><span class="header-section-number">1.4.3</span> Week 3</h3>
+<ul>
+<li>09-09-2024 (Monday)</li>
+</ul>
+<p>Basic Asymptotic Theory (the Law of Large Numbers, Law of Iterated Expectations, and the Central Limit Theorem)</p>
+<ul>
+<li>09-11-2024 (Wednesday)</li>
+</ul>
+<p>Correlation, Coeffcients, and Association (EPA, C3)</p>
+<p>Here we cover basic correlation in 2 Dimensions, mainly using scatterplots and contingency tables.</p>
+</section>
+<section id="week-4" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="week-4"><span class="header-section-number">1.4.4</span> Week 4</h3>
+<ul>
+<li>09-16-2024 (Monday)</li>
+</ul>
+<p>Required: Watch this: <a href="https://www.youtube.com/watch?v%3DAXqhWeUEtQU">Partial Derivatives</a> <a href="https://jgreathouse9.github.io/GSUmetricspolicy/ols.html">OLS Explained</a></p>
+<p>Optional: (ROS, C7), <a href="https://saylordotorg.github.io/text_introductory-statistics/s14-correlation-and-regression.html">IS, C10</a>. Also, Inference for OLS (Gauss-Markov Assumptions). <strong>Today, the research question is due.</strong></p>
+<ul>
+<li>09-18-2024 (Wednesday)</li>
+</ul>
+<p>Gauss-Markov Assumptions (from the previous chapter)</p>
+</section>
+<section id="week-5" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="week-5"><span class="header-section-number">1.4.5</span> Week 5</h3>
+<ul>
+<li>09-23-2024 (Monday)</li>
+</ul>
+<p>Panel Data</p>
+<ul>
+<li>09-25-2024 (Wednesday)</li>
+</ul>
+<p>Intro to Treatment Effects</p>
+</section>
+<section id="week-6" class="level3" data-number="1.4.6">
+<h3 data-number="1.4.6" class="anchored" data-anchor-id="week-6"><span class="header-section-number">1.4.6</span> Week 6</h3>
+<ul>
+<li>09-30-2024 (Monday) Required: Data Types and Measurement (EPA, C5) Optional: <a href="https://courses.lumenlearning.com/suny-hccc-research-methods/chapter/chapter-6-measurement-of-constructs/">RMSS, C6</a></li>
+</ul>
+<p>Data Gathering/Cleaning (Sampling, Measurement)</p>
+<ul>
+<li>10-02-2024 (Wednesday)</li>
+</ul>
+<p>Data Visualization</p>
+</section>
+<section id="week-7" class="level3" data-number="1.4.7">
+<h3 data-number="1.4.7" class="anchored" data-anchor-id="week-7"><span class="header-section-number">1.4.7</span> Week 7</h3>
+<ul>
+<li>10-07-2024 (Monday)</li>
+</ul>
+<p>Writing for Policy Analysis: The Introduction and Literature Review</p>
+<ul>
+<li>10-09-2024 (Wednesday)</li>
+</ul>
+<p>Writing for Policy Analysis: The Background</p>
+</section>
+<section id="week-8" class="level3" data-number="1.4.8">
+<h3 data-number="1.4.8" class="anchored" data-anchor-id="week-8"><span class="header-section-number">1.4.8</span> Week 8</h3>
+<ul>
+<li>10-14-2024 (Monday)</li>
+</ul>
+<p>Writing for Policy Analysis: Data</p>
+<ul>
+<li>10-16-2024 (Wednesday)</li>
+</ul>
+<p>Writing for Policy Analysis: Methods</p>
+</section>
+<section id="week-9" class="level3" data-number="1.4.9">
+<h3 data-number="1.4.9" class="anchored" data-anchor-id="week-9"><span class="header-section-number">1.4.9</span> Week 9</h3>
+<ul>
+<li>10-21-2024 (Monday)</li>
+</ul>
+<p>Writing for Policy Analysis: Results and Conclusions</p>
+<ul>
+<li>10-23-2024 (Wednesday)</li>
+</ul>
+<p>First Draft Due, Presentations begin.</p>
+</section>
+<section id="week-10" class="level3" data-number="1.4.10">
+<h3 data-number="1.4.10" class="anchored" data-anchor-id="week-10"><span class="header-section-number">1.4.10</span> Week 10</h3>
+<ul>
+<li><p>10-28-2024 (Monday)</p></li>
+<li><p>10-30-2024 (Wednesday)</p></li>
+</ul>
+</section>
+<section id="week-11" class="level3" data-number="1.4.11">
+<h3 data-number="1.4.11" class="anchored" data-anchor-id="week-11"><span class="header-section-number">1.4.11</span> Week 11</h3>
+<ul>
+<li><p>11-04-2024 (Monday)</p></li>
+<li><p>11-06-2024 (Wednesday)</p></li>
+</ul>
+</section>
+<section id="week-12" class="level3" data-number="1.4.12">
+<h3 data-number="1.4.12" class="anchored" data-anchor-id="week-12"><span class="header-section-number">1.4.12</span> Week 12</h3>
+<ul>
+<li><p>11-11-2024 (Monday)</p></li>
+<li><p>11-13-2024 (Wednesday)</p></li>
+</ul>
+</section>
+<section id="week-13" class="level3" data-number="1.4.13">
+<h3 data-number="1.4.13" class="anchored" data-anchor-id="week-13"><span class="header-section-number">1.4.13</span> Week 13</h3>
+<ul>
+<li><p>11-18-2024 (Monday)</p></li>
+<li><p>11-20-2024 (Wednesday)</p></li>
+</ul>
+</section>
+<section id="week-14" class="level3" data-number="1.4.14">
+<h3 data-number="1.4.14" class="anchored" data-anchor-id="week-14"><span class="header-section-number">1.4.14</span> Week 14</h3>
+<ul>
+<li><p>12-02-2024 (Monday)</p></li>
+<li><p>12-04-2024 (Wednesday)</p></li>
+</ul>
+</section>
+<section id="week-15" class="level3" data-number="1.4.15">
+<h3 data-number="1.4.15" class="anchored" data-anchor-id="week-15"><span class="header-section-number">1.4.15</span> Week 15</h3>
+<ul>
+<li><p>12-09-2024 (Monday)</p></li>
+<li><p>12-11-2024 (Wednesday)</p></li>
+</ul>
+</section>
+<section id="week-16" class="level3" data-number="1.4.16">
+<h3 data-number="1.4.16" class="anchored" data-anchor-id="week-16"><span class="header-section-number">1.4.16</span> Week 16</h3>
+<ul>
+<li>12-16-2024 (Monday)</li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./module1.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

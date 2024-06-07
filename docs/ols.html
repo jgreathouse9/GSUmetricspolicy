@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics for Policy Analysis - 5&nbsp; OLS Explained</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./writing.html" rel="next">
+<link href="./asymptotic.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Econometrics for Policy Analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Syllabus: PMAP 4041, Fall 2024</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Mathematics and Econometric Theory</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicprob.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Applied Research Methods</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#review-of-lines-and-functions" id="toc-review-of-lines-and-functions" class="nav-link active" data-scroll-target="#review-of-lines-and-functions"><span class="toc-section-number">5.1</span>  Review of Lines and Functions</a></li>
+  <li><a href="#arrividerci-algebra." id="toc-arrividerci-algebra." class="nav-link" data-scroll-target="#arrividerci-algebra."><span class="toc-section-number">5.2</span>  Arrividerci, Algebra.</a></li>
+  <li><a href="#an-extended-example" id="toc-an-extended-example" class="nav-link" data-scroll-target="#an-extended-example"><span class="toc-section-number">5.3</span>  An Extended Example</a>
+  <ul class="collapse">
+  <li><a href="#list-the-data" id="toc-list-the-data" class="nav-link" data-scroll-target="#list-the-data"><span class="toc-section-number">5.3.1</span>  List the Data</a></li>
+  <li><a href="#define-our-econometric-model" id="toc-define-our-econometric-model" class="nav-link" data-scroll-target="#define-our-econometric-model"><span class="toc-section-number">5.3.2</span>  Define Our Econometric Model</a></li>
+  <li><a href="#write-out-the-objective-function" id="toc-write-out-the-objective-function" class="nav-link" data-scroll-target="#write-out-the-objective-function"><span class="toc-section-number">5.3.3</span>  Write Out the Objective Function</a></li>
+  <li><a href="#simplify-the-objective-function" id="toc-simplify-the-objective-function" class="nav-link" data-scroll-target="#simplify-the-objective-function"><span class="toc-section-number">5.3.4</span>  Simplify the Objective Function</a></li>
+  <li><a href="#take-partial-derivatives" id="toc-take-partial-derivatives" class="nav-link" data-scroll-target="#take-partial-derivatives"><span class="toc-section-number">5.3.5</span>  Take Partial Derivatives</a></li>
+  <li><a href="#get-the-betas" id="toc-get-the-betas" class="nav-link" data-scroll-target="#get-the-betas"><span class="toc-section-number">5.3.6</span>  Get the Betas</a></li>
+  <li><a href="#our-ols-line-of-best-fit" id="toc-our-ols-line-of-best-fit" class="nav-link" data-scroll-target="#our-ols-line-of-best-fit"><span class="toc-section-number">5.3.7</span>  Our OLS Line of Best Fit</a></li>
+  </ul></li>
+  <li><a href="#inference-for-ols" id="toc-inference-for-ols" class="nav-link" data-scroll-target="#inference-for-ols"><span class="toc-section-number">5.4</span>  Inference For OLS</a></li>
+  <li><a href="#assumptions-of-ols" id="toc-assumptions-of-ols" class="nav-link" data-scroll-target="#assumptions-of-ols"><span class="toc-section-number">5.5</span>  Assumptions of OLS</a>
+  <ul class="collapse">
+  <li><a href="#assumption-1-linear-in-parameters" id="toc-assumption-1-linear-in-parameters" class="nav-link" data-scroll-target="#assumption-1-linear-in-parameters"><span class="toc-section-number">5.5.1</span>  Assumption 1: Linear in Parameters</a></li>
+  <li><a href="#assumption-2-random-sample" id="toc-assumption-2-random-sample" class="nav-link" data-scroll-target="#assumption-2-random-sample"><span class="toc-section-number">5.5.2</span>  Assumption 2: Random Sample</a></li>
+  <li><a href="#assumption-3-no-perfect-collinearity" id="toc-assumption-3-no-perfect-collinearity" class="nav-link" data-scroll-target="#assumption-3-no-perfect-collinearity"><span class="toc-section-number">5.5.3</span>  Assumption 3: No Perfect Collinearity</a></li>
+  <li><a href="#assumption-4-strict-exogeneity-mathbbeepsilon_i-x_i1-ldots-x_ik-0" id="toc-assumption-4-strict-exogeneity-mathbbeepsilon_i-x_i1-ldots-x_ik-0" class="nav-link" data-scroll-target="#assumption-4-strict-exogeneity-mathbbeepsilon_i-x_i1-ldots-x_ik-0"><span class="toc-section-number">5.5.4</span>  Assumption 4: Strict Exogeneity: <span class="math inline">\(\mathbb{E}[\epsilon_{i} | x_{i1}, \ldots, x_{iK}] = 0\)</span></a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">6</span>  Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="review-of-lines-and-functions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="review-of-lines-and-functions"><span class="header-section-number">5.1</span> Review of Lines and Functions</h2>
+<p>In middle school, we learn about the basics of functions in that when we plug in a number, we get another number in return. For <span class="math inline">\(2x=y\)</span> for example, if we plug in 2, we get 4. If we plug in 5, we get 10. If you’re at the grocery store and grapes are 1 dollar and 50 cents per pound, we just weigh the grapes and multiply that number by 1.5. This could take the form of <span class="math inline">\((0,0), (1,1.5), (2,3)\)</span>, and so on. These points form a line, the equation for which being <span class="math inline">\(y=mx+b\)</span>. Here, <span class="math inline">\(y\)</span> is our outcome, <span class="math inline">\(m\)</span> is the change in the price of grapes for every new pound of grapes bought, and b is our value we pay if we get no grapes.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ols_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The way we find the <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> for a straight line is the “rise over run” method, in this case</p>
+<p><span class="math display">\[m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{3 - 0}{2 - 0} = \frac{3}{2} = 1.5\]</span></p>
+<p>For this case, the function for the line of price paid for grapes is <span class="math inline">\(y=1.5x\)</span>. Notice here how the line explains how much we pay perfectly (in other words, the line exactly matches the data points). This means our <em>residuals</em> <span class="math inline">\(\hat{\epsilon}_i=y_i-\hat y_i\)</span> are 0, where <span class="math inline">\(y_i\)</span> maps on to the real data and <span class="math inline">\(\hat{y}_i\)</span> (which we call y-hat) is the prediction from the line/function. Here, the letter “<span class="math inline">\(\hat{\epsilon}_i\)</span>” is just a variable for the the distance from the predicted point to the observed point. If the observed value for our first data point is 10 but <span class="math inline">\(\hat{y}_1=11\)</span>, then <span class="math inline">\(\hat{\epsilon}_1\)</span> is -1. Note that I add the “hat” to the the greek symbol “epsilon” to denote that they are <em>estimates</em> which come from the model, not “error” (which includes residuals <em>not in the model</em>, as I explain below)</p>
+<p>However, this is because we have a case where all the necessary information is known (price and weight). We know the price of grapes or gas or movie tickets. The algebra is so simple we that we intuitively understand that this is how we calculate expenses. With just these simple known facts, we could calculate the amount of money we pay for grapes at 1 pound or a trillion pounds, assuming the price does not change. But…. what if the data we see are not nice and neat in terms of a function?</p>
+<div class="cell" data-engine="jupyter" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ols_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Take the idea of predicting crime rates in cities using the population of the city as a predictor. Now, how do we calculate the rise over run? We would presume some <em>function</em> exists that generates the crime rate for that city. However, is quite obvious that no deterministic function exists here. Before, we simply would throw our hands up, in a sense, and say that there’s no solution. Algebra has failed us in that we cannot find a function which perfectly explains these data points. But, this is not a fool’s errand. After all, this is what the real world is like, right? Crime rates are a <em>random variable</em> in the sense that the rate it takes on for a given place and time is not guaranteed. Sometimes, crime is high, other times its low(er). Why? Well, some cities are wealthier and some are poorer. Some cities vary by racial compositions, or will differ by factors like age composition, alcohol use, and gun ownership. Thus… some cities have high crime rates, others have low crime rates. Indeed, it would be very unreasonable to expect to find a singular function that perfectly explains the variation in crime rates across one or more cities.</p>
+<p>So, what can we do? We can’t find a function for the line that perfectly explains the crime trends… But, how about we instead seek the best <em>possible</em> line? The line which minimizes the residuals between what we actually see and what we would predict, given our datapoints? Can we, in a sense, derive a certain function that represents how crime trends change given some population input? To connect this idea to the first example, suppose I asked you to find the function for the line that tells me how much we pay for grapes, <em>even when I do not</em> give you the price. I only give you the weight of grapes you buy, and how much you paid for them.</p>
+</section>
+<section id="arrividerci-algebra." class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="arrividerci-algebra."><span class="header-section-number">5.2</span> Arrividerci, Algebra.</h2>
+<p>To do this, we’ve now reached a point in the course where simple algebra is no longer our best guide. We now <em>must</em> use calculus, specifically the basics of derivatives and optimization. The derivative is the slope of a curve/line at a given point. One very useful property about derivatives is that when we set the derivative of a function to 0 and solve for the variable, we reach a maximum or minimum point on the original function, usually. Optimization problems, in general, take the form of <span class="math display">\[
+\min_{\theta \in \Theta } f(\theta) \,\, \mathrm{ s.t. }  g(\theta) = 0, h(\theta) \leq 0,
+\]</span> where there’s some function <span class="math inline">\(f(\theta)\)</span> (called the <em>objective function</em>) that is minimized (or sometimes maximized) over a set of <span class="math inline">\(g(\theta)\)</span> equality constraints and <span class="math inline">\(h(\theta)\)</span> inequality constraints. In our case for regression, we have no constraints in our objective function since we desire the best fitting line possible.</p>
+<p>For example, say we shoot a basketball off a 2 foot cliff, which produces a trajectory function of <span class="math inline">\(h(t)= −5t^2 +20t+2\)</span>, where <span class="math inline">\(h(t)\)</span> is a function representing the ball’s height over time in seconds and the 2 represents the fact that we are standing 2 feet above ground. We can find the <em>maximum</em> height of the ball by taking the derivative of the original quadratic function and solving it for 0.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ols_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case, we use the power rule for derivatives. The power rule for dertivatives is where we subtract the exponent value of a function by 1 and place the original value to be multiplied by the base number. For example, the derivative of <span class="math inline">\(y=2x^3\)</span> is just <span class="math inline">\(6x^2\)</span>, since 3 minus 1 is 2 and 2 multiplied by 3 is 6. Here, we can apply this exact principle to obtain the derivative for the function of the ball’s trajectory:</p>
+<p><span class="math display">\[h(t) = -5t^2 + 20t + 2 = \frac{d}{dt}(-5t^2) + \frac{d}{dt}(20t) + \frac{d}{dt}(2)= -10t + 20\]</span></p>
+<p>We can then solve the derivative for 0. When we solve the derivative for 0 by multiplying by 2, <span class="math inline">\(-10(2) + 20=0\)</span>, we get the maximum height of 22 feet after 2 seconds (strictly speaking, if we wanted to be sure that this was a maximum, we could take the second derivative). Derivatives, for this reason, play a key role in minimizing or maximizing functions such as the ones we just did. We will use them to minimize the sum of <span class="math inline">\(\hat{\epsilon}^{2}_i\)</span>. This is known as <em>ordinary least squares</em> regression (OLS), also called <em>linear regression</em>. OLS is the main estimator you’ll use for this class, and it is the main foundation of econometric analysis for public policy research.</p>
+<p>To introduce OLS, we can think of the equation of a line (<span class="math inline">\(y=mx+b\)</span>) where <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> are variables. Unlike the above examples where <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> were once known variables, now they are unknown quantities we must solve for. Unlike the earlier examples though, with regression we have multiple variables (typically), each of which affect the output of the function differently. And in this case, it makes perfect sense: if we wish to derive a function for crime rates, it’s quite possible many things (such as the factors I mentioned above) may have differing impacts on the realized crime rate for a city. To deal with this with regression, we take the <em>partial derivative</em> with resepct to each variable, holding the other variable constant (that is, assuming that the other variables do not change, only the current one does). If this seems at all abstract to you, I will provide a detailed, clear derivation. Below, I deviate from most econometrics textbooks. I formally derive the OLS betas using derivatives. Note that for all of the steps below, Stata, R, or Python does (and optimizes!) this process for you. I only provide this derivation so you have a source to refer to when you wish to know how and <em>why</em>, exactly, the machine returns the numbers that it returns to you.</p>
+<p>To fix ideas, suppose we wish to attend a nightclub and we wish to express how much we pay for that evening as a function. In this case, how much we pay is a function of two things. We pay <em>some</em> one-time cost of money to enter, and then we pay <em>some</em> amount of money per drink. I say “<em>some</em>” because unlike the real world where we would know the price and entry fees by reading the sign, in this case we wish to estimate these values with only two known variables: how many drinks we bough and how much we paid.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ols_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="an-extended-example" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="an-extended-example"><span class="header-section-number">5.3</span> An Extended Example</h2>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is where you may start skimming. It is okay to not understand everything here.</p>
+</div>
+</div>
+<section id="list-the-data" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="list-the-data"><span class="header-section-number">5.3.1</span> List the Data</h3>
+<p>Say that we have data that looks like <span class="math inline">\((0, 30), (1, 35), (2, 40)\)</span>, where <span class="math inline">\(x\)</span>= number of drinks we buy (0,1,2) and <span class="math inline">\(y\)</span>=amount of money we spend that evening (30,35,40). If you want to, calculate the rise-over-run of these data points to derive <span class="math inline">\(m\)</span> and see what the answer might be in the end.</p>
+<p><span class="math display">\[m = \frac{35 - 30}{1 - 0} = \ldots \]</span></p>
+</section>
+<section id="define-our-econometric-model" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="define-our-econometric-model"><span class="header-section-number">5.3.2</span> Define Our Econometric Model</h3>
+<p>Our population model of how much we pay given some entry fees and additional drink costs looks like:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1x+\epsilon_i\]</span></p>
+<p>I remove the hats from these because there’s some model out there that exists to quantify this relationship between how much we spend given some entry fees, and drink fees, but here it is something we must estimate. Here, <span class="math inline">\(y_i\)</span> is the total amount of money we spend that evening in dollars, <span class="math inline">\(\hat{\beta}_{0}\)</span> is how much we pay to enter, <span class="math inline">\(\hat{\beta}_{1}\)</span> is how much we pay for the <span class="math inline">\(i\text{-th}\)</span> drink, and <span class="math inline">\(x\)</span> is the number of drinks we get. Nothing at all about this is different, so far, from anything we’ve discussed above. I’ve simply substituted <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> with the Greek letter “beta” into the already familiar <span class="math inline">\(y=mx+b\)</span>.</p>
+</section>
+<section id="write-out-the-objective-function" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="write-out-the-objective-function"><span class="header-section-number">5.3.3</span> Write Out the Objective Function</h3>
+<p>We can represent the objective function to solve OLS as <span class="math display">\[S = {\text{argmin}} \sum_{i=1}^{n} \underbrace{(y_i - \hat{y})^2}_{\text{objective function}}.\]</span></p>
+<p>I call the objective function “S” for “spending”, but we can call it any letter we’d like. <span class="math inline">\(\hat{\epsilon}_i\)</span> are simply calculated like <span class="math inline">\(y_i - \hat{y}\)</span>, or the difference between the observed values and our model’s prediction. From the above, our models predictions are simply the two variables we’ve discussed, <span class="math inline">\(\hat{y} =\hat{\beta}_0 + \hat{\beta}_1x\)</span>. We call this variable y-hat. In fact, our objective function may be rewritten completely by decomposing <span class="math inline">\(\hat{y}\)</span> as the model’s coefficients <span class="math display">\[S = \underset{\hat{\beta}_0,\hat{\beta}_1}{\text{argmin}} \sum_{i=1}^{n} (y_i - (\overbrace{\hat{\beta}_0 + \hat{\beta}_1x}^{\text{Predictions}}))^2.\]</span></p>
+<p>The word “<em>argmin</em>” here means “argument of the minimum”. The symbols underneath it, <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1\)</span>, are the coefficients we are solving for. We call the solutions <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1\)</span> <em>optimal</em> if they return the lowest possible values the function can produce. What values are these, what values does this objective function produce? The sum of <span class="math inline">\(\hat{\epsilon}_i^{2}\)</span>. The sigma symbol <span class="math inline">\(\sum_{i=1}^{n}\)</span> means we are adding up the <span class="math inline">\(i\text{-th}\)</span> squared residual to the <span class="math inline">\(n\text{-th}\)</span> data point/number of observations (in this case 3), meaning that the line will be as close as it can be to the observed data at every single data point.</p>
+<p>One may ask <em>why</em> we are squaring the summed <span class="math inline">\(\hat{\epsilon}_i\)</span>. First of all, minimizing the raw sum of the predicted <span class="math inline">\(\hat{\epsilon}_i\)</span> (that is, without squaring them) is a non-differentiable function. We would need to use numerical methods to compute its solution. Using <span class="math inline">\(\hat{\epsilon}_i^{2}\)</span> means that we are dealing a quadratic function (making the solution differentiable). Also, suppose one observation has a residual of 40 and another observation has a residual of -40. Adding these residuals would cancel out to 0. The squaring also has the property of penalizing worse predictions. After all, all <span class="math inline">\(\hat{\epsilon}_i\)</span> should not be created equally. If the observed value is 20 but we predict 25, the residual is -5. Its squared residual is 25. But if the observed value is 40, and we predict 80, the “absolute” error is -40 and the squared error of is 1600. If we did not square them, we would be treating a residual of 5 as the same as a residual of 40, and this does not make sense.</p>
+</section>
+<section id="simplify-the-objective-function" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="simplify-the-objective-function"><span class="header-section-number">5.3.4</span> Simplify the Objective Function</h3>
+<p>First, we can substitute the real values as well as our model for prediction into the objective function. We already know the values x-takes. You either buy no drinks, 1 drink, or 2. So with this information, we can now find the amount of money we pay up front (<span class="math inline">\(\hat{\beta}_0\)</span>) and how much it costs for each drink (<span class="math inline">\(\hat{\beta}_1\)</span>) <span class="math display">\[S = \underbrace{(30 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 0))^2}_{\text{Term 1}} + \underbrace{(35 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 1))^2}_{\text{Term 2}} + \underbrace{(40 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 2))^2}_{\text{Term 3}}\]</span></p>
+</section>
+<section id="take-partial-derivatives" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="take-partial-derivatives"><span class="header-section-number">5.3.5</span> Take Partial Derivatives</h3>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you do not wish to follow this section, then at least skip to <a href="#get-the-betas">this section</a> following my calculation of the partial derivatives.</p>
+</div>
+</div>
+<p>To find the values of <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>, we take the partial derivatives of <span class="math inline">\(S\)</span> w.r.t. <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>. Here is a short sketch of how we do this: For simplicity, I break this into two sections, one section per coefficient. In this case, the chain rule and power rules for differentiation are our friends here. To hear more about combining the power rule and chain rule, <a href="https://www.youtube.com/watch?v=TI-j-fr6c4A">see here</a>. I define one set of inner and outer functions, beginning with the power rule for the outer function, and then taking the derivative for the inner function. The partial derivative w.r.t each coefficient is simply the sum of these chain rules. First, we differentiate w.r.t. <span class="math inline">\(\hat{\beta}_0\)</span> (entry fees), then we do the same for <span class="math inline">\(\hat{\beta}_1\)</span> (drink fees).</p>
+<ol type="1">
+<li><strong>Partial derivative w.r.t. <span class="math inline">\(\hat{\beta}_0\)</span>:</strong></li>
+</ol>
+<p>First, we denote our inner functions. <span class="math display">\[
+\begin{aligned}
+f_1 &amp;= 30 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 0) \\
+f_2 &amp;= 35 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 1) \\
+f_3 &amp;= 40 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 2)
+\end{aligned}
+\]</span></p>
+<p>Here are our outer functions: <span class="math display">\[
+S = f_1^2 + f_2^2 + f_3^2.
+\]</span></p>
+<p>Now, following the chain rule, we have:</p>
+<p><span class="math display">\[
+\frac{\partial S}{\partial \hat{\beta}_0} = \frac{\partial S}{\partial f_1} \cdot \frac{\partial f_1}{\partial \hat{\beta}_0} + \frac{\partial S}{\partial f_2} \cdot \frac{\partial f_2}{\partial \hat{\beta}_0} + \frac{\partial S}{\partial f_3} \cdot \frac{\partial f_3}{\partial \hat{\beta}_0.}
+\]</span> The first step of the chain rule is using the power rule for the outer functions: <span class="math display">\[
+\begin{aligned}
+\frac{\partial S}{\partial f_1} &amp;= 2f_1 \\
+\frac{\partial S}{\partial f_2} &amp;= 2f_2 \\
+\frac{\partial S}{\partial f_3} &amp;= 2f_3.
+\end{aligned}
+\]</span> All we’ve done here is used the power rule, taking the 2 from the exponent and putting it on the outside of each term’s outer function. For the next step of the chain rule, we take the derivatives of each term’s inner function w.r.t. <span class="math inline">\(\hat{\beta}_0\)</span>: <span class="math display">\[
+\begin{aligned}
+\frac{\partial f_1}{\partial \hat{\beta}_0} &amp;= -1 \\
+\frac{\partial f_2}{\partial \hat{\beta}_0} &amp;= -1 \\
+\frac{\partial f_3}{\partial \hat{\beta}_0} &amp;= -1.
+\end{aligned}
+\]</span> Since the coefficient for <span class="math inline">\(-\hat{\beta}_0\)</span> is negative 1, each inner function’s derivative for <span class="math inline">\(\hat{\beta}_0\)</span> is just -1. Now, we substitute these inner derivatives back into the <span class="math inline">\(f_i\)</span> functions: <span class="math display">\[
+\begin{aligned}
+&amp;\frac{\partial S}{\partial \hat{\beta}_0} = 2f_1 \cdot (-1) + 2f_2 \cdot (-1) + 2f_3 \cdot (-1) \\
+&amp;= -2f_1 - 2f_2 - 2f_3 \\
+&amp;= -2(30 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 0)) - 2(35 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 1)) - 2(40 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 2))
+\end{aligned}
+\]</span></p>
+<p>Now, we simplify this expression. Let’s first expand each term by distributing the 2:</p>
+<p><span class="math display">\[
+= -60 + 2\hat{\beta}_0 - 70 + 2\hat{\beta}_0 + 2\hat{\beta}_1 - 80 + 2\hat{\beta}_0 + 4\hat{\beta}_1.
+\]</span></p>
+<p>Next I rearrange. I add parentheses for readability:</p>
+<p><span class="math display">\[
+= (-60 - 70 - 80) + (2\hat{\beta}_0 + 2\hat{\beta}_0 + 2\hat{\beta}_0) + (2\hat{\beta}_1 + 4\hat{\beta}_1).
+\]</span> Finally, when we combine like terms, we end with <span class="math display">\[
+= \boxed{-210 + 6\hat{\beta}_0 + 6\hat{\beta}_1}.
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Partial derivative w.r.t. <span class="math inline">\(\hat{\beta}_1\)</span>:</strong></li>
+</ol>
+<p>Following from the above, here are our inner functions <span class="math display">\[
+\begin{aligned}
+f_1 &amp;= 30 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 0) \\
+f_2 &amp;= 35 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 1) \\
+f_3 &amp;= 40 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 2).
+\end{aligned}
+\]</span></p>
+<p>Then the outer functions:</p>
+<p><span class="math display">\[
+S = f_1^2 + f_2^2 + f_3^2.
+\]</span></p>
+<p>Just as before, here’s the chain rule to get the partial derivative <span class="math display">\[
+\frac{\partial S}{\partial \hat{\beta}_1} = \frac{\partial S}{\partial f_1} \cdot \frac{\partial f_1}{\partial \hat{\beta}_1} + \frac{\partial S}{\partial f_2} \cdot \frac{\partial f_2}{\partial \hat{\beta}_1} + \frac{\partial S}{\partial f_3} \cdot \frac{\partial f_3}{\partial \hat{\beta}_1}.
+\]</span></p>
+<p>First I apply the power rule to the the outer functions:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial S}{\partial f_1} &amp;= 2f_1 \\
+\frac{\partial S}{\partial f_2} &amp;= 2f_2 \\
+\frac{\partial S}{\partial f_3} &amp;= 2f_3.
+\end{aligned}
+\]</span></p>
+<p>Next, we’ll do the inner functions:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial f_1}{\partial \hat{\beta}_1} &amp;= 0 \\
+\frac{\partial f_2}{\partial \hat{\beta}_1} &amp;= -1 \\
+\frac{\partial f_3}{\partial \hat{\beta}_1} &amp;= -2
+\end{aligned}
+\]</span> Note how <span class="math inline">\(\hat{\beta}_1\)</span> <strong>isn’t</strong> in term 1 since it is multiplied by 0 <span class="math display">\[
+\underbrace{(30 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 0))^2}_{\text{Term 1}},
+\]</span> its derivative must be 0. This means the first outer function goes away because <span class="math inline">\(f_1 \times 0=0\)</span>. So, I omit this from my derivation. Next, we’ll substitute these remaining two derivatives back into the expression for the outer function:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\frac{\partial S}{\partial \hat{\beta}_1} = 2f_2 \cdot (-1) + 2f_3 \cdot (-2) \\
+&amp;= -2f_2 - 4f_3 \\
+&amp;= 2(35 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 1)) - 4(40 - (\hat{\beta}_0 + \hat{\beta}_1 \cdot 2)).
+\end{aligned}
+\]</span> Now, we combine like terms: <span class="math display">\[
+\frac{\partial S}{\partial \hat{\beta}_1} = -2(35 - \hat{\beta}_0 - \hat{\beta}_1) - 4(40 - \hat{\beta}_0 - 2\hat{\beta}_1).
+\]</span> To simplify this expression, first we’ll expand each term by distributing the -2 and -4. Here is term 1:</p>
+<p><span class="math display">\[
+-2(35 - \hat{\beta}_0 - \hat{\beta}_1) = -70 + 2\hat{\beta}_0 + 2\hat{\beta}_1.
+\]</span> Now we expand term 2: <span class="math display">\[
+-4(40 - \hat{\beta}_0 - 2\hat{\beta}_1) = -160 + 4\hat{\beta}_0 + 8\hat{\beta}_1.
+\]</span> Now, combine like terms: <span class="math display">\[
+= (-70 + 2\hat{\beta}_0 + 2\hat{\beta}_1) + (-160 + 4\hat{\beta}_0 + 8\hat{\beta}_1).
+\]</span> I move the constants outside of the parentheses. I add adding parentheses for readability:</p>
+<p><span class="math display">\[
+= (-70 - 160) + (2\hat{\beta}_0 + 4\hat{\beta}_0) + (2\hat{\beta}_1 + 8\hat{\beta}_1).
+\]</span></p>
+<p>After subtracting the constants and combining like terms once more, we’re left with<br>
+<span class="math display">\[
+\boxed{-230 + 6\hat{\beta}_0 + 10\hat{\beta}_1}.
+\]</span></p>
+</section>
+<section id="get-the-betas" class="level3" data-number="5.3.6">
+<h3 data-number="5.3.6" class="anchored" data-anchor-id="get-the-betas"><span class="header-section-number">5.3.6</span> Get the Betas</h3>
+<p>Now we’ve set up our partial derivatives, so we can now return to normal scalar algebra to get our betas (in practice this is done with <em>matrix</em> algebra). Either way, we must solve a system of equations. The reason we must solve them as a system of equations is because we need for BOTH values to be the ones which minimize the distance between the model’s predictions and the observed data. Here are the equations we must solve for (note, we have two equations because we have two variables, but this can readily be extended to more variables): <span class="math display">\[\hat{\beta}_0 + \hat{\beta}_1 = 35\]</span> <span class="math display">\[6\hat{\beta}_0 + 10\hat{\beta}_1 = 230.\]</span></p>
+<p>Here I use <a href="https://youtu.be/V7H1oUHXPkg?si=evU3ldtIMa27uJvW">a method called substitution</a> to solve the system, but there are many such ways we can solve this. I choose to solve the first parital first since it is by far the easiest.</p>
+<section id="solve-for-hatbeta_0" class="level4" data-number="5.3.6.1">
+<h4 data-number="5.3.6.1" class="anchored" data-anchor-id="solve-for-hatbeta_0"><span class="header-section-number">5.3.6.1</span> Solve for <span class="math inline">\(\hat{\beta}_0\)</span>:</h4>
+<p>The first step of substitution is to solve for one of our variables. <span class="math display">\[\hat{\beta}_0 = 35 - \hat{\beta}_1\]</span> This is pretty simple, we just subtract <span class="math inline">\(\hat{\beta}_1\)</span>. Before I continue, notice a few interesting things about this: we know, by construction of the problem, that the entry fee is some positive number. We also know <span class="math inline">\(\hat{\beta}_1\)</span> has to be less than 35. Imagine a <span class="math inline">\(\hat{\beta}_1\)</span> that would equal or be greater than 35: this would mean that we get in for free or, enen sillier, are <em>paid</em> to enter, which does not make sense given the problem at hand (even though it’s theoretically possible, I suppose). We also know that <span class="math inline">\(\hat{\beta}_0\)</span> can’t be 35, because then this means that drinks are free. I should note that these are not impossible: maybe girls get in free before 12 or you’re a celebrity who’s paid to be there.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The reason I’m making such a fuss about this and carrying on with the example in this manner is because I want you to think of regression as a way of explaining the world, not just a mathematical set of equations. When the regression gives us a number, the model predictions need to either make sense under existing constraints/theory, or be interpreted sensibly. If the model predicts, for example, negative age or that you have negative cups of coffee per day, this suggests we need a different modeling strategy or that something’s been coded wrong. If negative values do not make sense for a x-values for a certain variable, we should not include negative values in our interpretation of our results.</p>
+</div>
+</div>
+<p>Now, we continue to solve.</p>
+</section>
+<section id="substitute-hatbeta_0" class="level4" data-number="5.3.6.2">
+<h4 data-number="5.3.6.2" class="anchored" data-anchor-id="substitute-hatbeta_0"><span class="header-section-number">5.3.6.2</span> Substitute <span class="math inline">\(\hat{\beta}_0\)</span>:</h4>
+<p>Since we know the expression for the constant (the entry fee), we can plug it into the partial for <span class="math inline">\(\hat{\beta}_1\)</span>,</p>
+<p><span class="math display">\[6\hat{\beta}_0 + 10\hat{\beta}_1 = 230.\]</span></p>
+<p>Once we do this, we can solve for <span class="math inline">\(\hat{\beta}_1\)</span>. Here is the partial for <span class="math inline">\(\hat{\beta}_1\)</span> plugging in the expression for <span class="math inline">\(\hat{\beta}_0\)</span> <span class="math display">\[6(35 - \hat{\beta}_1) + 10\hat{\beta}_1 = 230.\]</span> Distribute the 6 <span class="math display">\[210 - 6\hat{\beta}_1 + 10\hat{\beta}_1 = 230\]</span> and combine the terms <span class="math inline">\(- 6\hat{\beta}_1 + 10\hat{\beta}_1\)</span> together <span class="math display">\[210 + 4\hat{\beta}_1 = 230.\]</span> Next, we subtract 210 <span class="math display">\[4\hat{\beta}_1 = 20.\]</span> Finally, we divide by 4 <span class="math display">\[\boxed{\hat{\beta}_1 = 5}.\]</span></p>
+<p>Now, we know our value for <span class="math inline">\(\hat{\beta}_1\)</span>!!! We know that for each drink we get, we pay 5 more dollars. Since we now know <em>this</em>, we substitute 5 into <span class="math inline">\(\hat{\beta}_0 + \hat{\beta}_1 = 35\)</span> where <span class="math inline">\(\hat{\beta}_1\)</span> is. Then, we have one equation to solve for, with our goal being to get the value of <span class="math inline">\(\hat{\beta}_0\)</span>. <span class="math display">\[\hat{\beta}_0 + 5 = 35.\]</span></p>
+<p>Now, we simply subtract 5 from the RHS <span class="math display">\[\boxed{\hat{\beta}_0 = 30}.\]</span></p>
+<p>The entry fee is 30 dollars.</p>
+</section>
+</section>
+<section id="our-ols-line-of-best-fit" class="level3" data-number="5.3.7">
+<h3 data-number="5.3.7" class="anchored" data-anchor-id="our-ols-line-of-best-fit"><span class="header-section-number">5.3.7</span> Our OLS Line of Best Fit</h3>
+<p>So, our line of best fit is <span class="math inline">\(\hat{y} = 30 + 5x\)</span>. The way we interpret this is for every additional drink bought, you pay 5 more dollars. In fact, <em>compared</em> to those who only wanted to get in the club (and not drink), you spend 5 more dollars than they do, per each new drink you get. We can now predict how much money we would spend if we bought 5 drinks or 500 drinks.</p>
+<p>At the outset, one may ask why we did this at all. Why bother with the partial derivative approach and the messy system of equations? The reason is firstly pedagogical. OLS was never derived for me in quite this manner in undergrad, so I believe you should see it done with a simple, tractable, familiar example. Additionally, when we understand how the partial derivative allows us to look at the change of a function with the change of <em>one</em> variable in that function, we can quickly see how the parital derivative allows for us to (atttempt to) isolate the causal impact of <em>multiple</em> variables and go beyond the two-variable case. Strictly speaking, we did just that right here in this derivation! We considered the impact of BOTH entry fees and the number of drinks we bought too (after all, suppose entry was free, then we have no constant). If we wanted to add in another variable, say the cost of an additional cigar, all we would do is add another beta, <span class="math inline">\(\hat{\beta}_2\)</span>, to the original objective function and multiply the corresponding values by whatever the costs for that were. We would then have three systems of equations to solve for. However, the underlying principle is the same. Here is our completed regression line.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ols_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="inference-for-ols" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="inference-for-ols"><span class="header-section-number">5.4</span> Inference For OLS</h2>
+<p>Now that we’ve conducted estimation, we can now conduct inference with these statistics we’ve generated. Indeed, this is the primary point of this at all, in a sense. We <em>want</em> to know if these estimates are different from some null hypothesis. To begin, recall the notation of <span class="math inline">\(\hat{\epsilon}_i\)</span> which denotes our residuals for the regression predictions. We can use this to generate the standard error/the uncertainty statistic associated with the respective regression estimate. We can begin with the residual sum of squares, calcualted like <span class="math inline">\(\text{RSS} = \sum (\hat{\epsilon}_{i})^2\)</span>. Put another way, it is all the variation <em>not</em> explained by our model. If RSS=0, as was the case in the above example, then we have no need for inference since there’s nothing our model does <em>not</em> explain. We then can estimate the variance of the error like <span class="math inline">\(\hat{\sigma}^2 = \frac{\text{RSS}}{n - p}\)</span>, where <span class="math inline">\(n\)</span> is our number of observations and <span class="math inline">\(p\)</span> is our number of predictors (including the constant). We divide by <span class="math inline">\(n-p\)</span> because this takes into account our model’s residual degrees of freedom, or our model’s freedom to vary. Note as well that when <span class="math inline">\(n=p\)</span>, the error variance is not defined, meaning for OLS to be valid we need less predictors than observations. For a more detailed explanation of degrees of freedom, see <span class="citation" data-cites="dof">Pandey and Bright (<a href="#ref-dof" role="doc-biblioref">2008</a>)</span>.</p>
+<p>With this, we can estimate the variance-covariance matrix as <span class="math display">\[
+\text{Var}(\hat{\beta}) = \hat{\sigma}^2 (X^T X)^{-1}
+\]</span> This allows us to compute our standard error: <span class="math inline">\(\text{SE}(\hat{\beta}_j) = \sqrt{\text{Var}(\hat{\beta})_{jj}}\)</span>.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Again, I will never ever ask you to calculate the standard error or t-statistic without the necessary coefficients to calculate it algebraically. The reason I’m showing you this is just so you have a very clear sense of where these numbers are coming from,</p>
+</div>
+</div>
+<p>As we’ve discussed with normal descriptive statistics/classic hypothesis testing, we can also compute confidence intervals for these regression estimates. The formula for this should appear quite familiar <span class="math display">\[
+\beta_j \pm t_{\alpha/2, \text{df}} \cdot \text{SE}(\beta_j)
+\]</span></p>
+<p>Here, <span class="math inline">\(\beta_j\)</span> is the coefficient of our model, <span class="math inline">\(t\)</span> is our test statistic (1.96 ususally), <span class="math inline">\(\alpha\)</span> is our acceptance region (0.05 in most cases if we want a 95% confidence interval), SE is our standard error as we’ve computed it above and df is our degrees of freedom. Then, we can interpret our coefficients accordingly. Suppose a confidence interval for a coefficient 6.7 lies within 6.06 and 16.44. We interpret this as follows: given the dataset and input values (and assumiing the OLS assumptions are valid, which we will detail below), we are 95% confident that the true value for that coefficient lies within the range of 6.06 and 16.44. In other words, there’s a “width” of this confidence interval by about 10.</p>
+<p>Just as we discussed in the preceding chapters, OLS’s estimates (conditional on the assumptions being met, which we will cover after this) is only justified, asymptotically, based on the law of large numbers and CLT. In other words, as n tends to infinity, <span class="math inline">\(\lim\limits_{n\to \infty}\)</span>, our betas will converege to the true population value and the standard errors will shrink. Ergo, as these shrink, the confidence intervals will tighten, meaning our estimates will be more precise. A practical consequence of this is that as a very general rule, having more observations in your dataset makes your OLS estimates more precise and less biased.</p>
+</section>
+<section id="assumptions-of-ols" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="assumptions-of-ols"><span class="header-section-number">5.5</span> Assumptions of OLS</h2>
+<p>Keep in mind, despite all the detail we’ve discussed so far, do not lose sight of the larger picture: OLS is simply a mathematical estimation method. Its <em>validity</em> for the external world (aside from having quality data) relies on a few assumptions (collectively called the Gauss-Markov assumptions) being defensible. I say defensible instead of true because practically they are never true. After all, this is statistics: almost all of statistics is true. All statistical research (pretty much, outside of simulations) is at least partly wrong because we live in a probalistic world where we don’t have all the answers. In other words, the assumptions are only as valid as we can defend for them. Below, I detail them.</p>
+<section id="assumption-1-linear-in-parameters" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="assumption-1-linear-in-parameters"><span class="header-section-number">5.5.1</span> Assumption 1: Linear in Parameters</h3>
+<p>The very first assumption is that the parameters for our model are linear. The classic regression model for OLS is</p>
+<p><span class="math display">\[
+y_{i} = \beta_{0} + \beta_{1} x_{i1} + \cdots + \beta_{K} x_{iK} + \epsilon_{i}.
+\]</span></p>
+<p>We call this a linear model. Why? How do we know if it’s a linear relationship, and what might violations of this look like? Let’s say we’re buying weed. Say the price per quarter ounce is 80 dollars. The impact of <span class="math inline">\(\beta_{1}\)</span> is the same everywhere in the function, <span class="math inline">\(y=80x\)</span>. But step back and ask ourselves, from the seller’s persepctive, if this makes sense: does it make sense for weed to cost the same for every weight amount? No! Why not? Well, for one, let’s say you’re selling a full gram or pound of weed. That’s <strong><em>so much</em></strong> weed that weed(wo)men/people will charge much much more for lone individuals who wish to buy this much. So while it may be 80 for a quarter ounce, it’ll now be, say, 900 per pound. In fact, we could express this as a piecewise function</p>
+<p><span class="math display">\[
+\beta_{j} =
+\begin{cases}
+    80 \text{ if } x &lt; 1 \\
+    900 \text{ if } x &gt; 1. \\
+\end{cases}
+\]</span></p>
+<p>Why might this be done? Firstly, that’s so much more product than the average person could smoke or use. So, anyone interested in this would need to pay premium prices for such an outlandish amount. Also, it allows the dealer to get the pound of weed off their hands– relative to ounces, pounds of weed are much more likely to be noticed by police and therefore punished by the law harsher. So, the quicker they sell, the quicker they may re-up. So, for the normal crowd of people who do not but pounds, they pay one price. For those who are abnormal in how much they demand (say, the distributor for the connect for cocaine markets), they pay another price altogether. We see price discrimination in legal markets too, such as Sams Club. We can see that a regression model here IS NOT linear in parameters, since the slope of the line will change at different values of the function.</p>
+<p>People often confuse this assumption with non-linear values of our independent variables as they relate to our outcome. They conflate nonlinear regression <span class="math display">\[
+y_{i} = \beta_{0}^{2} + \beta_{1}^{2} x_{i1} + \cdots + \beta_{K}^{2} x_{iK} + \epsilon_{i}
+\]</span> with <span class="math display">\[
+y_{i} = \beta_{0} + \beta_{1} x_{i1}^{2} + \cdots + \beta_{K} x_{iK}^{2} + \epsilon_{i},
+\]</span> or an OLS model with non-linear relations between the inputs and the outcomes. Let me explain why this is wrong, because as it turns out, we can indeed model curvature. I’ve already given an example of when we’d have a nonlinear realtionship in terms of our betas. Now I discuss non-linearities in terms of our predictors. Let’s say we wish to model how much someone can dead lift given some input of age. Let’s say the true population parameter for the OLS model is 6 (we ignore the constant for exposition purposes) <span class="math display">\[
+y_{i} = 6x_{i}
+\]</span> What is our value for 0? 0, since you’re not yet born. For age 10? 60. For age 30? 180. For age 80? 480. I think we can already see why this relationship being modeled would be silly: it presumes that the older you get, the stronger one is. Which, generally speaking, is true… but we also know that at some point, as with all things, glory fades. Someone that was once strong and in shape will not (in general) always be that way because the body declines with the passage of time. How do we take this into account for our regression model, though?</p>
+<p><span class="math display">\[
+y_{i} = \beta_{1}(x_{i1} \times x_{i}) +  x_{i} \equiv y_{i} = \beta_{1}x^{2}_{i}
+\]</span> We simply square the original value of age, keeping its linear form in the regression model. That way, when age 4 is input in the model, the number our regression model reads in the computer is 16. When age 10 is put into the model, it reads 100. Of course, as one would expect, there’s likely some critical point for this function, where people begin to be able to lift less given some values of age.</p>
+<p>Another example of being able to account for non-linearities from economics is the idea of modeling how much produce one may produce given a set of labor inputs. Suppose we’re cooking cocaine. With just two people, you can get work done, but it won’t be a lot. With three people, you can do more, and more with each additional person. However, there’s an idea in economics called diminishing marginal returns for the factors of production (in this case labor). You may be able to cook a lot with 10 or 20 people, but when you have 40 or 50 people, at some point we end up producing less because there’s too many proverbial cooks in the kitchen. So, if we wished to model output of cocaine as a function of labor, we’d likely wish to square the “number of workers” part of our model since it does not make sense to expect production to increase perfectly linearly with every new human working with you. So you see, the linear in parameters assumption deals with our betas impact on our predictor variables, not the input values of our predictor variables.</p>
+</section>
+<section id="assumption-2-random-sample" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="assumption-2-random-sample"><span class="header-section-number">5.5.2</span> Assumption 2: Random Sample</h3>
+<p>We next presume that we’ve collected a random sample of our population. The name <em>random</em> sample is something of an antiquated, romantic name to denote the idea that the sample we’ve collected is representative of the population we wish to map on to. Suppose we wish to investigate the relationship between introducing all virtual menus (the kind you scan on your phone) to see if it increases how much money they make for [<em>random marketing reasons</em>]. We take all the restaurants in Buckhead and Sandy Springs, in Atlanta, as a sample, comparing the ones that did this intervention to the ones that didn’t do the intervention. We get a coefficient of 10,000, suggesting that this intervention increased money made, on average, by 10,000 dollars compared to the places that didn’t do this. The issue with this idea is that our sample is not a random sample. Sandy Springs and Buckhead, in particular, are among the wealthiest areas in Atlanta. We can’t generalize the effet of this intervention to the population (restuarants in Atlanta, say) becuase our units of intertested are decidedly <em>not</em> representative of Atlanta’s entire culinary scence.</p>
+<p>Another example can come from sports. Say we posit a relationship between height and skill at basketball. We take a sample of NBA players, run a few regressions for relevant metrics and have our software spit out coefficients at us. Can we generalize to the population? No!! The NBA is one of the most selective sports leagues on the planet. They select for height and skill, among other things. The worst player on the NBA bench is like a god from Olympus compared to the average human, physically and in terms of skill. So, we cannot use them to generalize to the population, unless of course we are concerned only with NBA players. The same would apply to the first example: if we care only about the high-income restaurants in the city, then that’s great, but assuming we wish to generalize more broadly, we will need more data from other, more diverse units that have more information encoded in their outcome about the sample.</p>
+</section>
+<section id="assumption-3-no-perfect-collinearity" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="assumption-3-no-perfect-collinearity"><span class="header-section-number">5.5.3</span> Assumption 3: No Perfect Collinearity</h3>
+<p>The simple way to think about this one is we cannot include redundant variables in our regressions. Suppose we wish to predict the ticket sales of NBA teams. In our regression, we include the number of games won as well as the number of games lost. Well, these are mirror images of each other. The number of games you won is a direct function of the total games minus the number you lost, and the number you lost is a direct and perfect function of the total minus the number you won.</p>
+<p>By extension, suppose we wish to compare women to men (say we wish to test that men earn more/less than women on average). We take data on 500 respondents who we’ve sampled randomly across a company. We have one column that denotes the respondent as male and the other as female. We cannot include both male and female columns in our models, these are perfect linear functions of one another. A female is necessarily not coded as male, and male is necessarily not coded as female. Practically, this means we must choose when we use a categorical variable in our models. Say our regression includes age ang gender as a predictor. If category 1 of gender is female and category 0 is male, then if the beta for “gender” is -30, we would interpret the beta for gender as “holding constant age/compared to men of the same age group, female respondents earn about 30 dollars less than men.” By extension, the coefficient for male (if we decided to include this group as the group of interest) would just be 30, with a similar interpretation in the other direction.</p>
+</section>
+<section id="assumption-4-strict-exogeneity-mathbbeepsilon_i-x_i1-ldots-x_ik-0" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="assumption-4-strict-exogeneity-mathbbeepsilon_i-x_i1-ldots-x_ik-0"><span class="header-section-number">5.5.4</span> Assumption 4: Strict Exogeneity: <span class="math inline">\(\mathbb{E}[\epsilon_{i} | x_{i1}, \ldots, x_{iK}] = 0\)</span></h3>
+<p>Next we presume strict exogeneity. Formally, this means the average of our errors, given the set of covariates we’ve controlled for, is 0. For example, say we wish to evaluate how the number of firefighters sent to a call impacts the amount of damage from that fire. We conclude that there’s a positive relationship between number of firefighters sent and damage, so we elect to send less people to future calls. Is this a good idea? No!!!! People will die like that. Presumably, the firefighters are not pouring gasoline on the fire, so perhaps we’ve omitted things from our model that might influence both how many people we send as well as fire damage. What else should we control for? Maybe, building size, building type, neighborhood income status, temperature, and other relevant predictors to ensure that we are not blaming the outcomes on a spurious relationship. Indeed, on some level we would expect for the size of the fire to be correlated with the number of people sent to fight it.</p>
+<p>Strict exogeneity is pretty much never met in real life, but it basically posits that there’s no other critical variable missing from our regression model that may explain our outcome. It means our predictor variables may not be correlated with the error term. In economics we would say that we need for our variables to be exogenous in that the predictors influence the outcome, not the outcome influencing the predictors. This is also why it matters to critically think about the variables one will use in their regression model <em>before</em> they run regressions.</p>
+</section>
+</section>
+<section id="summary" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Summary</h1>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-dof" class="csl-entry" role="doc-biblioentry">
+Pandey, Shanta, and Charlotte Lyn Bright. 2008. <span>“<span class="nocase">What Are Degrees of Freedom?</span>”</span> <em>Social Work Research</em> 32 (2): 119–28. <a href="https://doi.org/10.1093/swr/32.2.119">https://doi.org/10.1093/swr/32.2.119</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./asymptotic.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./writing.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
