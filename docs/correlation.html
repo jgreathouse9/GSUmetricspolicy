@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econometrics for Policy Analysis - 6&nbsp; Writing for Policy Analysis: THe Introduction</title>
+<title>Econometrics for Policy Analysis - 5&nbsp; Correlation and Association</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ols.html" rel="prev">
+<link href="./ols.html" rel="next">
+<link href="./asymptotic.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -60,6 +61,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -122,7 +124,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
       </ul>
@@ -137,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./writing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
+  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
   </div>
 </li>
       </ul>
@@ -154,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
 </div>
 
 
@@ -169,7 +176,59 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>The intro should…</p>
+<p>As Gregory House once said, “The cave man who heard a rustle in the bushes checked out to see what it was lived longer than the guy who assumed it was just a breeze”. House’s point here is that the human ability for hypothetical reasoning and the ability to form associations in our minds was critical to our survival and development. We will discuss the aspect of statistical reasoning that covers hypothetical reasoning much later, but for now we cover simple correlation and measures of association.</p>
+<p>In statistics, we typically begin by looking at bivariate correlations. The formula for Pearson’s <span class="math inline">\(r\)</span>, the Pearson correlation coefficient cor continuous variables, is: <span class="math display">\[
+r = \frac{\sum_{i=1}^{N} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{N} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{N} (y_i - \bar{y})^2}}.
+\]</span> Let’s parse these terms, shall we? The numerator is the formula for what we call the covariance between two random variables. It is the sum of the differences between the individual datapoints for each variable and its average, divided by the product of the standard deviations of each variable. Let’s compute the Pearson correlation coefficient ( r ) for the following data points:</p>
+<p><span class="math display">\[
+X = \{1, 2, 3, 4\}
+\]</span> <span class="math display">\[
+Y = \{2, 4, 5, 7\}
+\]</span></p>
+<ol type="1">
+<li><p>Calculate the means of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>: <span class="math display">\[
+\bar{X} = \frac{1 + 2 + 3 + 4}{4} = 2.5
+\]</span> <span class="math display">\[
+\bar{Y} = \frac{2 + 4 + 5 + 7}{4} = 4.5
+\]</span></p></li>
+<li><p>Compute the differences from the mean for each data point: <span class="math display">\[
+y_i - \bar{x} = \{-1.5, -0.5, 0.5, 1.5\}
+\]</span> <span class="math display">\[
+y_i - \bar{y} = \{-2.5, -0.5, 0.5, 2.5\}
+\]</span></p></li>
+<li><p>Calculate the sum of the products of these differences: <span class="math display">\[
+\begin{aligned}
+&amp;\sum (x_i - \bar{x})(y_i - \bar{y}) = \\
+&amp;(-1.5 \cdot -2.5) + (-0.5 \cdot -0.5) + (0.5 \cdot 0.5) + (1.5 \cdot 2.5) = \\
+&amp;3.75 + 0.25 + 0.25 + 3.75 = 8
+\end{aligned}
+\]</span></p></li>
+<li><p>Compute the sum of the squared differences for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. For x we have <span class="math display">\[
+\begin{aligned}
+&amp;\sum (x_i - \bar{x})^2 = \\
+&amp;(-1.5)^2 + (-0.5)^2 + (0.5)^2 + (1.5)^2 = \\
+&amp; 2.25 + 0.25 + 0.25 + 2.25 = 5.
+\end{aligned}
+\]</span> For <span class="math inline">\(y\)</span> we have <span class="math display">\[
+\begin{aligned}
+&amp;\sum (y_i - \bar{y})^2 = \\
+&amp;(-2.5)^2 + (-0.5)^2 + 0.5^2 + 2.5^2 = \\
+&amp;6.25 + 0.25 + 0.25 + 6.25 = 13.
+\end{aligned}
+\]</span></p></li>
+<li><p>Now, we plug these in: <span class="math display">\[
+r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2} \sqrt{\sum (y_i - \bar{Y})^2}} = \frac{8}{\sqrt{5} \cdot \sqrt{13}} = \frac{8}{\sqrt{65}} = \frac{8}{8.062} \approx \boxed{0.993}.
+\]</span> Okay, so here’s our correlation coefficient. We’d say there’s a strong, positive relationship between our variables here. Similarly, if <span class="math inline">\(r\)</span> were negative, we’d say there’s a strong negative relation. Of course, if the coefficient were, say, 0.01 or -0.01, we’d say there’s pretty much no relatoinship between the variables. Here’s how we’d visualize these.</p></li>
+</ol>
+<div class="cell" data-engine="jupyter" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 
@@ -309,11 +368,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ols.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></span>
+      <a href="./asymptotic.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./ols.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

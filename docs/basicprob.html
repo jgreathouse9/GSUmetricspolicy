@@ -119,12 +119,17 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></a>
+  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
       </ul>
@@ -139,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
+  <a href="./writing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing for Policy Analysis: THe Introduction</span></a>
   </div>
 </li>
       </ul>
@@ -158,8 +163,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#means-arithmetic-and-median" id="toc-means-arithmetic-and-median" class="nav-link" data-scroll-target="#means-arithmetic-and-median"><span class="toc-section-number">3.1.1</span>  Means: Arithmetic and Median</a></li>
   <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="toc-section-number">3.1.2</span>  Variance</a></li>
   </ul></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications"><span class="toc-section-number">3.2</span>  Applications</a></li>
-  <li><a href="#uncertainty-around-the-mean" id="toc-uncertainty-around-the-mean" class="nav-link" data-scroll-target="#uncertainty-around-the-mean"><span class="toc-section-number">3.3</span>  Uncertainty Around the Mean</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="toc-section-number">3.2</span>  Hypothesis Testing</a></li>
+  <li><a href="#uncertainty-around-the-mean" id="toc-uncertainty-around-the-mean" class="nav-link" data-scroll-target="#uncertainty-around-the-mean"><span class="toc-section-number">3.3</span>  Uncertainty Around the Mean</a>
+  <ul class="collapse">
+  <li><a href="#confidence-intervals-and-the-normal-distribution" id="toc-confidence-intervals-and-the-normal-distribution" class="nav-link" data-scroll-target="#confidence-intervals-and-the-normal-distribution"><span class="toc-section-number">3.3.1</span>  Confidence Intervals and the Normal Distribution</a></li>
+  <li><a href="#constructing-a-confidence-interval" id="toc-constructing-a-confidence-interval" class="nav-link" data-scroll-target="#constructing-a-confidence-interval"><span class="toc-section-number">3.3.2</span>  Constructing a Confidence Interval</a></li>
+  </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">4</span>  Summary</a></li>
   </ul>
 </nav>
@@ -194,41 +203,41 @@ ul.task-list li input[type="checkbox"] {
 <p>Probability is rarely used in a vacuum, though. We typically, in the policy sciences, wish to take a given outcome from a set of outcomes and draw conclusions from it. To do this, we use descriptive statistics (also called <em>moments</em>).</p>
 <section id="means-arithmetic-and-median" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="means-arithmetic-and-median"><span class="header-section-number">3.1.1</span> Means: Arithmetic and Median</h3>
-<p>The first moment is called the <strong>average/mean</strong>. The formula for the mean, also called the <em>expected value</em> (denoted by <span class="math inline">\(\mathbb E\)</span>) is <span class="math display">\[
-\mathbb{E}[X]=\frac{1}{N}\sum_{i=1}^{N}x_i
-\]</span> In our formula for the average is <span class="math inline">\(\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i\)</span>, where <span class="math inline">\(\bar{x}\)</span> is the mean, <span class="math inline">\(N\)</span> is the number of values, and <span class="math inline">\(x_i\)</span> represents the <span class="math inline">\(i\text{-th}\)</span> value in the sequence. The uppercase Greek letter “sigma” means summation, or <span class="math inline">\(\sum_{i=1}^{N} x_i\)</span>. It adds the values from <span class="math inline">\(i = 1\)</span> to <span class="math inline">\(N.\)</span> For a discrete random variable, the expected value is</p>
+<p>The first moment is called the <strong>average/arithmetic mean</strong>. The formula for the mean, also called the <em>expected value</em> (denoted by <span class="math inline">\(\mathbb E\)</span>) is <span class="math display">\[
+\bar{x} = \mathbb{E}[X]=\frac{1}{N}\sum_{i=1}^{N}x_i
+\]</span> where <span class="math inline">\(\bar{x}\)</span> is the mean, <span class="math inline">\(N\)</span> is the number of values, and <span class="math inline">\(x_i\)</span> represents the <span class="math inline">\(i\text{-th}\)</span> value in the sequence. The uppercase Greek letter “sigma” means summation, or <span class="math inline">\(\sum_{i=1}^{N} x_i\)</span>. It adds the values from <span class="math inline">\(i = 1\)</span> to <span class="math inline">\(N.\)</span> For a discrete random variable, the expected value is</p>
 <p><span class="math display">\[
 \mathbb{E}[X] = \sum_{i=1}^{N} x_i \cdot P(x_i).
 \]</span> So for our die, the expected value is <span class="math display">\[
 \mathbb{E}[X] = 1 \cdot \frac{1}{3} + 2 \cdot \frac{1}{3} + 3 \cdot \frac{1}{3} = \frac{1 + 2 + 3}{3} = 2
-\]</span> We can take averages with things aside from die too. Suppose we have a room of 10 men and 40 women, where women take the value of 1 and men the value of 0. The average number of women in the room is <span class="math inline">\(\frac{40}{50}\)</span>. This means the expected value of women in the room is .8. In other words, if we randomly selected a person from the room 10 times, we’d expect about 8 of them to be women.</p>
-<p>The median, or the middle number. It is a type of average. Suppose we have a dataset of years of education <span class="math inline">\(A=\{5,6,7,9,18\}\)</span>. The middle number here is 7 (since two numbers lie to the let and right of 7). But let’s consider the issue deeper: suppose we were to use the average years of education at the average. For us, we have <span class="math display">\[
+\]</span> For a coin, the expected value (assuming it is fair) is 0.5. Suppose we have a room of 10 men and 40 women, where women take the value of 1 and men the value of 0. The average number of women in the room is <span class="math inline">\(\frac{40}{50}\)</span>. This means the expected value of women in the room is .8. In other words, if we randomly selected a person from the room 10 times, we’d expect about 8 of them to be women. We can take averages with things aside from die and coins too. Naturally, if the amount of water in one giant jug was 5 liters and in another jug there is 7 liters, the average liters of water in the sample is <span class="math inline">\(\frac{1}{N}\sum_{i=1}^{N} x_i = \frac{1}{2}\sum_{i=1}^{2} 5+7=6\)</span> liters.</p>
+<p>The median, or the middle number, is also a type of average. It is less influenced by outliers than the average is. Suppose we have a dataset of years of education across a group of peopl in a neighborhood, <span class="math inline">\(A=\{5,6,7,9,18\}\)</span>. The middle number here is 7 (since two numbers lie to the let and right of 7). But let’s consider the issue deeper: suppose we were to use the average years of education at the average. For us, we have <span class="math display">\[
 \frac{1}{5} \times \sum_{i=1}^{5} 5 + 6 + 7 + 9 + 18 =\frac{45}{5}=9
-\]</span> The mean and median produce differing values. If we were to use the mean, we’d conclude the average person in this sample is in high school. When in fact, as a raw number, most of our respondents are in middle school with one elementary schooler. Thus, we can see that the average is influenced by outliers (in this case, somebody in graduate school).</p>
+\]</span> The mean and median produce differing values. If we were to use the mean, we’d conclude the average person in this sample is in high school. When in fact, as a raw number, the modal respondent is a middle schooler with one elementary schooler. Thus, we can see that the average is influenced by outliers (in this case, somebody in graduate school). The classic joke is that when Bill Gates walks into a bar, everyone, <em>on average</em>, is a billionaire.</p>
 </section>
 <section id="variance" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">3.1.2</span> Variance</h3>
-<p>The <strong>variance</strong> is the second moment. For a random variable <span class="math inline">\(X\)</span>, the varaince is denoted <span class="math inline">\(\text{Var}(X)\)</span>, measures the spread of its values around the mean. For a discrete random variable, it is calculated as: <span class="math inline">\(\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]\)</span> For our die, the variance is:</p>
-<p><span class="math display">\[
+<p>The <strong>variance</strong> is the second moment. For a random variable <span class="math inline">\(X\)</span>, the varaince is denoted <span class="math inline">\(\text{Var}(X)\)</span>, measures the spread of its values around the mean. For a discrete random variable, it is calculated as: <span class="math inline">\(\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]\)</span>. Naturally, if all numbers in a set are the same [e.g., <span class="math inline">\(A=\{5,5\}\)</span>], there’s no variance (and the mean is just that number, as one would expect). For our die, the variance is: <span class="math display">\[
 \text{Var}(X) = \frac{1}{3}[(1-2)^2 + (2-2)^2 + (3-2)^2] = \frac{1}{3}[1 + 0 + 1] = \frac{2}{3}.
 \]</span></p>
-<p>Note that so far, we’ve assumed that we have the population (or, every observation we are interested in). In practice, we typically have only a <em>sample</em>, or a smaller subset of the population. We will return to this later, but somtimes this affects the way we calculate statistics. For example, while the formula for the mean stays the same, the <em>sample</em> variance’s formula becomes</p>
+<p>The sample variance is</p>
 <p><span class="math display">\[
 s^2 = \frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2.
+\]</span> The subtracting of 1 is called <a href="https://math.oxford.emory.edu/site/math117/besselCorrection/">Bessel’s correction</a> because it factors in uncertainty. Some might wonder why we’re squaring these differences. The main reason here is because it penalizes outliers, or datapoints that are far from the mean. For example, let’s say that we have three people’s years of education, <span class="math inline">\(A=\{1, 2, 15\}\)</span>. The average of this is 3. Person 1 and 2 are only 2 and 1 year less than the mean. But someone with 15 years of education varies a lot more from the mean, since a junior in college has 12 more years of school than a third grader. So, we square the large difference to penalize this disparity.</p>
+<p>The square root of our variance is what’s called the standard deviation from the mean. It is a measure of how much the sample data deviate from the mean. This will become more apparent when we discuss probability distributions below.</p>
+</section>
+</section>
+<section id="hypothesis-testing" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">3.2</span> Hypothesis Testing</h2>
+<p>In public policy we oftentimes wish to test hypotheses. A hypothesis is a statement abuot the world that we wish to determine the validity of. We are always testing a hypothesis against a scenario where the hypothesis is wrong. If I ask you what you think the average literacy rate is in the population of Americans, you may give different answers like “I think it’s at the 9th grade level”, “I think the average literacy level is less than the 6th grade level” or “I think the average literacy rate is different from 0”. Each of these forms sets of testable hypotheses. In the first case, the research hypothesis (the ones formed by we researchers) is “The literacy rate is equal to 9th grade.” In the second case, the research hypothesis is “The literacy rate is less than the 6th grade level.” Finally, we’d say “I think the literacy rate in America is not 0” (or, some significant portion of the population can read). Formally, we denote these hypotheses as</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; H_{R}: L=9 \\
+&amp;H_{R}: L &lt; 6 \\
+&amp;H_{R}: L \neq 0
+\end{aligned}
 \]</span></p>
-</section>
-</section>
-<section id="applications" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="applications"><span class="header-section-number">3.2</span> Applications</h2>
-<p>We can use these two moments to answer questions about a group of individuals/units (say, people, cities, etc). For example, say we have the incomes (in 1000s) for 5 people in one year across two groups. For Group A, we have <span class="math inline">\(A=\{50, 50, 50, 50, 50\}\)</span>, and for Group B we have <span class="math inline">\(B=\{30, 50, 50, 50, 70\}\)</span>. The mean and variance for Group A are just 50 and 0 respectively. 50 is the only number we have, so its average is just that, and since it’s the only number we have, it cannot deviate at all from this mean. For Group B, our mean is <span class="math display">\[
-\mathbb{E}[X] = \frac{1}{N}\sum_{i=1}^{N} x_i = \frac{1}{5}(30 + 50 + 50 + 50 + 70) = \frac{1}{5} \times 250 = 50
-\]</span> and the variance is <span class="math display">\[
-s^2 = \frac{1}{5-1} \left[ (30 - 50)^2 + (50 - 50)^2 + (50 - 50)^2 + (50 - 50)^2 + (70 - 50)^2 \right]
-\]</span> which gives us <span class="math display">\[
-= \frac{1}{4} \left[ 400 + 0 + 0 + 0 + 400 \right]
-\]</span> and finally <span class="math display">\[
-= \frac{800}{4} = 200.
-\]</span> So, what do we have here? On average, these groups are the same… but their variance is different. What practically might this mean, why is this useful? Because it allows us to make better inferences on things such as income distribution. To see why, consider the following plot of 10000 hypothetical incomes across two groups of people.</p>
+<p>We test these research hypotheses against what we call <em>null</em> hypotheses. When we say <em>null</em>, think of the word “no.” The null hypotheses for these examples respectively are “The literacy rate above is not at the 9th grade level”, “The literacy rate is greater than the 6th grade level”, and “The literay rate in America is 0”. To test this, we simply take a of sample the population somehow (which is usually taken care of for us in census data/compiled statistics). We then calculate the sample average of the grade level of our sample (ranging from 0 being illiterate and 16+ which means postgraduate). Let’s visualize this.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -238,27 +247,32 @@ s^2 = \frac{1}{5-1} \left[ (30 - 50)^2 + (50 - 50)^2 + (50 - 50)^2 + (50 - 50)^2
 </div>
 </div>
 </div>
-<p>Now, the difference is more apparent. If we only consider the average income of people in both groups, we’d walk away saying that the income distributions are the exact same. But this is wrong, Group A is much tighter distribution of income than Group B because its variance/spread is smaller.</p>
+<p>This is a histogram. It shows a distribution of data. To better conceptualize it, imagine the height of the histogram (the y axis) represents the number of people in the data who take on the values on the x-axis. So, roughly 70 people have a literacy level of 8.</p>
+<p>In this case I generated a sample of 500 people with a small amount of variance. The average literacy rate in this population is 8 (for 8th grade). We now wish to see if our population mean (of 8th grade) is different from the researcher mean (9, 6, and 0). To do this, we need what’s called a t-statistic, which is a measure of deviation from the mean <em>when taking into account</em> the standard deviation from the mean and sample size. The formula for this simple t-statistic is</p>
+<p><span class="math display">\[
+t = \frac{\bar{x} - \mu_R}{\frac{s}{\sqrt{n}}}.
+\]</span> Let’s parse these terms. In the numerator we take the difference of our sample mean (<span class="math inline">\(\bar x\)</span>, the mean we in fact observe in our dataset) versus our hypothetical mean that we are testing our sample mean against, denoted as <span class="math inline">\(\mu_R\)</span> (“myoo-sub R”). The denominator is the standard error, which is the standard deviation divided by the square root of our sample size. For example, here’s how we’d do this with the null hypothesis for 0 (that is, our sample mean is different from 0).</p>
+<p><span class="math display">\[
+t = \frac{\bar{x} - \mu_R}{\frac{s}{\sqrt{n}}}=\frac{7.949 - 0}{\frac{1.9983}{\sqrt{500}}}=88.95.
+\]</span> In other words, our average literacy grade level is 88 times that of what we would expect given our standard error. Later on, we will revisit the idea of a grouped t-test, where we compare the average of one group to the average of another group.</p>
 </section>
 <section id="uncertainty-around-the-mean" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="uncertainty-around-the-mean"><span class="header-section-number">3.3</span> Uncertainty Around the Mean</h2>
-<p>Typically, we wish to see how uncertain our estimates are. The way we do this is by calculating the margin of error for the mean. We take such uncertainty into account by computing the standard error of the mean, <span class="math inline">\(\text{SEM} = \frac{\sigma}{\sqrt{N}}\)</span>. Here, lowercase sigma, <span class="math inline">\(\sigma\)</span>, is the sample standard deviation and <span class="math inline">\(N\)</span> is our sample size. The sample standard deviation is how far our entire dataset is from the mean. it is the square root of the variance. In the case of Group A from above, our sample size is 10000. We have 10000 incomes to pick from. The expectation/average of these in Group A, as we’ve said, is 50. The standard deviation of this group is 2.</p>
-<p>Before we can discuss the margin of error, though, we must say some words about probability distributions. The distributions of both income groups are what we’d call <em>normally</em> distributed in the sense that most of the values we see are within 1 standard deviation of the mean. In fact, we can show that 68% of our observations lie within one standard deviation of the mean. What this means here, is that if the mean if 50, 68% of our respondents incomes are between 48.6 and 51.4. Let’s visualize this for group A.</p>
-<div class="cell" data-engine="jupyter" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="basicprob_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Typically though, scientists are interested in our uncertainty within two standard deviations of the mean, where 95% of our data lie. To do this, we need the number for the normal distribution that reflects how many standard deivations we are interested in. In practice, the number we use is 1.96. That is, we are using all values from our sample that are within 1.96 standard deviations from our observed mean. Putting this all together, our margin of error for the average income for Group A is <span class="math display">\[
-0.0277= 1.96 \times \frac{1.4142135623730951}{\sqrt{10000}}.
-\]</span> Now, in order to characterize the range that the mean falls within, we simply do <span class="math display">\[
+<p>Aside from raw mean estimates, we typically are concerend with the uncertainty of our estimates. Uncertainty around the mean is typically expressed through <strong>confidence intervals</strong>. A confidence interval provides a range of values that, under certain conditions, contains the true population mean. Now we should distinguish between the population and sample size: the sample is that subset of the population that we can get. We can rarely sample every single American in the country (the population), but a random (or representative) sample of 3000 Americans, say, is just fine.</p>
+<section id="confidence-intervals-and-the-normal-distribution" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="confidence-intervals-and-the-normal-distribution"><span class="header-section-number">3.3.1</span> Confidence Intervals and the Normal Distribution</h3>
+<p>To understand confidence intervals, it’s essential to first grasp the role of <a href="https://www.youtube.com/watch?v=rzFX5NWojp0">a normal/Gaussian distribution</a>. The normal distribution is a continuous probability distribution characterized by its bell-shaped curve. We call it a continuous distribution because unlike coin flips, other data points can take on many values such as homicide rates, COVID-19 rates, and other metrics that can’t be broken into simple, countable groups. Most real-world phenomena, when measured, tend to follow a normal distribution (we will return to this in the lecture on asymptoyic theory). A normal distribution is defined by its mean (<span class="math inline">\(\mu\)</span>) and standard deviation (<span class="math inline">\(\sigma\)</span>). The great thing about a normal distribuition is that we can prove that 68 and 95% of the data lie within 1 and 2 standard deviations of the mean. We will exploit this to construct a confidence interval.</p>
+</section>
+<section id="constructing-a-confidence-interval" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="constructing-a-confidence-interval"><span class="header-section-number">3.3.2</span> Constructing a Confidence Interval</h3>
+<p>The most common confidence interval is the 95% confidence interval. This means that if we were to take many samples and construct confidence intervals for each of them, approximately 95% of these intervals would contain the true population mean. Typically, we have only one sample to work with (and we rely on asymptotics to argue for the validity of our confidence intervals), but methods such as bootstrapping (where we simulate many such samples) may be employed to do this too. For our current purposes though, we construct a confidence interval for the population mean <span class="math inline">\(\mu\)</span>, we use the sample mean <span class="math inline">\(\bar{x}\)</span> and the standard error of the mean as we’ve defined them above.</p>
+<p>For a 95% confidence interval, we use the critical value from the standard normal distribution, typically denoted as <span class="math inline">\(z^*\)</span>. For a 95% confidence level, <span class="math inline">\(t^* \approx 1.96\)</span> (<a href="https://www.youtube.com/watch?v=2fzYE-Emar0">since</a> approximately 95% of the values lie within 1.96 standard deviations from the mean in a standard normal distribution). Note, 95% CIs do not mean 95% of the sample data lies within this interval. Confidence intervals are statements about the mean. Instead, it means that if we were to take many samples and construct intervals in the same way for a mean of interest, 95% of those intervals would contain the true population mean. For example, say I generated a 10,000 person sample of incomes (in 1000s). The average is 50. The standard deviation is the square root of 2. To estimate the confidence interval, we compute <span class="math display">\[
+0.0277= 1.96 \times \frac{\sqrt{2}}{\sqrt{10000}}
+\]</span> to get our standard error of the mean. Now, in order to characterize the range that the mean falls within, we simply do <span class="math display">\[
 \text{CI} = \mu \pm \text{Margin of Error}=50 \pm 0.0277=(49.986,50.014).
 \]</span></p>
-<p>What we’re looking at here, is our 95% Confidence Interval. Why 95%? Because that is the range we are intersted within, the area under the normal curve where 95% of our data lie. We interpret this as “Our sample mean is 50 thousand dollars. We are 95% confident that given the data, the real mean lies between 49.986 and 50.014 thousand dollars.” Since I simulated this dataset, we know for fact that the true mean does lie within here! But in real life, the confidence intervals will usually never be this tight.</p>
+<p>We interpret this as “Our sample mean is 50 thousand dollars. We are 95% confident that given the data, the real mean lies between 49.986 and 50.014 thousand dollars.”</p>
+</section>
 </section>
 <section id="summary" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Summary</h1>
@@ -410,7 +424,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./asymptotic.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Primer on Asymptotic Theory</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
