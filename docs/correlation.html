@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econometrics for Policy Analysis - 6&nbsp; Correlation and Association</title>
+<title>Econometrics for Policy Analysis - 5&nbsp; Correlation and Association</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ols.html" rel="next">
-<link href="./asymptotic.html" rel="prev">
+<link href="./stataintro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -187,22 +187,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./treatmenteffects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  <a href="./treatmenteffects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
   </div>
 </li>
       </ul>
@@ -219,11 +214,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-prelude-to-regression" id="toc-a-prelude-to-regression" class="nav-link active" data-scroll-target="#a-prelude-to-regression"><span class="toc-section-number">6.1</span>  A Prelude To Regression</a></li>
-  <li><a href="#the-first-exercise-of-the-statistical-mind" id="toc-the-first-exercise-of-the-statistical-mind" class="nav-link" data-scroll-target="#the-first-exercise-of-the-statistical-mind"><span class="toc-section-number">6.2</span>  The First Exercise of the Statistical Mind</a></li>
-  <li><a href="#correlation-in-stata" id="toc-correlation-in-stata" class="nav-link" data-scroll-target="#correlation-in-stata"><span class="toc-section-number">6.3</span>  Correlation in Stata</a></li>
-  <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications"><span class="toc-section-number">6.4</span>  Implications</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">7</span>  Summary</a></li>
+  <li><a href="#a-prelude-to-regression" id="toc-a-prelude-to-regression" class="nav-link active" data-scroll-target="#a-prelude-to-regression"><span class="toc-section-number">5.1</span>  A Prelude To Regression</a></li>
+  <li><a href="#the-first-exercise-of-the-statistical-mind" id="toc-the-first-exercise-of-the-statistical-mind" class="nav-link" data-scroll-target="#the-first-exercise-of-the-statistical-mind"><span class="toc-section-number">5.2</span>  The First Exercise of the Statistical Mind</a></li>
+  <li><a href="#correlation-in-stata" id="toc-correlation-in-stata" class="nav-link" data-scroll-target="#correlation-in-stata"><span class="toc-section-number">5.3</span>  Correlation in Stata</a></li>
+  <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications"><span class="toc-section-number">5.4</span>  Implications</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">6</span>  Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -232,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
 </div>
 
 
@@ -359,8 +354,8 @@ Important
 </div>
 </div>
 </details>
-<section id="a-prelude-to-regression" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="a-prelude-to-regression"><span class="header-section-number">6.1</span> A Prelude To Regression</h2>
+<section id="a-prelude-to-regression" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="a-prelude-to-regression"><span class="header-section-number">5.1</span> A Prelude To Regression</h2>
 <p>Typically, when we discuss correlation, we use scatterplots to visualize the association between variables. A scatterplot is simply a chart which depicts the co-movement of variables. On the x-axis we plot our independent variables/predictors (or, the things we think explain a given outcome) and the y axis plots the variable we think is being affected by the one on the x-axis. Below, I plot in the left panel the homicide rate per 100,000 versus the state-specific Gini coefficient for 27 Brazilian states in the year 1990. The right panel plots the average retail price of cigarettes versus cigarette consumption per capita for 39 American states in the year 1980.</p>
 <div class="cell" data-engine="jupyter" data-execution_count="3">
 <div class="cell-output cell-output-display">
@@ -373,8 +368,8 @@ Important
 </div>
 <p>Well now, what do we see here? We see the plotted datapoints along with the Pearson’s <span class="math inline">\(r\)</span>. We can see a negative correlation coefficient reported, where a one unit increase in the Gini coefficient leads to a decrease in the homicide rate in Brazil for this year. We also observe a negative relationship between the retail price of cigarettes and the consumption of cigarettes, where an increase in price leads to a decrease in the amount of cigarettes consumed. This result especially should be pretty intuitive: all else equal, as the price of a good increases, the demand for said good generally decreases. However, what about the leftmost plot? The Gini coefficient is a measure for inequality, where 1 denotes one person has all the money and everyone else nada/nothing. A Gini coefficient of 0 means everyone has the same amount of money, and a measure of anything in between is some intermittent level of inequality. Well, this result is puzzling in a bivariate lens: typically, we associate income inequality and poverty with an increase in things like higher rates of homicide and other kinds of crime, but that’s not what this result implies. While correlation is a useful measure sometimes, it alone is inadequate for serious policy analysis. Below, I explain why.</p>
 </section>
-<section id="the-first-exercise-of-the-statistical-mind" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="the-first-exercise-of-the-statistical-mind"><span class="header-section-number">6.2</span> The First Exercise of the Statistical Mind</h2>
+<section id="the-first-exercise-of-the-statistical-mind" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="the-first-exercise-of-the-statistical-mind"><span class="header-section-number">5.2</span> The First Exercise of the Statistical Mind</h2>
 <p>Earlier this morning, I was on Facebook and one of my friends posted a picture that cited <a href="https://grammymuseum.org/education/music-educator-award/">a story</a> of a public school music teacher named Annie Ray winning a Grammy. In the article, they say [caps theirs]</p>
 <blockquote class="blockquote">
 <p>THE FACTS ABOUT THE IMPORTANCE OF MUSIC EDUCATION DON’T LIE… Schools that have music programs have significantly higher graduation rates than do those without music programs (90.2 percent as compared to 72.9 percent).</p>
@@ -403,10 +398,11 @@ Important
 <p>These aside, there may also be what we call “selection bias” here, where some students are able to <em>select</em> into/decide to go to a given school. For example, some schools have magnet programs. The one I was in was for the International Baccalaureate Program; other high schools have STEM magnet programs or music/arts programs where some schools literally recruit middle school students who want to pursue these things. And when they select for these qualities, it becomes hard to isolate the impact of a music program on a graduattion rate, becasue they’re already selecting for highly motivated students (who mostly but not exclusively are from wealthier districts or better-to-do families). These are the kinds of students who would perform well anyways, even if music wasn’t there.</p>
 <p>This again does not discount the real benefits of music education or the arts more generally! But when we read statistics, as with harmonic analysis of music chords, we also need to understand the context they exist within, and when we do this we begin to see that the relationship is not as clear cut as simple descriptive statistics might seem. As we see from the simulated plot, some schools have a graduation rate of almost nobody, which also happen to have low levels of music funding. And while I couldn’t find specific examples of this when I looked up <a href="https://www.uscareerinstitute.edu/blog/where-are-the-highest-graduation-rates-in-the-us">data</a> on it, numbers this low <a href="https://www.fox5vegas.com/2023/05/24/high-school-reschedules-graduation-ceremony-due-only-5-seniors-found-eligible-graduate/">do happen</a> anecdotally. And when we see numbers like this, we must ask ourselves “How are these sets of schools different from these sets of schools?”</p>
 <p>As we will see when we cover regression analysis, the world rarely works off of pretty, linear functions. Measures of simple association do not mean that something is causing another thing, the world is much too complex for that. As researchers and as human beings, we must constantly be skeptical of simplistic claims and investigate them when they seem too good to be true.</p>
+<p>With this exercise in mind, let’s think of <a href="https://x.com/Travis_4_Trump/status/1831372457372217386">a similar application</a> of correlation in real life…</p>
 </section>
-<section id="correlation-in-stata" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="correlation-in-stata"><span class="header-section-number">6.3</span> Correlation in Stata</h2>
-<p>Becuause you’ll never actuallly use the correlation coefficient for 99% of the analyses you ever do, I’ll only show how to use Stata to calculate correlation coefficients and scatterplots. Hopefully, the previous discussion is sufficient to show how it is not causation. Here, I take data from a paper that investigates the causal impact of crime reduction strategies on homicide rates (the same thing I did above). In 1999, the government of Sao Paulo “created or expanded a number of policies that have arguably contributed to the decrease in criminality”. One thing that may affect the homicide rate in a Brazilian state is the Gini Index, or a measure of inequality in a region. For the Gini Coefficient, -1 denotes perfect equality and 1 denotes one person having all of the money. We can produce a table and a plot in Stata which shows this relationship.</p>
+<section id="correlation-in-stata" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="correlation-in-stata"><span class="header-section-number">5.3</span> Correlation in Stata</h2>
+<p>Becuause you’ll never actuallly use the actual correlation coefficient for 99% of the analyses you ever do, I’ll only show how to use Stata to calculate correlation coefficients and scatterplots. Hopefully, the previous discussion is sufficient to show how it is not causation. Here, I take data from a paper that investigates the causal impact of crime reduction strategies on homicide rates (the same thing I did above). In 1999, the government of Sao Paulo “created or expanded a number of policies that have arguably contributed to the decrease in criminality”. One thing that may affect the homicide rate in a Brazilian state is the Gini Index, or a measure of inequality in a region. For the Gini Coefficient, -1 denotes perfect equality and 1 denotes one person having all of the money. We can produce a table and a plot in Stata which shows this relationship.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> *</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cls</span>
@@ -440,15 +436,15 @@ Important
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     giniimp |  -0.2848   1.0000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The way to interpret this, is that there’s a weak negative relationship between the Gini Coefficient and the homicide rate. Or, as the Gini Coefficient/inequality increases, the homicide rate decreases</p>
 </section>
-<section id="implications" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="implications"><span class="header-section-number">6.4</span> Implications</h2>
+<section id="implications" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="implications"><span class="header-section-number">5.4</span> Implications</h2>
 <p>The reason this matters for policy analysts is because when taken to its conclusion, mistaken correlation for causation or not thinking about things in a systemic, multivariate way could result in pumping more money into music programs in order to fix failing schools, a much wider and more sophisticated problem.</p>
 <p>It leads to things like pumping more money into police deparmtents to decrease crime rates, even though crime has been falling in general for decades in the U.S. and there’s no real link between militant policing measures and crime reduction.</p>
 <p>It also leads to things like mass like <a href="https://apnews.com/article/dating-births-marriage-japan-technology-42b2685cb0bea35a69ca3318c3af48c7">many</a> <a href="https://www.theguardian.com/world/2023/mar/20/state-sponsored-matchmaking-app-launched-in-china">modern</a> <a href="https://www.yahoo.com/news/south-korea-turns-matchmaking-boost-091724471.html?guccounter=1&amp;guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&amp;guce_referrer_sig=AQAAAIGyzxXdwZi-2RIp92S-c-AiHX3Tltx8OD5p5xYEe4zFPJzOFd6io6LVtNoL0qrGQ1Bpa5bZ3oumkdTdcFwCsToXh3KR4o3MnLgzf0H1AT8vj_GyDow3XbQ2Dol_14ySXttLJeVfj86mw_sRQ7TO7lded10DwB9Ow13d75-F5fuw">governemnts</a> doing things like making dating apps and sponsoring mass dating events (yes, really!) in order to increase birth and marriage rates.</p>
 <p>The idea of course is that people aren’t having kids or getting married <em>because</em> they’re not meeting one another. And if more people met, the more kids they’d have. And to a degree this is true due to things like social media, so the underlying logic makes plenty of sense. But then, once we agree to this probelm, we have to ask <em>why</em> are people not meeting one another and having kids or getting married? The real problem is <em>a lot</em> more systemic. Especially in South Korea, Japan, and <a href="https://www.aljazeera.com/news/2023/3/1/for-some-chinese-women-it-doesnt-make-sense-to-have-babies">China</a>, the reasons are mostly having to do with <a href="https://www.reuters.com/world/asia-pacific/south-koreas-fertility-rate-dropped-fresh-record-low-2023-2024-02-28/">labor issues</a>, <a href="https://www.washingtonpost.com/world/2024/02/21/south-korea-women-gender-equality-gap/">changes in gender norms</a>, and <a href="https://sg.news.yahoo.com/why-women-asia-having-fewer-215615927.html">broader social factors</a> which lead to people not wanting to have kids.</p>
 </section>
-<section id="summary" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Summary</h1>
+<section id="summary" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Summary</h1>
 <p>Correlation and causation is a very delicate topic in statistics. Whenever we’re doing research, we must always be careful to structure our studies in such as way that our findings are not corrupted by other factors, even if our software tells us we’ve found a “statistically significant” correlation. I’m sure if we took the t-statistic of music programs and graudation (or funding of music programs, as my scatterplot does), we’d find a very high t-statistic for the correlation coefficient. Equally, we’d find a high t-statistic for countries reporting increases in <a href="https://theweek.com/feature/briefing/1022710/why-south-koreas-young-people-are-so-lonely">loneliness</a> and low fertility rates. But I don’t care, and neither should you, since there are other factors which contribute to graduation aside from music, and a lot more factors driving fertility rates than simple loneliness or lack of opportunity to meet people. Thinking causally can be a challenging thing. After multiple years of torment, you will learn to think like this as if by muscle memory since it’ll be so routine to you. We will cover this in more detail in our chapter on treatment effect estimation.</p>
 
 
@@ -590,13 +586,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./asymptotic.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></span>
+      <a href="./stataintro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Stata</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ols.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">OLS Explained</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

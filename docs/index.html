@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jared Greathouse">
-<meta name="dcterms.date" content="2024-09-13">
+<meta name="dcterms.date" content="2024-09-14">
 
 <title>Econometrics for Policy Analysis</title>
 <style>
@@ -124,22 +124,17 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./treatmenteffects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  <a href="./treatmenteffects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
   </div>
 </li>
       </ul>
@@ -219,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-09-13</p>
+      <p class="date">2024-09-14</p>
     </div>
   </div>
   
@@ -263,14 +258,14 @@ Note
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="paper-breakdown"><span class="header-section-number">1.1.1</span> Paper Breakdown</h3>
 <p>In this spirit, I give to you one assignment. Specifically, you will write a paper where you will <em>apply</em> the statistical concepts we cover to answer questions about a real, existing policy. You will turn in each sub-section of the paper to me <em>well before</em> the first draft is due. I will give you feedback on each section, which I expect you to improve upon with subsequent iterations. So then, when it is time to turn in the full first draft, you will be able to incorporate my previous suggestions. I expect you to send me your section/paper (or at least ask to meet with me about it) as often as you need. To facilitate this, I have three potential datasets you may use.</p>
 <ol type="1">
-<li><a href="https://github.com/jgreathouse9/GSUmetricspolicy/blob/main/data/texasabortion.dta">The first dataset</a> deals with the impact of <a href="https://www.texastribune.org/2021/08/31/texas-abortion-law-supreme-court/">Texas’s abortion restrictions</a> on the number of births.</li>
-<li><a href="https://github.com/jgreathouse9/GSUmetricspolicy/blob/main/data/ssbev.dta">The second dataset</a> deals with the impact of <a href="https://d3n8a8pro7vhmx.cloudfront.net/heatlhyfoodamerica/pages/137/attachments/original/1491248559/SanFranProfileSheet_Final.pdf?1491248559">a tax on pop/soda</a> on the employment rate in San Francisco.</li>
-<li><a href="https://github.com/jgreathouse9/FDIDTutorial/blob/main/basque.dta">The third dataset</a> deals with <a href="https://economics.mit.edu/sites/default/files/publications/The%20Economic%20Costs%20of%20Conflict.pdf">the impact of terrorism</a> on the GDP per Capita of the Basque Country,Spain from 1975-1997.</li>
+<li><a href="https://github.com/jgreathouse9/GSUmetricspolicy/blob/main/data/texasabortion.dta">The first dataset</a> deals with the impact of <a href="https://www.texastribune.org/2021/08/31/texas-abortion-law-supreme-court/">Texas’s abortion restrictions</a> on the number of births. The goal here is to see how Texas’ monthly births would look if SB8 were never passed.</li>
+<li><a href="https://github.com/jgreathouse9/GSUmetricspolicy/blob/main/data/ssbev.dta">The second dataset</a> deals with the impact of <a href="https://d3n8a8pro7vhmx.cloudfront.net/heatlhyfoodamerica/pages/137/attachments/original/1491248559/SanFranProfileSheet_Final.pdf?1491248559">a tax on pop/soda</a> on the employment rate in San Francisco. The goal with this paper is to see how SF’s employment trends would look in the event that the SSB tax were never passed.</li>
+<li><a href="https://github.com/jgreathouse9/FDIDTutorial/blob/main/basque.dta">The third dataset</a> deals with <a href="https://economics.mit.edu/sites/default/files/publications/The%20Economic%20Costs%20of%20Conflict.pdf">the impact of terrorism</a> on the GDP per Capita of the Basque Country, Spain from 1975-1997. The goal of this paper is to see how Basque GDP would look if the terrorism never happened.</li>
 </ol>
 <p>Should there be another policy you wish to study, or another research question you have in mind, you may do this instead, <em>subject to</em> public data on that question existing and my permission. <a href="https://github.com/jgreathouse9/GSUmetricspolicy/blob/main/example/PolicyDataAnalysisExample.pdf">Here is an example paper</a> of how yours should look, more or less. The text file versions of these three datasets are now online (as of August 29, 2024)</p>
 <p>The paper consists of 5 sections: The intro, data, methods, results, and discussion sections. Each section is worth 4% each, meaning the sections themselves are worth 20%. The full first draft, then, is 20%. Here is what each section must look like:</p>
 <ul>
-<li><p>Intro: Describes the general problem of interest. Should answer “Who did the policy/intervention, what policy/intervention was done, when did the policy happen, where did the policy happen, and how is the policy exepected to affect whatever outcome we care about?” I.e., if you are doing option 3, you will need to do some reading on why we would expect terrorism to affect a local economy. If you are doing option 2, you will need to read on why a tax on pop might affect local levels of employment. Also, say why having answers to how this policy affects things matters– why does the (wo)man on the street care about how abortion bans affect birth rates?</p></li>
+<li><p>Intro: Describes the general problem of interest. Should answer “Who did the policy/intervention, what policy/intervention was done, when did the policy happen, where did the policy happen, and how is the policy exepected to affect whatever outcome we care about?” I.e., if you are doing option 3, you will need to do some reading on why we would expect terrorism to affect a local economy. If you are doing option 2, you will need to read on why a tax on pop might affect local levels of employment. Also, say why having answers to how this policy affects things matters– why does the (wo)man on the street care about how abortion bans affect birth rates? Whatever the context, the goal of your paper is to see how some outcome would look if a policy of interest did not happen.</p></li>
 <li><p>Data: This section describes the dataset you’re using. Say how many units of analysis there are (i.e., how many unique cities, countries, states, counties are in your dataset). Say the time period the data was collected from, if applicable. Say when the treatment began and for which state/entity. Say how each variable was measured (i.e., if the main variable is education, is it a 0 1 variable for college educated or not, or is it 1 … 16 to represent the years of education).</p></li>
 <li><p>Methods: Describe your statistical model. For most people, this presumably will be difference-in-differences.</p></li>
 <li><p>Results: Summarize your results. Did the policy work or not? If so, by how much? was the effect size small or large? How uncertain are we about the estimates?</p></li>
