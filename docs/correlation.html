@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics for Policy Analysis - 5&nbsp; Correlation and Association</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ols.html" rel="next">
+<link href="./stataintro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Econometrics for Policy Analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Syllabus: PMAP 4041, Fall 2024</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Mathematics and Econometric Theory</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicprob.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stataintro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./treatmenteffects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Applied Research Methods</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dd.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Difference-in-Differences</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-prelude-to-regression" id="toc-a-prelude-to-regression" class="nav-link active" data-scroll-target="#a-prelude-to-regression"><span class="toc-section-number">5.1</span>  A Prelude To Regression</a></li>
+  <li><a href="#the-first-exercise-of-the-statistical-mind" id="toc-the-first-exercise-of-the-statistical-mind" class="nav-link" data-scroll-target="#the-first-exercise-of-the-statistical-mind"><span class="toc-section-number">5.2</span>  The First Exercise of the Statistical Mind</a></li>
+  <li><a href="#correlation-in-stata" id="toc-correlation-in-stata" class="nav-link" data-scroll-target="#correlation-in-stata"><span class="toc-section-number">5.3</span>  Correlation in Stata</a></li>
+  <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications"><span class="toc-section-number">5.4</span>  Implications</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">6</span>  Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation and Association</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>As Gregory House once said, “The cave man who heard a rustle in the bushes checked out to see what it was lived longer than the guy who assumed it was just a breeze”. House’s point here is that the human ability for hypothetical reasoning and the ability to form associations in our minds was critical to our survival and development. In this case of course, we learned to check the bush since it could be a sabretooth or another human who wanted to eat us or steal our food, and we also learned to reason that checking things out, spear in hand, was more likely to keep us safe than rolling the dice by not checking. We will discuss the aspect of statistical reasoning that covers hypothetical reasoning later, but for now we cover simple correlation and measures of association. In statistical analysis, we typically begin by looking at bivariate correlations. We calculate a statistic called “Pearson’s <span class="math inline">\(r\)</span>”. The formula for Pearson’s <span class="math inline">\(r\)</span>, the Pearson correlation coefficient for continuous variables, is: <span class="math display">\[
+r = \frac{\sum_{i=1}^{N} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{N} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{N} (y_i - \bar{y})^2}}.
+\]</span> Let’s parse these terms, shall we? The numerator is the formula for what we call the covariance between two random variables. It is the sum of the differences between the individual datapoints for each variable and its average, divided by the product of the standard deviations of each variable. More practically, <span class="math inline">\(r\)</span> represents how variables tend to move together, given how much their values move internally (hence the standard deviation term). As a quick example, let’s compute the Pearson correlation coefficient <span class="math inline">\(r\)</span> for the following data points <span class="math inline">\(x= \{1, 2, 3, 4\}\)</span> and for <span class="math inline">\(y\)</span> we have <span class="math inline">\(y = \{2, 4, 5, 7\}.\)</span></p>
+<details>
+<summary>
+Here is the computation…
+</summary>
+<p>First we calculate the means of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>: <span class="math display">\[
+\begin{aligned}
+&amp;\bar{x} = \frac{1 + 2 + 3 + 4}{4} = 2.5 &amp; \bar{y} = \frac{2 + 4 + 5 + 7}{4} = 4.5
+\end{aligned}
+\]</span> Then compute the differences from the mean for each data point: <span class="math display">\[
+\begin{aligned}
+&amp; x_i - \bar{x} = \{-1.5, -0.5, 0.5, 1.5\} &amp; y_i - \bar{y} = \{-2.5, -0.5, 0.5, 2.5\}.
+\end{aligned}
+\]</span> Then calculate the sum of the products of these differences: <span class="math display">\[
+\begin{aligned}
+&amp;\sum (x_i - \bar{x})(y_i - \bar{y}) = \\
+&amp;(-1.5 \cdot -2.5) + (-0.5 \cdot -0.5) + (0.5 \cdot 0.5) + (1.5 \cdot 2.5) = \\
+&amp;3.75 + 0.25 + 0.25 + 3.75 = 8.
+\end{aligned}
+\]</span></p>
+<p>Next, we compute the sum of the squared differences for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. For <span class="math inline">\(x\)</span> we have <span class="math display">\[
+\begin{aligned}
+&amp;\sum (x_i - \bar{x})^2 = \\
+&amp;(-1.5)^2 + (-0.5)^2 + (0.5)^2 + (1.5)^2 = \\
+&amp; 2.25 + 0.25 + 0.25 + 2.25 = 5.
+\end{aligned}
+\]</span> For <span class="math inline">\(y\)</span> we have <span class="math display">\[
+\begin{aligned}
+&amp;\sum (y_i - \bar{y})^2 = \\
+&amp;(-2.5)^2 + (-0.5)^2 + 0.5^2 + 2.5^2 = \\
+&amp;6.25 + 0.25 + 0.25 + 6.25 = 13.
+\end{aligned}
+\]</span></p>
+<p>Now, we plug these in: <span class="math display">\[
+r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2} \sqrt{\sum (y_i - \bar{y})^2}} = \frac{8}{\sqrt{5} \cdot \sqrt{13}} = \frac{8}{\sqrt{65}} = \frac{8}{8.062} \approx \boxed{0.993}.
+\]</span></p>
+</details>
+<p>Okay, so our correlation coefficient is 0.993. We’d say there’s a strong, positive linear relationship between our variables here (whatever they happen to be). Similarly, if <span class="math inline">\(r\)</span> were negative, we’d say there’s a strong negative relation. Of course, if the coefficient were, say, 0.01 or -0.01, we’d say there’s pretty much no relationship between the variables.</p>
+<p>Here’s how we’d visualize these.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can think of <span class="math inline">\(r\)</span> as the degree to which one variable moves with another variable. If the relationship were just <span class="math inline">\(r=1\)</span> or <span class="math inline">\(r=-1\)</span>, we’d say for every one increase in <span class="math inline">\(x\)</span>, there’s a guaranteed increase/decrease in <span class="math inline">\(y\)</span> respectively because they move identically. For a simple example of a perfect linear relation, consider a dataset with the number of games an NBA team won in one column versus how many they lost in another column. For simplicitly, let’s consider the first ten games. If a team won 5, they also lost 5. If a team won 6, they must’ve lost 4. There’s a perfect, inverse linear relaionship between these; to win the first game necessarily means you’ve lost 0 games yet, and to lose the first means you’ve won none just yet.</p>
+<p>By the way, we can do the exact same thing with categorical variables (e.g., race and promotions). We could consider a setting of two variables where we have gender as our predictor and an outcome for “promotion” (being promoted or not).</p>
+<div class="cell" data-engine="jupyter" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can posit that gender may affect the likelihood of someone being promoted, perhaps men are more likely to be promoted than women. In this situation, we can graph the proportion of men who were promoted versus not. The plot above suggests that men were much more likely to be promoted than women are.</p>
+<details>
+<summary>
+For those who care about the “statistical significance” of <span class="math inline">\(r\)</span> …
+</summary>
+<p>As for mean differences, we can also use the t-statistic for the correlation coefficient to determine statistical significance. So let’s use the example above. First, here is the formula for the t-statistic:</p>
+<p><span class="math display">\[
+t = \frac{r \sqrt{n-2}}{\sqrt{1-r^2}}
+\]</span></p>
+<p>where <span class="math inline">\(r\)</span> is the Pearson correlation coefficient and <span class="math inline">\(n\)</span> is the number of data points. Given:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;r \approx 0.993 \\
+&amp;n = 4,
+\end{aligned}
+\]</span></p>
+<p>we can begin by plugging in our values. First, we compute the variance in the denominator by squaring our <span class="math inline">\(r\)</span>:</p>
+<p><span class="math display">\[
+r^2 = 0.993^2 = 0.986049
+\]</span></p>
+<p>Then, we compute how much our one variable <span class="math inline">\(x\)</span> does NOT explain the variance of the other variable:</p>
+<p><span class="math display">\[
+1 - r^2 = 1 - 0.986049 = 0.013951
+\]</span></p>
+<p>For our numerator, we compute:</p>
+<p><span class="math display">\[
+\sqrt{n - 2} = \sqrt{4 - 2} = \sqrt{2} \approx 1.414
+\]</span></p>
+<p>Next, in the denominator, this simplifies to:</p>
+<p><span class="math display">\[
+\sqrt{1 - r^2} = \sqrt{0.013951} \approx 0.118
+\]</span></p>
+<p>Finally, we compute:</p>
+<p><span class="math display">\[
+t = \frac{0.993 \cdot 1.414}{0.118} \approx \frac{1.404102}{0.118} \approx 11.899
+\]</span></p>
+<p>Thus, the t-statistic for the given Pearson’s <span class="math inline">\(r\)</span> is approximately <span class="math inline">\(\boxed{11.899}\)</span>. Since <span class="math inline">\(11.9&gt;&gt;1.96\)</span>, we’d say the linear association is statistically significant.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will never do this by hand (at least I never have!), I include this section only to show it’s possible.</p>
+</div>
+</div>
+</details>
+<section id="a-prelude-to-regression" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="a-prelude-to-regression"><span class="header-section-number">5.1</span> A Prelude To Regression</h2>
+<p>Typically, when we discuss correlation, we use scatterplots to visualize the association between variables. A scatterplot is simply a chart which depicts the co-movement of variables. On the x-axis we plot our independent variables/predictors (or, the things we think explain a given outcome) and the y axis plots the variable we think is being affected by the one on the x-axis. Below, I plot in the left panel the homicide rate per 100,000 versus the state-specific Gini coefficient for 27 Brazilian states in the year 1990. The right panel plots the average retail price of cigarettes versus cigarette consumption per capita for 39 American states in the year 1980.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Well now, what do we see here? We see the plotted datapoints along with the Pearson’s <span class="math inline">\(r\)</span>. We can see a negative correlation coefficient reported, where a one unit increase in the Gini coefficient leads to a decrease in the homicide rate in Brazil for this year. We also observe a negative relationship between the retail price of cigarettes and the consumption of cigarettes, where an increase in price leads to a decrease in the amount of cigarettes consumed. This result especially should be pretty intuitive: all else equal, as the price of a good increases, the demand for said good generally decreases. However, what about the leftmost plot? The Gini coefficient is a measure for inequality, where 1 denotes one person has all the money and everyone else nada/nothing. A Gini coefficient of 0 means everyone has the same amount of money, and a measure of anything in between is some intermittent level of inequality. Well, this result is puzzling in a bivariate lens: typically, we associate income inequality and poverty with an increase in things like higher rates of homicide and other kinds of crime, but that’s not what this result implies. While correlation is a useful measure sometimes, it alone is inadequate for serious policy analysis. Below, I explain why.</p>
+</section>
+<section id="the-first-exercise-of-the-statistical-mind" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="the-first-exercise-of-the-statistical-mind"><span class="header-section-number">5.2</span> The First Exercise of the Statistical Mind</h2>
+<p>Earlier this morning, I was on Facebook and one of my friends posted a picture that cited <a href="https://grammymuseum.org/education/music-educator-award/">a story</a> of a public school music teacher named Annie Ray winning a Grammy. In the article, they say [caps theirs]</p>
+<blockquote class="blockquote">
+<p>THE FACTS ABOUT THE IMPORTANCE OF MUSIC EDUCATION DON’T LIE… Schools that have music programs have significantly higher graduation rates than do those without music programs (90.2 percent as compared to 72.9 percent).</p>
+</blockquote>
+<p>For visualization, let’s do some graphing shall we? The plot on the left plots the rates from the quote, the right plot is simulated data.</p>
+<div class="cell" data-engine="jupyter" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="correlation_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This quote caused fire alarms to sound in my head. Why? Because the article (and <a href="https://www.njworkshopforthearts.com/music-in-schools/">reporting</a> on music education more broadly) misleadingly discusses these statistics. This does NOT mean these statistics are wrong in terms of their computation. Presumably whoever did this used statistical software to get these numbers, and I trust that the numbers are accurate.</p>
+<p>My criticism is about practical implication. The heavy suggestion from the block quotation is the music programs are <em>causing</em> this 17.3 percentage point difference in graduation rates. When we read things like “The facts don’t lie”, there’s this air of certainty that these statistics are being reported with.</p>
+<p>And in fairness, this is not a <em>completely</em> crazy idea: music does indeed help people learn languages. It likely helped me learn Spanish and made me a better overall reader. It’s also correlated with spatial skills. In fact, in another life, I was a music theorist who could do harmonic analysis of chord progressions and tell you what I thought the artist was trying to communicate. And as a matter of fact, music studies likely made me an even better econometrician, because one thing music analysis teaches you about is <em>context</em>. And in larger context, these statistics seem misleading.</p>
+<p>The suggestion is that if more schools <em>just</em> had music programs, we’d see higher graduation rates by 17.3 percentage points, on average. And yes, to some degree, if a school now has a music program and did not have one before, it is true students now have the opportunity to learn music. They may even go on to study and succeed in music now that they have the opportunity to do so. But how could we estimate this? How many people would this even affect, exactly?</p>
+<p>Most people do not want to be musicians. Learning music, like any other art form or professional skillset, is a non-trivial investment of time and money. Everyone doesn’t have the means or honestly dedication to pursue it, esepcially in light of other potential desires or opportunities. Those who do decide to become musicians (not just in classically trained in school, but generally) may have personal qualities that differ from other students in ways that affect whether they graduate or other aggregate metrics of success. So if 20 more students in a school of 5000 and a graduating class of 300 reap the benfits of music, is this really enough to move the proverbial needle on the graduation rate for an entire school or county? Not likely.</p>
+<p>More to the point, not every school has the <em>means</em> to have a music program, nevermind a well funded music program. <a href="https://hub.yamaha.com/music-educators/prog-health/advocacy/status-of-music-education-in-public-schools/">According</a> to statistics reported by Yamaha, 8% of all public schools in the United States don’t have <strong>any</strong> arts programs at all (music, theatre, or dance).</p>
+<p>In the U.S., schools are funded by property taxes in public schools and by extremely wealthy donors at private schools. This means that the wealthier public schools will be located in wealthier districts which naturally has a bigger tax base. What do those districts have more of? Money! Status, class, opportunity. Instruments do not grow on trees, they cost money; not every school has 80,000 dollars for a Steinway piano. By the way (no, I did not look this up before writing it), the same study, according to Yamaha’s reporting, said</p>
+<blockquote class="blockquote">
+<p>The study also noted that a disproportionate number of these students without access to arts education are concentrated in major urban or very rural areas where the majority of students are Black, Hispanic or Native American, and at schools with the highest percentage of students eligible for free/reduced-price meals.</p>
+</blockquote>
+<p>I have to emphasize again, I didn’t suspect this because I looked it up before, I suspected it because this is what it means to think like a statistician. It means you have to think in a multivariate way, where more than one thing can affect something else. Here, this idea is pretty obvious: how do we know that these graduation rates are not explained in part (if not entirely) by baseline differences in socioeconomic status of communities (poverty, low employment rates, larger contextual factors), opportunities of individual families (say, personal connections individual families may have that others don’t), as well as the effects those factors have on individual students? When we think of it like this, simply suggesting that music programs would be a great solution is not so convincing.</p>
+<p>These aside, there may also be what we call “selection bias” here, where some students are able to <em>select</em> into/decide to go to a given school. For example, some schools have magnet programs. The one I was in was for the International Baccalaureate Program; other high schools have STEM magnet programs or music/arts programs where some schools literally recruit middle school students who want to pursue these things. And when they select for these qualities, it becomes hard to isolate the impact of a music program on a graduation rate, because they’re already selecting for highly motivated students (who mostly but not exclusively are from wealthier districts or better-to-do families). These are the kinds of students who would perform well anyways, even if music wasn’t there.</p>
+<p>This again does not discount the real benefits of music education or the arts more generally! But when we read statistics, as with harmonic analysis of music chords, we also need to understand the context they exist within, and when we do this we begin to see that the relationship is not as clear cut as simple descriptive statistics might seem. As we see from the simulated plot, some schools have a graduation rate of almost nobody, which also happen to have low levels of music funding. And while I couldn’t find specific examples of this when I looked up <a href="https://www.uscareerinstitute.edu/blog/where-are-the-highest-graduation-rates-in-the-us">data</a> on it, numbers this low <a href="https://www.fox5vegas.com/2023/05/24/high-school-reschedules-graduation-ceremony-due-only-5-seniors-found-eligible-graduate/">do happen</a> anecdotally. And when we see numbers like this, we must ask ourselves “How are these sets of schools different from these sets of schools?”</p>
+<p>As we will see when we cover regression analysis, the world rarely works off of pretty, linear functions. Measures of simple association do not mean that something is causing another thing, the world is much too complex for that. As researchers and as human beings, we must constantly be skeptical of simplistic claims and investigate them when they seem too good to be true.</p>
+<p>With this exercise in mind, let’s think of <a href="https://x.com/Travis_4_Trump/status/1831372457372217386">a similar application</a> of correlation in real life…</p>
+</section>
+<section id="correlation-in-stata" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="correlation-in-stata"><span class="header-section-number">5.3</span> Correlation in Stata</h2>
+<p>Becuause you’ll never actuallly use the actual correlation coefficient for 99% of the analyses you ever do, I’ll only show how to use Stata to calculate correlation coefficients and scatterplots. Hopefully, the previous discussion is sufficient to show how it is not causation. Here, I take data from a paper that investigates the causal impact of crime reduction strategies on homicide rates (the same thing I did above). In 1999, the government of Sao Paulo “created or expanded a number of policies that have arguably contributed to the decrease in criminality”. One thing that may affect the homicide rate in a Brazilian state is the Gini Index, or a measure of inequality in a region. For the Gini Coefficient, -1 denotes perfect equality and 1 denotes one person having all of the money. We can produce a table and a plot in Stata which shows this relationship.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> *</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cls</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">//!!!!!!!!! Note my use of "import delimited", </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">// since this is the way to import a csv file</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>import delimited <span class="st">"https://raw.githubusercontent.com/danilofreire/homicides-sp-synth/master/data/df.csv"</span>, <span class="kw">clear</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span> == 1990</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">// restricting our sample size to 1990</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> code state <span class="fu">year</span> homiciderates giniimp</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">// keeping only these COLUMNS (the above keep, keeps only some observations)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">corr</span> homiciderates giniimp</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> homiciderates giniimp, mcolor(<span class="bn">pink</span>) <span class="bn">msymbol</span>(smsquare)), <span class="co">///</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="bn">ytitle</span>(Homicide Rate) <span class="co">/// Y Axis Title</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="bn">xtitle</span>(Gini Coefficient) <span class="co">/// X Axis Title</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(Correlation Between Inequality and Homicide) <span class="co">/// Plot Title</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">note</span>(From: https:<span class="co">//doi.org/10.25222/larr.334) ///</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="dv">scheme</span>(sj) <span class="co">// Stata Journal Scheme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The table we get is</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>             | homici~<span class="fu">s</span>  giniimp</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>-------------+------------------</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>homicidera~<span class="fu">s</span> |   1.0000</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     giniimp |  -0.2848   1.0000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The way to interpret this, is that there’s a weak negative relationship between the Gini Coefficient and the homicide rate. Or, as the Gini Coefficient/inequality increases, the homicide rate decreases</p>
+</section>
+<section id="implications" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="implications"><span class="header-section-number">5.4</span> Implications</h2>
+<p>The reason this matters for policy analysts is because when taken to its conclusion, mistaken correlation for causation or not thinking about things in a systemic, multivariate way could result in pumping more money into music programs in order to fix failing schools, a much wider and more sophisticated problem.</p>
+<p>It leads to things like pumping more money into police deparmtents to decrease crime rates, even though crime has been falling in general for decades in the U.S. and there’s no real link between militant policing measures and crime reduction.</p>
+<p>It also leads to things like mass like <a href="https://apnews.com/article/dating-births-marriage-japan-technology-42b2685cb0bea35a69ca3318c3af48c7">many</a> <a href="https://www.theguardian.com/world/2023/mar/20/state-sponsored-matchmaking-app-launched-in-china">modern</a> <a href="https://www.yahoo.com/news/south-korea-turns-matchmaking-boost-091724471.html?guccounter=1&amp;guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&amp;guce_referrer_sig=AQAAAIGyzxXdwZi-2RIp92S-c-AiHX3Tltx8OD5p5xYEe4zFPJzOFd6io6LVtNoL0qrGQ1Bpa5bZ3oumkdTdcFwCsToXh3KR4o3MnLgzf0H1AT8vj_GyDow3XbQ2Dol_14ySXttLJeVfj86mw_sRQ7TO7lded10DwB9Ow13d75-F5fuw">governemnts</a> doing things like making dating apps and sponsoring mass dating events (yes, really!) in order to increase birth and marriage rates.</p>
+<p>The idea of course is that people aren’t having kids or getting married <em>because</em> they’re not meeting one another. And if more people met, the more kids they’d have. And to a degree this is true due to things like social media, so the underlying logic makes plenty of sense. But then, once we agree to this probelm, we have to ask <em>why</em> are people not meeting one another and having kids or getting married? The real problem is <em>a lot</em> more systemic. Especially in South Korea, Japan, and <a href="https://www.aljazeera.com/news/2023/3/1/for-some-chinese-women-it-doesnt-make-sense-to-have-babies">China</a>, the reasons are mostly having to do with <a href="https://www.reuters.com/world/asia-pacific/south-koreas-fertility-rate-dropped-fresh-record-low-2023-2024-02-28/">labor issues</a>, <a href="https://www.washingtonpost.com/world/2024/02/21/south-korea-women-gender-equality-gap/">changes in gender norms</a>, and <a href="https://sg.news.yahoo.com/why-women-asia-having-fewer-215615927.html">broader social factors</a> which lead to people not wanting to have kids.</p>
+</section>
+<section id="summary" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Summary</h1>
+<p>Correlation and causation is a very delicate topic in statistics. Whenever we’re doing research, we must always be careful to structure our studies in such as way that our findings are not corrupted by other factors, even if our software tells us we’ve found a “statistically significant” correlation. I’m sure if we took the t-statistic of music programs and graudation (or funding of music programs, as my scatterplot does), we’d find a very high t-statistic for the correlation coefficient. Equally, we’d find a high t-statistic for countries reporting increases in <a href="https://theweek.com/feature/briefing/1022710/why-south-koreas-young-people-are-so-lonely">loneliness</a> and low fertility rates. But I don’t care, and neither should you, since there are other factors which contribute to graduation aside from music, and a lot more factors driving fertility rates than simple loneliness or lack of opportunity to meet people. Thinking causally can be a challenging thing. After multiple years of torment, you will learn to think like this as if by muscle memory since it’ll be so routine to you. We will cover this in more detail in our chapter on treatment effect estimation.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./stataintro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Stata</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ols.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">OLS Explained</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
