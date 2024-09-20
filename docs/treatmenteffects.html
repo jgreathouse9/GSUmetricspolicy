@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics for Policy Analysis - 8&nbsp; Causal Inference</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ols.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Causal Inference</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Econometrics for Policy Analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Syllabus: PMAP 4041, Fall 2024</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./module1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data and Policy Studies</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Mathematics and Econometric Theory</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basicprob.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Probability Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stataintro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./asymptotic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Asymptotic Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Correlation and Association</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">OLS Explained</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Applied Research Methods</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./treatmenteffects.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-causality" id="toc-what-is-causality" class="nav-link active" data-scroll-target="#what-is-causality"><span class="toc-section-number">8.1</span>  What Is Causality?</a></li>
+  <li><a href="#randomized-controlled-trials" id="toc-randomized-controlled-trials" class="nav-link" data-scroll-target="#randomized-controlled-trials"><span class="toc-section-number">8.2</span>  Randomized Controlled Trials</a></li>
+  <li><a href="#problems-with-randomization" id="toc-problems-with-randomization" class="nav-link" data-scroll-target="#problems-with-randomization"><span class="toc-section-number">8.3</span>  Problems With Randomization</a></li>
+  <li><a href="#threats-to-validity" id="toc-threats-to-validity" class="nav-link" data-scroll-target="#threats-to-validity"><span class="toc-section-number">8.4</span>  Threats to Validity</a>
+  <ul class="collapse">
+  <li><a href="#internal-validity" id="toc-internal-validity" class="nav-link" data-scroll-target="#internal-validity"><span class="toc-section-number">8.4.1</span>  Internal Validity</a></li>
+  <li><a href="#threats-to-external-validity" id="toc-threats-to-external-validity" class="nav-link" data-scroll-target="#threats-to-external-validity"><span class="toc-section-number">8.4.2</span>  Threats to External Validity</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">8.5</span>  Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Causal Inference</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Statistics teachers oftentimes proudly declare to their students that correlation is not causation when emphasizing the idea that just because two things move together that does not mean that one thing is causing the other thing. We’ve discussed examples of this before. So, the question that (at least for me) itched in the back of my mind was “Okay. Well, what <em>is</em> causality then? What does it mean for a thing to cause another thing?”</p>
+<p>Our final few chapters cover treatment effects/causal inference for policy analysis. Strictly speaking, we could have multiple courses on this. So, as an introduction, this chapter seeks to provide you with the basic philosophy of causal inference, specifically, what it is as a concept, how it’s used in the policy sciences. We will cover randomization, as well as threats to validity in the context of impact evaluation.</p>
+<section id="what-is-causality" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="what-is-causality"><span class="header-section-number">8.1</span> What Is Causality?</h2>
+<p>As I <a href="https://jgreathouse9.github.io/GSUmetricspolicy/correlation.html">mentioned</a> in the chapter on correlation, humans have <em>evolved</em> to think hypothetically. It is how we have survived for as long as we have. Causal inference demands that we imagine another world that we believe could exist, but doesn’t exist.</p>
+<div id="def-cf" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8.1 (Counterfactual) </strong></span>A counterfactual is defined as the quantitative difference between what we really see for one outcome, and what we <em>would have</em> seen if some intervention didn’t take place.</p>
+</div>
+<p>In history, we’d call this a “counterfactual”, so termed because we are talking about a fictional scenario that happened <em>in contrast</em> to observed facts. We as human beings do this all the time.</p>
+<ul>
+<li><p>How would the American economy have evolved post 1860 if the Civil War never happened?</p></li>
+<li><p>What if a school did a new math curriculum? Would math scores improve?</p></li>
+<li><p>How would gun homicide statistics look, 6 months from now, if a state <em>didn’t</em> pass gun control policies?</p></li>
+<li><p>How would a grocery store’s in-store sales have evolved if it didn’t implement all self checkout scanners?</p></li>
+<li><p>Did Nebraska’s repeal of the tampon tax affect tampon use? How would tampon sales have evolved if Nebraska didn’t get rid of the tax?</p></li>
+<li><p>How would New Orleans’ outward migration have looked if Hurricane Katrina didn’t happen?</p></li>
+</ul>
+<p>A counterfactual is byproduct of what we call a <em>treatment effect</em>, or the actual quantitative impact of the treatment.</p>
+<div id="def-tau" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8.2 (Treatment Effect) </strong></span>Mathematically, we can represent the treatment effect like \(\tau_{i} = y_{i}^{1} - y_{i}^{0}\), where the <span class="math inline">\(y_{i}^{1}\)</span> denotes an outcome we observe (the unit under treatment) versus the outcome <span class="math inline">\(y_{i}^{0}\)</span>, which we do not observe (the untreated values).</p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the Greek letter “t-ow” is used as a symbol for the treatment effect, yet you may use other symbols in your writing should you wish. By the way, the subscript <span class="math inline">\(i\)</span> here indexes the units of interest. You may use any subscript you wish. If you have outcomes for a set of states over time, nothing is wrong with saying <span class="math inline">\(y_s\)</span>. If you have outcomes for cities, nothing is wrong with writing something like <span class="math inline">\(y_c\)</span>. Similarly, if you are referring to a panel data strucutre (which you will be) of cities over a periods of weeks, nothing is wrong with saying something like “Our outcomes <span class="math inline">\(y_{cw}\)</span>”. So long as you are consistent.</p>
+</div>
+</div>
+<p>However, we get but one copy of reality, making it hard to estimate treatment effects. The American Civil War ended in 1865. The real GDP of the U.S. in 1866 was roughly 88.8 billion dollars (in today’s money). So, the formula for the treatment effect is \(\tau_{i} = 88.8 - ?\). Why is there a question mark here? Well, we can’t literally look at the United States where the Civil War happened (the reality we have) and one where it didn’t happen (not that we’d really want to, by the way). It is impossible to access that reality in the current universe we exist in. Thus, counterfactuals are things we can estimate, guess about, and speculate on, but never ever see in real life. Before we get into how we’d estimate counterfactuals statistically, though, let’s use a more relatable example.</p>
+<p>Suppose I’m going to school today. I think the way I take to school (Way A) is quicker than Way B. This gives us a set of two ways to take, \(d \in \{0,1\}\) (read as “d in 0 1”), where \(d=0\) means we have taken Way B and \(d=1\) means we have taken Way A. The outcome of interest \(y\) is the commute time associated with each way we take.</p>
+<p>Each way we take can be expressed formally as \(d \mapsto y\left(d\right)\), or our commute time we ultimately see being a function of the road we choose. We may represent the outcomes of each way as \(y^A\) and \(y^B\), where naturally \(y^A\) is how long it takes if we take my way and \(y^B\) is how long it takes if we go the other way.</p>
+<p>Here, \(\tau\) is the difference in minutes between the way it took me by taking Way A, and the time it <em>would’ve</em> taken me if I’d taken Way B. In fact, I did this as I wrote this. I used Google Maps to tell me how long the drive from my apartment to Georgia Tech would be. Using the highway it takes 14 minutes. But, one of the options when I avoid highways takes 23 minutes.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Way Taken</th>
+<th>Indicator <span class="math inline">\(d\)</span></th>
+<th>Commute Time</th>
+<th>Outcome <span class="math inline">\(y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Way A</td>
+<td><span class="math inline">\(d=1\)</span></td>
+<td><span class="math inline">\(y^A = 14\)</span> min</td>
+<td><span class="math inline">\(y = y^A = 14\)</span> min</td>
+</tr>
+<tr class="even">
+<td>Way B</td>
+<td><span class="math inline">\(d=0\)</span></td>
+<td><span class="math inline">\(y^B = 23\)</span> min</td>
+<td><span class="math inline">\(y = y^B = 23\)</span> min</td>
+</tr>
+<tr class="odd">
+<td>Treatment Effect</td>
+<td><span class="math inline">\(\tau\)</span></td>
+<td><span class="math inline">\(y^A - y^B = -9\)</span> min</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>To do this in Stata, let’s get this exact same effect size with regression, using the model <span class="math inline">\(y=\beta_0+\beta_1x_i\)</span>, where <span class="math inline">\(y_i\)</span> is our commute time, <span class="math inline">\(\beta_0\)</span> is the constant (or the time we would expect to take if we’d taken Way B), <span class="math inline">\(\beta_1\)</span> is the effect of taking Way A, and <span class="math inline">\(x_1\)</span> is the value for having taken Way A (<span class="math inline">\(x=1\)</span>), relative to Way B.</p>
+<p>If you’ve been paying attention (or reading), you rememeber from last class that the way we interpret the OLS coefficients/betas/estimates for a continuous variable is “a one unit increase in <span class="math inline">\(x\)</span> leads to a <span class="math inline">\(\beta\)</span> change in <span class="math inline">\(y\)</span>, compared to other similar units with the same characteristics”. In the case of a <em>dichotomous variable</em> however (such as taking the Highway A), we interpret the <span class="math inline">\(\beta_1\)</span> as the <em>difference</em> between Way A and B.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> *</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 2</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cls</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>g commutetime = 14 <span class="kw">in</span> 1</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> commutetime = 23 <span class="kw">in</span> 2</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>g taken = 1 <span class="kw">in</span> 1</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> taken = 0 <span class="kw">if</span> taken == .</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> commutetime taken</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See how this returns the same coefficient as above? The way we interpret the <code>taken</code> coefficient is that the expected commute time when taking Way A is 9 minutes less than what we’d expect had I taken Way B. Similarly, it tells us that not taking Way A (or, if <span class="math inline">\(x=0\)</span>), we travel 23 minutes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------------</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> commutetime | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>-------------+----------------------------------------------------------------</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     1.taken |         -9          .        .       .            .           .</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="dt">_cons</span> |         23          .        .       .            .           .</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------------</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose I do indeed take Way A, as I would, and that it in fact takes 14 minutes. Does this mean the effect of Way A is in general quicker by 9 minutes? No, not exactly. Maybe I do take \(y^A\), but traffic builds on Way A, but traffic does not build up on the other way. Or, maybe \(y^A\) still would take 14 minutes, but the other way, \(y^B\), happens to (this time) take 20 minutes instead of 23, meaning our treatment effect is now \(14-20=-6\). The problem inherent here is I cannot take both ways at once. I have a choice to make, and once I choose I must commmit to it. I can <em>either</em> take my way or the other way, I can’t do both on the same day at the same time. Thus, because of this choice, I can only guess as to what \(y^B\)’s travel time actually would have been for me on that day. Only one outcome exists in reality.</p>
+</div>
+</div>
+<div id="def-seq" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8.3 (Fundamental Problem of Causal Inference) </strong></span>The fundamental problem of causal inference is what’s called the <em>switching equation</em>, or the idea that we observe units as treated or untreated, but never both: <span class="math inline">\(y_{i}=dy_{i}^{1}+\left(1-d \right)y_{i}^0\)</span>.</p>
+</div>
+<p>Let’s break down the order of operations from <a href="#def-seq">Definition&nbsp;<span>8.3</span></a>, shall we?. If we take Way A (<span class="math inline">\(d=1\)</span>), we get \(y=y^A \times 1 +\left(1-1\right)y^B\), or just \(y^A\) since anything multiplied by 0 is just 0 and \(y^A \times 1\) is just \(y^A\). In other words, taking Way A necessitates that we do not take Way B. If we take Way B (<span class="math inline">\(d=0\)</span>), we get \(y=y^A \times 0 +\left(1-0\right)y^B\), or just \(y^B\) because now \(y^A \times 0=0\) and \(\left(1-0\right)y^B\) is just \(1 \times y^B\). Taking Way B means we cannot take Way A.</p>
+<p>In other words, the 9 minute effect size is but an <em>estimate</em> of an imperfectly accounted for reality. The treatment effect is <em>inherently</em> unobservable because the counterfactual effect is in principle unobservable. The counterfactual, and therefore the treatment effect, are both things we have to estimate.</p>
+</section>
+<section id="randomized-controlled-trials" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="randomized-controlled-trials"><span class="header-section-number">8.2</span> Randomized Controlled Trials</h2>
+<p>Establishing causality and generating counterfactuals are all about comparisons. Typically, we compare a group of one or more units that did an intervention or policy to units that did not do the same policy. We use regression as a vehicle to facilitate this comparison. Before we do this for a real policy example though, let’s think about how this is done in a (close to) ideal setting.</p>
+<div id="def-rct" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8.4 (Randomized Controlled Trial) </strong></span>A randomized controlled trial is a form of study design where we assign a treatment at random to a certain number of people or units or entities. In such a design, random assignment means every unit should have a 0.5 probability of recieving the treatment.</p>
+</div>
+<p>In medicine, we must test drugs in order to see if they work before we allow them to be used on humans in a broader sense. We use randomized controlled trials to try to establish the efficacy of drugs. In this case, the individual is the unit of interest. There are <span class="math inline">\(N\)</span> such individuals. Those who get the treatment we call the <em>treatment group</em> with their number being <span class="math inline">\(N_{\text{tr}}\)</span>. Those who do not get the treatment are called the <em>control group</em> (or, sometimes we call the untreated group the <em>donor pool</em>), with their number being <span class="math inline">\(N_{\text{co}}=N-N_{\text{tr}}\)</span>.</p>
+<p>We randomize treatments by using a computer to flip a coin across our \(N\) individuals/units to determine if it gets treatment. If treatment assignment is truly random, this now means that any <em>other</em> covariates that may influence the outcome do not predict treatment status or outcome information. We call these additional covariates that that cloud the relationship between the treatment and the outcome <strong>confounders</strong>.</p>
+<p>Say we wish to study the impact of a vaccine on recovery time. We cannot just give the vaccine to some people and not others in a non-random way (i.e., giving the vaccine to anyone who wants it) because maybe other variables may confound the relationship between the recovery rates and the desire to take the vaccine.</p>
+<p>Perhaps those who took the vaccine are younger on average than those who didn’t– maybe they wanted to be extra safe from the virus. Or, maybe younger people had bettter baseline health characteristics (compared to older adults). This means, on average, those who took the vaccine would recover from COVID (say) quicker than the control group, not completely because of the vaccine but because they were already healthier or younger on average compared to the control group.</p>
+<div id="exm-rct" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8.1 (Vaccine) </strong></span>When the coin flip decides who gets the vaccine, then in a large enough representative sample, our treatment and control groups are <em>balanced</em> across all confounders, on average. We say “<strong>balanced</strong>” because when all study participants of all ages, races, and so on are <strong>equally likely</strong> to be given the vaccine or not, the average difference in recovery time can be better attributed to the vaccine instead of other factors such as age. The way we practically would check this is to take the average of the covariates in the treatment and control group after we have randomized. Ideally, they should be a similar average of age, in this case, between both groups.</p>
+</div>
+<p>After we’ve randomized our treatment successfully, we can then calculate what the effect size is. We can do this using averages or OLS regression. In the case of a randomized controlled trial, the estimand of interest is the average treatment effect.</p>
+<div id="def-ate" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8.5 (Average Treatment Effect) </strong></span>We may compute the average treatment effect as <span class="math inline">\(\text{ATE}=\frac{1}{N}\sum_{i=1}^{N}y_i^1-y_i^0\)</span>. This is only valid when the treatment is randomized.</p>
+</div>
+<p>Here is how we’d estimate the ATE in Stata.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> *</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1455</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 2000</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> age = rnormal(40, 10) <span class="co">// average age is 40, standard dev is 10 years</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Height: Mean = 170 cm, SD = 10 cm</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> gender = <span class="fu">round</span>(runiform())</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> height = <span class="fu">cond</span>(gender == 1, rnormal(175, 8), rnormal(165, 7))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Income: a baseline function of age, height, and gender, plus some random noise</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> income = 20000 + 500*age + 100*height + 10000*gender + rnormal(0, 5000)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">// Unbalanced treatment assignment: treatment based on gender, age, or height</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> treat_unbalanced = <span class="fu">cond</span>(gender == 1, (age &gt; 40 &amp; height &gt; 170), (age &gt; 35 &amp; height &gt; 160))</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>cls</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">// Our imbalacned covariates</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="kw">mean</span> age income gender height, <span class="bn">over</span>(treat_unbalanced) <span class="co">// focus on the differences in means</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">// Our biased ATE</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> income i.treat_unbalanced age height i.gender <span class="co">// use OLS to estimate the treatment effect</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">We see that guys are much more likely to make more money already.</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">We also see that every centimeter taller you are, you'll make more money.</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">We also see every year older you are, you'll make 484 more dollars, roughly.</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">The treatment effect is very small by comparison since the current effects are</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">dominated by gender. To have a truly accurate estimate, we have to randomize.</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> treat_randomized = runiform() &gt; 0.5</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="kw">mean</span> age income gender height, <span class="bn">over</span>(treat_randomized)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co">// these are definitely balanced</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">// Post-treatment income</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> income_post = income + 5000 * treat_randomized</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co">// See how income was affected with the randomized treatment. This is our unbiased ATE</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> income_post treat_randomized age height gender</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> income_post treat_randomized</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="kw">mean</span> income_post, <span class="bn">over</span>( treat_randomized)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co">// HERE is our ATE</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="kw">di</span> 67129.88 - 61573.52</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">/* See how regardless of whether we adjust for age, height, and gender, the </span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co">coefficient for treat_randomized is still pretty much the same?</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co">This is because randomization takes care of the other </span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="co">stuff that affects the outcome. */</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here I assign a treatment totally at random and use OLS to estimate the causal impact (5000 in this case).The impact is not quite 5000… But very very close!!! As we discussed last class, if we had a bigger sample size, the more likely we are to approximate the <strong>true</strong> effect size (change the samplse size from 2000 to 200000 and tell me what you get.)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>      Source |       SS           df       MS      Number <span class="kw">of</span> <span class="kw">obs</span>   =     2,000</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>-------------+----------------------------------   <span class="fu">F</span>(4, 1995)      =   1276.99</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>       Model |  1.2433e+11         4  3.1083e+10   Prob &gt; <span class="fu">F</span>        =    0.0000</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    Residual |  4.8560e+10     1,995  24340786.6   R-squared       =    0.7191</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>-------------+----------------------------------   Adj R-squared   =    0.7186</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>       Total |  1.7289e+11     1,999  86489211.5   Root MSE        =    4933.6</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>----------------------------------------------------------------------------------</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>     income_post | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>-----------------+----------------------------------------------------------------</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>treat_randomized |   5143.774   220.9541    23.28   0.000     4710.449    5577.099</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>             age |   476.3055   10.80702    44.07   0.000     455.1113    497.4997</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>          height |   93.74094    15.0525     6.23   0.000     64.22068    123.2612</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>          gender |   10047.37   267.2298    37.60   0.000     9523.291    10571.45</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>           <span class="dt">_cons</span> |   22088.73   2530.033     8.73   0.000     17126.94    27050.51</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>----------------------------------------------------------------------------------</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> income_post treat_randomized</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>      Source |       SS           df       MS      Number <span class="kw">of</span> <span class="kw">obs</span>   =     2,000</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>-------------+----------------------------------   <span class="fu">F</span>(1, 1998)      =    195.86</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>       Model |  1.5435e+10         1  1.5435e+10   Prob &gt; <span class="fu">F</span>        =    0.0000</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    Residual |  1.5746e+11     1,998  78807250.6   R-squared       =    0.0893</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>-------------+----------------------------------   Adj R-squared   =    0.0888</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>       Total |  1.7289e+11     1,999  86489211.5   Root MSE        =    8877.3</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>----------------------------------------------------------------------------------</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>     income_post | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>-----------------+----------------------------------------------------------------</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>treat_randomized |   5556.364   397.0268    13.99   0.000     4777.734    6334.994</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>           <span class="dt">_cons</span> |   61573.52   279.3331   220.43   0.000      61025.7    62121.33</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>----------------------------------------------------------------------------------</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="problems-with-randomization" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="problems-with-randomization"><span class="header-section-number">8.3</span> Problems With Randomization</h2>
+<p>The central issue with randomization is that there are some interventions (in fact, most of them) that researchers simply cannot randomize. After all, many treatments of interest have explicit assignment mechanisims (i.e., this neighborhood has high crime rates <em>therefore</em> we elect to send more police as a response to crime). Even if the rationale for doing the treatment is not given, sometimes our available set of control units may differ in important ways from the unit that’s treated.</p>
+<div id="exm-turk" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8.2 (Turkey) </strong></span>In February of 2023, Turkey had an earthquake. Suppose we’re interested in the effect of <a href="https://apnews.com/article/earthquake-turkey-syria-february-2023-62dba95d0608a3a587ddd2fe5ec39541">this earthquake</a> on the local economic outcomes for the affected cities or the entire country. Well, researchers cannot randomize earthquakes to strike certain cities versus others, and even if we could this would be morally unacceptable. So assuming we were comparing cities in Turkey that were affected to those that weren’t, the affected areas may differ in their baseline characteristics from unaffected areas. For example, <a href="https://www.economist.com/graphic-detail/2023/02/16/poor-areas-suffered-35-times-more-damage-in-turkeys-earthquake">maybe poorer areas</a> were more vulnerable than richer ones. For a cross country comparison, maybe <a href="https://archinect.com/news/article/150422767/strict-building-codes-prevented-a-larger-catastrophe-in-earthquake-prone-taiwan">bulding codes</a> would explain the differences in the effect of the earthquake which, in turn, affect the economic implications for Turkey versus another unexposed nation.</p>
+</div>
+<div id="exm-weed" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8.3 (Weed) </strong></span>Another example is cannabis legalization. We cannot flip coins to have some states legalize cannabis and others not. Canabis’ legality is decided by the preferences of the legislature. Thus, we run into the problem of selection bias (as in, maybe some states are more likely to legealize cannabis than others). We also run into counfounding biases. If we wish to see how legal cannabis affected alcohol sales for Oregon, then we need to consider what other factors may affect alcohol consumption aside from the policy of interest. That is, Oregon may differ from other states (say, Alabama or Mississippi) on key characteristics that makes the causal comparison unreasonable. Maybe the price of alcohol between Oregon and a set of others states was not similar enough. Maybe Oregon simply had different economic conditions that made alcohol consumption more or less likely. Perhaps cultural factors would lead to higher level of alcohol consumption anyways, absent cannabis legalization. The fact that we cannot randomize means that researchers cannot make plausible the unconfoundedness assumption (or, lack of omitted variable bias) which underlies OLS regression models.</p>
+</div>
+</section>
+<section id="threats-to-validity" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="threats-to-validity"><span class="header-section-number">8.4</span> Threats to Validity</h2>
+<p>Of course, the subject of the next chapter will be how to properly address for lack of randomization. For now though, we cover the kinds of <a href="https://www.creative-wisdom.com/teaching/WBI/threat.shtml">threats to validity</a> of causal estimates, some of which will be quite helpful in characterizing the plausibility of causal estimates.</p>
+<section id="internal-validity" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="internal-validity"><span class="header-section-number">8.4.1</span> Internal Validity</h3>
+<ol type="1">
+<li><p><strong>History</strong>: Bias occurs when external events influence the outcome in some way. Example? Holidays. Suppose we are a grocery store and we wish to see if the introduction of some new product will increase sales. Suppose for the moment that this is a new chocolate bar If we introduce the chocolate bar this week, and Valentine’s Day is next week, we can’t really attribute the growth of rose sales to the chocolate bar, even though roses and chocolate are complimentary goods in many cases. Why not? It’s Valentine’s Day! People are more likely to buy things in general that day and in the days leading up to it, we couldn’t attribute the effect of the chocolate bar to sales unless we do additional adjustments to our sales estimates. Another example was <a href="https://x.com/Travis_4_Trump/status/1831372457372217386">this one</a> I mentioned from the correlation chapter, where the historical bias that leads to rise of more school shootings has to do with the fact that schools just opened, and therefore could not have had school shootings when they were not open.</p></li>
+<li><p><strong>Maturation</strong>: Natural changes in participants over time that affect outcomes independent of the treatment. For example, suppose we wish to see if the new chocolate bar has weed in it, and we wish to see if the weed and chocolate affected sales in the following 6 months after its introduction. We’d need to be sure that the treated unit, relative to its comparison units, has the same internal composition. In other words, what if over the next 6 months the area continues to gentrify further, bringing in people with higher incomes. Maybe, spending at the store would’ve increased anyhow, independent of a new product.</p></li>
+<li><p><strong>Testing</strong>: The effect of giving a treatment more than once. Not really relevant for policy scientists unless you’re doing a true experiment with humans, but perhaps repeated tests mean people get wise to the format of the test such that the outcomes are no lnoger being meaningfully tested.</p></li>
+<li><p><strong>Instrumentation</strong>: Changes in the the way we measure the outcome over time. This is pretty common, in fact. Actually, instrumentation has even been <a href="https://www.youtube.com/watch?v=aN1eptTaWVM">advocated for</a> in the context of COVID-19 policy. If the CDC is testing COVID cases one way, and then they either stop testing or make important chagnes to how they test, this may invalidate the estimated causal effect of some policy because it may make it look like the policy was much more/less effective than it in fact was. The more consistent your outcomes are collected, the better off your estiamtes will be.</p></li>
+<li><p><strong>Statistical Regression</strong>: Extreme results tend to revert back to the average trend over time. Suppose <a href="https://www.reuters.com/world/us/haitian-immigrants-fueled-springfields-growth-now-us-presidential-debate-2024-09-11/">we say</a> Haitian immigrants are the cause of increases in welfare, rising property values or car accidents. Perhaps an empirical effect exists, but presumbly (due to maturation over time), new residents will get jobs and adjust more into the community (i.e., having more driver’s licenses). So, while there may be a spike in some outcome after an intervention, it is likely that the outcome may return to trend, especially for short lived shocks that aren’t expected to have very long term effects. In the example I just linked to, “Local rents [in Springfiled, Ohio] did increase at the third-fastest pace among cities from May 2022 through the end of 2023, rising at a 14.6% annualized pace, data from Zillow shows. But the market also appears to be normalizing: Rents this year have risen at a modest 3.2% pace, 68th fastest among 400 cities sampled.” By the way, this is another paper topic you could do. You could, if you wished, see the causal impact of how the introduction of Haitian migrants affected the price of rent in Springfield Ohio, compared to others who had no such introduction, since data on this <a href="https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv?t=1726838306">exists</a>.</p></li>
+<li><p><strong>Selection</strong>: Baseline differences between treated and untreated units which make their outcomes incomparable. The classic example in economics is the benefits of education on income. People who get PHDs and numerous advanced degrees likely differ substantially from the rest of the population who do not. Maybe they, on average, come from wealthier families or are dissimarly situated compared to those who don’t go to college. In other words, maybe people get education on the grounds that they will make more money as a result; or maybe such people are more motivated in a sense, and would’ve made more money anyways without the education.</p></li>
+<li><p><strong>Experimental Mortality (Attrition)</strong>: Participants leave the study over time. Say a grocery store goes all self checkout on grounds that it’ll make more money. We compare one grocery store to 50 others, and of those 50, say 20 close over the 6 month study period. Well, unless we attenuate for this, it is likely the case that a store that is doing experimental things, from a corporate perspective, is already “built different” from the ones who closed. So, keeping the stores in the sample who all closed likely differ from the treated unit.</p></li>
+<li><p><strong>Selection-Maturation Interaction</strong>: When different groups mature differently, this leads to heterogeneous trends that makes it tough to estimate the treatment effect. I mentioned gentrification above; what if one city, or a cluster of them, mature at much different rates compared to the treated units. There may be reasons for this differnece in maturation.</p></li>
+</ol>
+<p>Satisfying these may not always be relevant for every study (for example, if all your units remain in the study, you do not need to care about attrition.)</p>
+</section>
+<section id="threats-to-external-validity" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="threats-to-external-validity"><span class="header-section-number">8.4.2</span> Threats to External Validity</h3>
+<p>These are threats that compromise the generalizability of a study’s findings.</p>
+<ol type="1">
+<li><p><strong>Interaction of Testing and Treatment</strong>: The act of testing may change participants’ responses. not really relevant for many public policy settigns where we typically study macro-level interventions.</p></li>
+<li><p><strong>Interaction of Selection and Treatment</strong>: If the treatment effects are unit specific, we cannot generalize about them. If we wish to see a NBA training program affected basketball skills, we cannot include normal people in the control group since NBA players will smoke any normal human being. Their baseline differences are so gigantic that the effect of the program would be wildly overstated.</p></li>
+<li><p><strong>Multiple-Treatment Interference</strong>: Multiple treatments harm our ability to isolate the impact of one single treatment.</p></li>
+</ol>
+<p>As above, satisfying these external threats to validity may not be necessary in every study, since each treatment is unique. If only one intervention occurs (which we may have to verify in some cases), we don’t have to worry about interfernece of treatments.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.5</span> Summary</h2>
+<p>Unlike the OLS chapter which was very math intensive, this chapter is likely the most conceptually heavy. Thinking in a causal manner requires practice. It is not simply a scientific tool, it is a framework with which we can use to evaluate the world through. It forces us to step back and consider, step by step, the methods and mechanisms which policy affects things through. If you do this for long enough, you’ll even hear causal claims like “This politician reduced crime”</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ols.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">OLS Explained</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
