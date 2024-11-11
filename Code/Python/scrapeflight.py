@@ -4,85 +4,74 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 import time
-
+import re
 
 def run_scraping_for_url(url):
-    """
-    This function takes a URL, scrapes the airport delay percentage data, and returns a DataFrame
-    with the airport data (Date, Delay %, Airport).
-    """
-    # Configure the Chrome WebDriver with headless mode
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Runs Chrome in headless mode.
-    chrome_options.add_argument("--disable-gpu")  # Applicable to Windows OS only
-    chrome_options.add_argument("start-maximized")
-    chrome_options.add_argument("disable-infobars")
-    chrome_options.add_argument("--disable-extensions")
-
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
-    df = pd.DataFrame()  # Initialize empty DataFrame
+    df = pd.DataFrame()
 
     try:
-        # Navigate to the given URL
         driver.get(url)
-
-        # Wait for the 'forthdiv' element to load (indicating the page has loaded)
         WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.ID, "forthdiv"))
         )
-
-        # Ensure the 'forthdiv' is visible by removing the 'hidden' class
         driver.execute_script("document.getElementById('forthdiv').classList.remove('hidden');")
-
-        # Wait a brief moment to ensure the 'forthdiv' content is visible
         time.sleep(2)
 
-        # Retrieve all <dt> elements within 'forthdiv'
-        dt_elements = driver.find_elements(By.TAG_NAME, "dt")
+        th_element = driver.find_element(By.CSS_SELECTOR, "body > table > tbody > tr > td > table:nth-child(2) > tbody > tr > th")
+        airport_full_name = th_element.text
+        airport_code = re.search(r'\((.*?)\)', airport_full_name).group(1) if airport_full_name else None
 
-        # Get the selected airport from the dropdown
-        airport_dropdown = driver.find_element(By.CSS_SELECTOR, "#Airport")
-        selected_option = airport_dropdown.find_element(By.CSS_SELECTOR, "option:checked").text
+        soup = BeautifulSoup(driver.page_source, "html.parser")
+        airport_dropdown = soup.select_one("#Airport")
+        selected_option = airport_dropdown.find("option", selected=True).text if airport_dropdown else "Unknown Airport"
 
-        # Filter and parse the data into a structured list (Date and Airport Delay %)
-        parsed_data = []
+        dt_elements = soup.select("div#forthdiv dt")
+
+        # Step 1: Organize data by date
+        date_data = {}
         for dt in dt_elements:
-            if "Airport Delay %" in dt.text:
-                parts = dt.text.split(';')
+            text = dt.get_text()
+            if "Date:" in text:
+                # Extract the date
+                date = text.split(";")[0].split(":")[1].strip()
 
-                # Ensure we have enough parts and the correct structure
-                if len(parts) >= 4:
-                    try:
-                        date = parts[0].split(':')[1].strip()
-                        airport_delay_percentage = float(parts[3].split(':')[1].replace('%', '').strip())
-                        parsed_data.append({
-                            'Date': date,
-                            'Airport Delay %': airport_delay_percentage,
-                            'Airport': selected_option
-                        })
-                    except (IndexError, ValueError) as e:
-                        print(f"Error parsing element '{dt.text}': {e}")
+                # Initialize the date dictionary if not already created
+                if date not in date_data:
+                    date_data[date] = {'Date': date, 'Airport': selected_option, 'Airport Code': airport_code}
 
-        # Create a DataFrame directly from the parsed data
+                # Extract delay metrics based on keywords in text
+                if "Airport Delay %" in text:
+                    date_data[date]['Airport Delay %'] = float(text.split("Airport Delay %:")[1].replace('%', '').strip())
+                elif "Airport Average Delay" in text:
+                    date_data[date]['Delay Minutes'] = float(text.split("Airport Average Delay:")[1].replace('minutes', '').strip())
+
+        # Step 2: Convert collected data into a list of dictionaries
+        parsed_data = [data for data in date_data.values()]
+        # Step 3: Convert parsed data into a DataFrame
         df = pd.DataFrame(parsed_data)
+        print(f"{airport_code} finished.")
 
     except Exception as e:
         print(f"An error occurred while scraping {url}: {e}")
 
     finally:
-        # Close the WebDriver
         driver.quit()
 
-    # Return the DataFrame containing the scraped data
     return df
+
+
 
 
 def get_international_airport_urls():
     """
     This function scrapes the international airport URLs from the main page
-    and returns a list of URLs that contain specified keywords such as
-    "International," "LaGuardia," "VI:", "TT:", "PR:", "HI:", "Intercontinental," or "Detroit Metro."
+    and returns a list of URLs that contain "International," "LaGuardia,"
+    or any of the specified strings ("VI:", "TT:", "PR:", "HI:").
     """
     # Configure the Chrome WebDriver with headless mode
     chrome_options = Options()
@@ -130,7 +119,7 @@ def get_international_airport_urls():
         all_links = driver.find_elements(By.TAG_NAME, "a")
 
         # Filter the links based on the specified criteria
-        filter_strings = ["International", "LaGuardia", "VI:", "TT:", "PR:", "HI:", "Intercontinental", "Detroit Metro"]
+        filter_strings = ["International", "LaGuardia", "VI:", "TT:", "PR:", "HI:"]
         filtered_links = [
             link.get_attribute("href")
             for link in all_links
@@ -152,42 +141,28 @@ def get_international_airport_urls():
                 final_urls.append(final_url)
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred.")
 
     finally:
         # Close the WebDriver
         driver.quit()
 
-    # Return the list of final URLs
     return final_urls
-
 
 
 def scrape_all_airports():
     """
     This function loops through all international airport URLs, scrapes the data,
-    and appends the results to a master DataFrame.
-    Finally, saves the DataFrame to a CSV file.
+    and appends the results to a master DataFrame. Finally, saves the DataFrame to a CSV file.
     """
-    # Get all international airport URLs
     urls = get_international_airport_urls()
-
-    # Initialize an empty DataFrame to hold all the scraped data
     all_data = pd.DataFrame()
 
-    # Loop through each URL and scrape data
     for url in urls:
-        print(f"Scraping data from: {url}")
-        df = run_scraping_for_url(url)  # Scrape data from the URL
-
-        # Append the new data to the master DataFrame
+        df = run_scraping_for_url(url)
         all_data = pd.concat([all_data, df], ignore_index=True)
 
-    # Save the final DataFrame to a CSV file
     all_data.to_csv('airport_delays.csv', index=False)
     print("Data has been saved to 'airport_delays.csv'.")
 
-
-# Example usage:
-# This will scrape data from all international airport URLs and save it to a CSV file
 scrape_all_airports()
