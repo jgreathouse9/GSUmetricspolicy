@@ -165,4 +165,6 @@ def scrape_all_airports():
     all_data.to_csv('airport_delays.csv', index=False)
     print("Data has been saved to 'airport_delays.csv'.")
 
+
+# Example usage:
 scrape_all_airports()
