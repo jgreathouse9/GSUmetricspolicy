@@ -165,3 +165,17 @@ su te if year >=1975
 
 // In today's money, that's roughly $-1,023.94 less dollars, every year!
 
+cwf default
+
+g weight = .16 if regionno == 14
+replace weight = .84 if regionno ==10
+replace weight = 1 if regionno == 17
+
+replace weight = 0 if weight == .
+
+regress gdpcap i.treat##i.post [iweight = weight]
+
+// Our ATT= -703, which is pretty much the same as -701.
+
+
+
