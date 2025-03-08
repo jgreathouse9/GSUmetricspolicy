@@ -1,0 +1,175 @@
+date,route,value,Congestion
+2024-12-10,Control Average,16,0
+2024-12-11,Control Average,17,0
+2024-12-12,Control Average,17,0
+2024-12-13,Control Average,16,0
+2024-12-14,Control Average,16,0
+2024-12-15,Control Average,14,0
+2024-12-16,Control Average,15,0
+2024-12-17,Control Average,16,0
+2024-12-18,Control Average,16,0
+2024-12-19,Control Average,17,0
+2024-12-20,Control Average,17,0
+2024-12-21,Control Average,14,0
+2024-12-22,Control Average,14,0
+2024-12-23,Control Average,15,0
+2024-12-24,Control Average,14,0
+2024-12-25,Control Average,13,0
+2024-12-26,Control Average,15,0
+2024-12-27,Control Average,15,0
+2024-12-28,Control Average,14,0
+2024-12-29,Control Average,14,0
+2024-12-30,Control Average,15,0
+2024-12-31,Control Average,15,0
+2025-01-01,Control Average,14,0
+2025-01-02,Control Average,14,0
+2025-01-03,Control Average,15,0
+2025-01-04,Control Average,14,0
+2025-01-05,Control Average,13,0
+2025-01-06,Control Average,15,0
+2025-01-07,Control Average,15,0
+2025-01-08,Control Average,15,0
+2025-01-09,Control Average,15,0
+2025-01-10,Control Average,16,0
+2025-01-11,Control Average,14,0
+2025-01-12,Control Average,14,0
+2025-01-13,Control Average,15,0
+2025-01-14,Control Average,16,0
+2025-01-15,Control Average,16,0
+2025-01-16,Control Average,16,0
+2025-01-17,Control Average,16,0
+2025-01-18,Control Average,15,0
+2025-01-19,Control Average,14,0
+2025-01-20,Control Average,14,0
+2025-01-21,Control Average,15,0
+2025-01-22,Control Average,16,0
+2025-01-23,Control Average,15,0
+2025-01-24,Control Average,15,0
+2025-01-25,Control Average,14,0
+2025-01-26,Control Average,13,0
+2025-01-27,Control Average,14,0
+2025-01-28,Control Average,15,0
+2025-01-29,Control Average,15,0
+2025-01-30,Control Average,12,0
+2025-01-31,Control Average,16,0
+2025-02-01,Control Average,14,0
+2025-02-02,Control Average,14,0
+2025-02-03,Control Average,15,0
+2025-02-04,Control Average,16,0
+2025-02-05,Control Average,16,0
+2025-02-06,Control Average,15,0
+2025-02-07,Control Average,16,0
+2025-02-08,Control Average,15,0
+2025-02-09,Control Average,14,0
+2025-02-10,Control Average,14,0
+2025-02-11,Control Average,15,0
+2025-02-12,Control Average,15,0
+2025-02-13,Control Average,16,0
+2025-02-14,Control Average,17,0
+2025-02-15,Control Average,15,0
+2025-02-16,Control Average,15,0
+2025-02-17,Control Average,14,0
+2025-02-18,Control Average,15,0
+2025-02-19,Control Average,15,0
+2025-02-20,Control Average,16,0
+2025-02-21,Control Average,16,0
+2025-02-22,Control Average,16,0
+2025-02-23,Control Average,14,0
+2025-02-24,Control Average,15,0
+2025-02-25,Control Average,17,0
+2025-02-26,Control Average,17,0
+2025-02-27,Control Average,16,0
+2025-02-28,Control Average,16,0
+2025-03-01,Control Average,15,0
+2025-03-02,Control Average,14,0
+2025-03-03,Control Average,15,0
+2025-03-04,Control Average,20,0
+2025-03-05,Control Average,16,0
+2025-03-06,Control Average,16,0
+2024-12-10,NYC,12,0
+2024-12-11,NYC,13,0
+2024-12-12,NYC,14,0
+2024-12-13,NYC,13,0
+2024-12-14,NYC,13,0
+2024-12-15,NYC,11,0
+2024-12-16,NYC,12,0
+2024-12-17,NYC,12,0
+2024-12-18,NYC,13,0
+2024-12-19,NYC,13,0
+2024-12-20,NYC,12,0
+2024-12-21,NYC,11,0
+2024-12-22,NYC,11,0
+2024-12-23,NYC,12,0
+2024-12-24,NYC,11,0
+2024-12-25,NYC,10,0
+2024-12-26,NYC,11,0
+2024-12-27,NYC,12,0
+2024-12-28,NYC,11,0
+2024-12-29,NYC,11,0
+2024-12-30,NYC,11,0
+2024-12-31,NYC,11,0
+2025-01-01,NYC,10,0
+2025-01-02,NYC,11,0
+2025-01-03,NYC,11,0
+2025-01-04,NYC,10,0
+2025-01-05,NYC,9,Congestion
+2025-01-06,NYC,10,Congestion
+2025-01-07,NYC,10,Congestion
+2025-01-08,NYC,10,Congestion
+2025-01-09,NYC,11,Congestion
+2025-01-10,NYC,11,Congestion
+2025-01-11,NYC,10,Congestion
+2025-01-12,NYC,9,Congestion
+2025-01-13,NYC,10,Congestion
+2025-01-14,NYC,11,Congestion
+2025-01-15,NYC,11,Congestion
+2025-01-16,NYC,11,Congestion
+2025-01-17,NYC,11,Congestion
+2025-01-18,NYC,10,Congestion
+2025-01-19,NYC,9,Congestion
+2025-01-20,NYC,9,Congestion
+2025-01-21,NYC,11,Congestion
+2025-01-22,NYC,10,Congestion
+2025-01-23,NYC,10,Congestion
+2025-01-24,NYC,10,Congestion
+2025-01-25,NYC,10,Congestion
+2025-01-26,NYC,9,Congestion
+2025-01-27,NYC,10,Congestion
+2025-01-28,NYC,10,Congestion
+2025-01-29,NYC,10,Congestion
+2025-01-30,NYC,8,Congestion
+2025-01-31,NYC,10,Congestion
+2025-02-01,NYC,10,Congestion
+2025-02-02,NYC,9,Congestion
+2025-02-03,NYC,10,Congestion
+2025-02-04,NYC,10,Congestion
+2025-02-05,NYC,11,Congestion
+2025-02-06,NYC,11,Congestion
+2025-02-07,NYC,11,Congestion
+2025-02-08,NYC,10,Congestion
+2025-02-09,NYC,9,Congestion
+2025-02-10,NYC,10,Congestion
+2025-02-11,NYC,10,Congestion
+2025-02-12,NYC,10,Congestion
+2025-02-13,NYC,11,Congestion
+2025-02-14,NYC,11,Congestion
+2025-02-15,NYC,10,Congestion
+2025-02-16,NYC,9,Congestion
+2025-02-17,NYC,9,Congestion
+2025-02-18,NYC,10,Congestion
+2025-02-19,NYC,11,Congestion
+2025-02-20,NYC,11,Congestion
+2025-02-21,NYC,10,Congestion
+2025-02-22,NYC,10,Congestion
+2025-02-23,NYC,9,Congestion
+2025-02-24,NYC,10,Congestion
+2025-02-25,NYC,11,Congestion
+2025-02-26,NYC,11,Congestion
+2025-02-27,NYC,10,Congestion
+2025-02-28,NYC,11,Congestion
+2025-03-01,NYC,10,Congestion
+2025-03-02,NYC,9,Congestion
+2025-03-03,NYC,10,Congestion
+2025-03-04,NYC,10,Congestion
+2025-03-05,NYC,11,Congestion
+2025-03-06,NYC,11,Congestion
